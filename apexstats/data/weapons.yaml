@@ -1,0 +1,105 @@
+flatline:
+  name: VK-47 Flatline
+  type: ar
+
+scout:
+  name: G7 Scout
+  type: ar
+
+hemlok:
+  name: Hemlok Burst AR
+  type: ar
+
+r301:
+  name: R-301 Carbine
+  type: ar
+
+havoc:
+  name: HAVOC Rifle
+  type: ar
+
+#
+
+alternator:
+  name: Alternator SMG
+  type: smg
+
+prowler:
+  name: Prowler Burst PDW
+  type: smg
+
+r99:
+  name: R-99 SMG
+  type: smg
+
+volt:
+  name: Volt SMG
+  type: smg
+
+#
+
+devotion:
+  name: Devotion LMG
+  type: lmg
+
+spitfire:
+  name: M600 Spitfire
+  type: lmg
+
+lstar:
+  name: L-STAR EMG
+  type: lmg
+
+#
+
+longbow:
+  name: Longbow DMR
+  type: sniper
+
+kraber:
+  name: Kraber .50-cal Sniper
+  type: sniper
+
+3take:
+  name: Triple Take
+  type: sniper
+
+sentinel:
+  name: Sentinel
+  type: sniper
+
+chrifle:
+  name: Charge Rifle
+  type: sniper
+
+#
+
+eva:
+  name: EVA-8 Auto
+  type: sg
+
+mastiff:
+  name: Mastiff Shotgun
+  type: sg
+
+mozambique:
+  name: Mozambique Shotgun
+  type: sg
+
+peacekeeper:
+  name: Peacekeeper
+  type: sg
+
+#
+
+re45:
+  name: RE-45 Auto
+  type: pistol
+
+p20:
+  name: P2020
+  type: pistol
+
+wingman:
+  name: Wingman
+  type: pistol
