@@ -1,105 +1,422 @@
+### Schema:
+# weapon_id:
+#   name: VK-47 Flatline
+#   type: ar     # ar, smg, lmg, sniper, sg, pistol
+#   modes: ['auto', 'single']  # auto, single, burst
+#   ammo: 'heavy'
+#   damage: 19
+#   spread: 1
+#   headshot: 2.0
+#   legshot: 0.75
+#   rpm: 600
+#   magazine: [20, 25, 28, 30]
+#   hopups: []
+
+
 flatline:
   name: VK-47 Flatline
   type: ar
+  ammo: 'heavy'
+  magazine: [20, 25, 28, 30]
+  ads_move: 0.5
+  modes:
+    single: &flatline_single
+      damage: 19
+      burst: 1
+      spread: 1
+      headshot: 2.0
+      legshot: 0.75
+      rpm: 600
+      note: ''
+    auto: 
+      <<: *flatline_single  # inherit from single mode
 
 scout:
   name: G7 Scout
   type: ar
+  ammo: 'light'
+  magazine: [10, 15, 18, 20]
+  ads_move: 0.35
+  modes:
+    single: &g7_single
+      damage: 34
+      burst: 1
+      spread: 1
+      headshot: 1.75
+      legshot: 0.75
+      rpm: 240
+      note: ''
+    burst: 
+      <<: *g7_single  # inherit from single mode
+      burst: 2
+      note: 'requires Double Tap Trigger Hop-Up'
 
 hemlok:
   name: Hemlok Burst AR
   type: ar
+  ammo: 'heavy'
+  magazine: [18, 24, 27, 30]
+  ads_move: 0.5
+  modes:
+    single: &hemlok_single
+      damage: 22
+      burst: 1
+      spread: 1
+      headshot: 1.75
+      legshot: 0.75
+      rpm: 384
+      note: ''
+    burst: 
+      <<: *hemlok_single  # inherit from single mode
+      burst: 3
+      rpm: 643
 
 r301:
   name: R-301 Carbine
   type: ar
+  ammo: 'light'
+  magazine: [18, 20, 25, 28]
+  ads_move: 0.5
+  modes:
+    single: &r301_single
+      damage: 14
+      burst: 1
+      spread: 1
+      headshot: 2.0
+      legshot: 0.75
+      rpm: 816
+      note: ''
+    auto: 
+      <<: *r301_single  # inherit from single mode
 
 havoc:
   name: HAVOC Rifle
   type: ar
+  ammo: 'energy'
+  magazine: [24, 28, 32, 36]
+  ads_move: 0.5
+  modes:
+    auto:
+      damage: 18
+      burst: 1
+      spread: 1
+      headshot: 2.0
+      legshot: 0.75
+      rpm: 672
+      note: ''
 
 #
 
 alternator:
   name: Alternator SMG
   type: smg
+  ammo: 'light'
+  magazine: [19, 22, 25, 27]
+  ads_move: 0.85
+  modes:
+    auto:
+      damage: 15
+      burst: 1
+      spread: 1
+      headshot: 1.5
+      legshot: 0.75
+      rpm: 640
+      note: ''
 
 prowler:
   name: Prowler Burst PDW
   type: smg
+  care_package: true
+  ammo: 'heavy+'
+  magazine: [35]
+  ads_move: 0.85
+  modes:
+    burst: &prowler_burst
+      damage: 15
+      burst: 5
+      spread: 1
+      headshot: 1.5
+      legshot: 0.75
+      rpm: 800
+      note: ''
+    auto: 
+      <<: *prowler_burst  # inherit from single mode
 
 r99:
   name: R-99 SMG
   type: smg
+  ammo: 'light'
+  magazine: [20, 22, 24, 27]
+  ads_move: 0.85
+  modes:
+    auto:
+      damage: 11
+      burst: 1
+      spread: 1
+      headshot: 1.5
+      legshot: 0.75
+      rpm: 1080
+      note: ''
 
 volt:
   name: Volt SMG
   type: smg
+  ammo: 'energy'
+  magazine: [19, 21, 23, 26]
+  ads_move: 0.85
+  modes:
+    auto:
+      damage: 16
+      burst: 1
+      spread: 1
+      headshot: 1.5
+      legshot: 0.75
+      rpm: 783
+      note: ''
 
 #
 
 devotion:
   name: Devotion LMG
   type: lmg
+  ammo: 'energy'
+  magazine: [36, 40, 44, 48]
+  ads_move: 0.4
+  modes:
+    auto:
+      damage: 16
+      burst: 1
+      spread: 1
+      headshot: 2
+      legshot: 0.8
+      rpm: 900
+      note: ''
 
 spitfire:
   name: M600 Spitfire
   type: lmg
+  ammo: 'heavy'
+  magazine: [35, 40, 45, 55]
+  ads_move: 0.4
+  modes:
+    auto:
+      damage: 18
+      burst: 1
+      spread: 1
+      headshot: 2
+      legshot: 0.8
+      rpm: 512
+      note: ''
 
 lstar:
   name: L-STAR EMG
   type: lmg
+  ammo: 'energy'
+  magazine: ['inf']
+  ads_move: 0.4
+  modes:
+    auto:
+      damage: 18
+      burst: 1
+      spread: 1
+      headshot: 2
+      legshot: 0.8
+      rpm: 600
+      note: ''
 
 #
 
 longbow:
   name: Longbow DMR
   type: sniper
+  ammo: 'sniper'
+  magazine: [6, 8, 10, 12]
+  ads_move: 0.35
+  modes:
+    single:
+      damage: 55
+      burst: 1
+      spread: 1
+      headshot: 2
+      headshot_skullpiercer: 2.5
+      legshot: 0.8
+      rpm: 86
+      note: ''
 
 kraber:
   name: Kraber .50-cal Sniper
   type: sniper
+  care_package: true
+  ammo: 'sniper'
+  magazine: [4]
+  ads_move: 0.35
+  modes:
+    single:
+      damage: 145
+      burst: 1
+      spread: 1
+      headshot: 3.0
+      legshot: 0.8
+      rpm: 36
+      note: 'bolt action'
 
 3take:
   name: Triple Take
   type: sniper
+  ammo: 'sniper'
+  magazine: [6, 7, 8, 9]
+  ads_move: 0.35
+  modes:
+    single:
+      damage: 55
+      burst: 1
+      spread: 3
+      headshot: 2.0
+      legshot: 0.9
+      rpm: 72
 
 sentinel:
   name: Sentinel
   type: sniper
+  ammo: 'sniper'
+  magazine: [4, 5, 6, 7]
+  ads_move: 0.35
+  modes:
+    single:
+      damage: 70
+      burst: 1
+      spread: 1
+      headshot: 2.0
+      legshot: 0.9
+      rpm: 37.5
 
 chrifle:
   name: Charge Rifle
   type: sniper
+  ammo: 'sniper'
+  magazine: [8]
+  ads_move: 0.35
+  modes:
+    single:
+      damage: 45
+      burst: 1
+      spread: 1
+      headshot: 1.25
+      legshot: 0.5
+      rpm: 30
 
 #
 
 eva:
   name: EVA-8 Auto
   type: sg
+  ammo: 'shell'
+  magazine: [8]
+  ads_move: 0.9
+  modes:
+    single: &eva_single
+      damage: 7
+      burst: 1
+      spread: 9
+      headshot: 1.25
+      legshot: 1
+      rpm: 128
+    burst: 
+      <<: *eva_single
+      burst: 2
+      note: 'requires Double Tap Trigger Hop-Up'
 
 mastiff:
   name: Mastiff Shotgun
   type: sg
+  ammo: 'shell'
+  magazine: [6]
+  ads_move: 0.9
+  modes:
+    single:
+      damage: 13
+      burst: 1
+      spread: 8
+      headshot: 1.25
+      legshot: 1
+      rpm: 60
 
 mozambique:
   name: Mozambique Shotgun
   type: sg
+  ammo: 'shell'
+  magazine: [4]
+  ads_move: 1
+  modes:
+    single:
+      damage: 15
+      damage_hammerpoint: 34
+      burst: 1
+      spread: 3
+      headshot: 1.5
+      legshot: 0.8
+      rpm: 180
 
 peacekeeper:
   name: Peacekeeper
   type: sg
+  ammo: 'shell'
+  magazine: [5]
+  ads_move: 0.9
+  modes:
+    single:
+      damage: 10
+      burst: 1
+      spread: 11
+      headshot: 1.25
+      legshot: 0.8
+      rpm: 58
 
 #
 
 re45:
   name: RE-45 Auto
   type: pistol
+  ammo: 'light'
+  magazine: [16, 19, 22, 25]
+  ads_move: 0.95
+  modes:
+    auto:
+      damage: 12
+      burst: 1
+      spread: 1
+      headshot: 1.5
+      legshot: 0.9
+      rpm: 750
 
 p20:
   name: P2020
   type: pistol
+  ammo: 'light'
+  magazine: [12, 14, 16, 18]
+  ads_move: 1
+  modes:
+    single:
+      damage: 15
+      damage_hammerpoint: 36
+      burst: 1
+      spread: 1
+      headshot: 1.5
+      legshot: 0.9
+      rpm: 430
 
 wingman:
   name: Wingman
   type: pistol
+  ammo: 'heavy'
+  magazine: [5, 6, 7, 8]
+  ads_move: 1
+  modes:
+    single:
+      damage: 45
+      burst: 1
+      spread: 1
+      headshot: 2
+      headshot_skullpiercer: 2.25
+      legshot: 0.9
+      rpm: 156
