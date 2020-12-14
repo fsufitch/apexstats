@@ -1,10 +1,10 @@
 import React from 'react';
-import { ThemeContext } from './theming/themes';
+import { ThemeContext } from 'apexstats/style/themes';
 
 export const ThemeSwitcher = () =>
     <div>
         <ThemeContext.Consumer>
-            {({ theme, setTheme }) =>
+            {({ theme, themeClass, setTheme }) =>
                 <>
                     <span>
                         <strong> Current: {theme} </strong>

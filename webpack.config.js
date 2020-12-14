@@ -26,9 +26,9 @@ let cssLoader = {
     loader: 'css-loader', options: {
         // sourceMap: true,
         modules: true,
-        // modules: {
-        //     localIdentName: '[path][name]__[local]--[hash:base64:5]',
-        // },
+        modules: {
+            localIdentName: '[path][name]__[local]--[hash:base64:5]',
+        },
     }
 };
 let cssModulesTypescriptLoader = { loader: 'css-modules-typescript-loader' };

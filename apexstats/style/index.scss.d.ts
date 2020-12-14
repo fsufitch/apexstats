@@ -401,7 +401,6 @@ interface CssExports {
   'embed-responsive-21by9': string;
   'embed-responsive-4by3': string;
   'embed-responsive-item': string;
-  'exportArea': string;
   'fade': string;
   'figure': string;
   'figure-caption': string;
@@ -1409,6 +1408,7 @@ interface CssExports {
   'py-xl-3': string;
   'py-xl-4': string;
   'py-xl-5': string;
+  'raw-export': string;
   'rounded': string;
   'rounded-0': string;
   'rounded-bottom': string;
@@ -1529,6 +1529,8 @@ interface CssExports {
   'text-xl-right': string;
   'thead-dark': string;
   'thead-light': string;
+  'theme-dark': string;
+  'theme-light': string;
   'toast': string;
   'toast-body': string;
   'toast-header': string;

@@ -1,18 +1,22 @@
 import React, { useState, useEffect, createContext, FunctionComponent } from 'react';
 
-import * as lightTheme from './lightTheme.scss';
-import * as darkTheme from './darkTheme.scss';
+import styles from './index.scss';
 
 const LOCAL_STORAGE_KEY = 'apexstats.theme';
 
 export type Theme = 'light' | 'dark';
 
 export const DEFAULT_THEME = 'light' as Theme;
-export const DEFAULT_THEME_STYLE = lightTheme;
+
+const themeClass = (theme: Theme) => ({
+    light: styles['theme-light'],
+    dark: styles['theme-dark'],
+}[theme || DEFAULT_THEME]);
 
 export const ThemeContext = createContext({
-    theme: DEFAULT_THEME, 
-    setTheme: (theme: Theme) => {},
+    theme: DEFAULT_THEME,
+    themeClass: themeClass(DEFAULT_THEME),
+    setTheme: (theme: Theme) => { },
 });
 
 export const Theming: FunctionComponent<{}> = (props) => {
@@ -28,18 +32,8 @@ export const Theming: FunctionComponent<{}> = (props) => {
         localStorage.setItem(LOCAL_STORAGE_KEY, newTheme);
         setThemeState(newTheme);
     }
-    
 
-    return <ThemeContext.Provider value={{theme, setTheme}}>
+    return <ThemeContext.Provider value={{ theme, themeClass: themeClass(theme), setTheme }}>
         {props.children}
     </ThemeContext.Provider>;
 }
-
-export function styleChooser<T>(choices: {[theme in Theme]?: T}, defaultStyle: T) {
-    return (choice: Theme) => (choices[choice] || defaultStyle);
-}
-
-export const globalStyleChooser = styleChooser({
-    light: lightTheme,
-    dark: darkTheme,
-}, DEFAULT_THEME_STYLE)
