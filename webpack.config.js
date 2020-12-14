@@ -5,14 +5,13 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack').DefinePlugin;
 const Dotenv = require('dotenv-webpack');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+const TerserPlugin = require("terser-webpack-plugin");
 const path = require('path');
 
 const BUILD_DIR = path.join(__dirname, 'build');
 
 
-var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = env => {
     const prod = (!env || !env.development);
@@ -50,7 +49,6 @@ module.exports = env => {
 
     return {
         mode: prod ? 'production' : 'development',
-        target: 'web',
         devtool: prod ? false : 'inline-source-map',
         entry: {
             app: [
@@ -95,15 +93,15 @@ module.exports = env => {
             splitChunks: { chunks: 'all' },
             minimize: true,
             minimizer: [
-                // new CssMinimizerPlugin(),
-                // new UglifyJsPlugin({
-                //     parallel: true,
-                //     sourceMap: true,
-                // }),
+                new CssMinimizerPlugin(),
+                new TerserPlugin({
+                    extractComments: false,
+                }),
             ]
         },
         devServer: {
             open: true,
+            historyApiFallback: true,
         }
     };
 };

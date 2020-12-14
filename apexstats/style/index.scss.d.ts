@@ -301,6 +301,7 @@ interface CssExports {
   'container-md': string;
   'container-sm': string;
   'container-xl': string;
+  'content': string;
   'custom-checkbox': string;
   'custom-control': string;
   'custom-control-inline': string;
@@ -489,6 +490,7 @@ interface CssExports {
   'font-weight-light': string;
   'font-weight-lighter': string;
   'font-weight-normal': string;
+  'footer': string;
   'form-check': string;
   'form-check-inline': string;
   'form-check-input': string;
@@ -1208,6 +1210,7 @@ interface CssExports {
   'p-xl-3': string;
   'p-xl-4': string;
   'p-xl-5': string;
+  'page-background': string;
   'page-item': string;
   'page-link': string;
   'pagination': string;
@@ -1536,6 +1539,9 @@ interface CssExports {
   'toast-header': string;
   'tooltip': string;
   'tooltip-inner': string;
+  'topnav': string;
+  'topnav-collapser': string;
+  'topnav-content': string;
   'user-select-all': string;
   'user-select-auto': string;
   'user-select-none': string;

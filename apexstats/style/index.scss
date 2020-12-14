@@ -1,5 +1,9 @@
-@use './themes';
+@import './apex-colors';
+@import './themes';
 
-@import '~bootstrap-scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
+@import './main';
+@import './nav';
+@import './footer';
 @import './raw-export';

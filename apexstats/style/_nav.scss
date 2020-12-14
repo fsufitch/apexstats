@@ -1,0 +1,37 @@
+.topnav {
+    @extend .navbar;
+    @extend .navbar-expand-lg;
+
+    .topnav-collapser {
+        @extend .navbar-toggler;
+    }
+
+    .topnav-content {
+        @extend .collapse;
+        @extend .navbar-collapse;
+        > ul {
+            @extend .navbar-nav;
+            @extend .mr-auto;
+            li {
+                @extend .nav-item;
+                a {
+                    @extend .nav-link;
+                }
+            }
+        }
+    }
+}
+
+.theme-light {
+    .topnav {
+        @extend .navbar-light;
+        @extend .bg-light;
+    }
+}
+
+.theme-dark {
+    .topnav {
+        @extend .navbar-dark;
+        @extend .bg-dark;
+    }
+}
