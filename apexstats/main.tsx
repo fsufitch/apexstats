@@ -1,18 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import legends from './data';
+import styles from './main.scss';
+import { Theming } from 'apexstats/theming/themes';
+import { RawDataExport } from 'apexstats/raw-export';
+import { ThemeSwitcher } from './theme-switcher';
+
+console.log(styles);
+console.log(styles.rootContainer);
 
 const App = () => {
-    return <div>
-        <p>Hello world from React</p>
-        <h2>Game data:</h2>
-        <code>
-            <pre>
-                {JSON.stringify(legends, null, 2)}
-            </pre>
-        </code>
-    </div>;
+    return <Theming>
+        <div className={styles.rootContainer}>
+            <h1>hello world</h1>
+            <p>all work and no play makes jack a dull boy</p>
+            <ThemeSwitcher />
+            <RawDataExport />
+        </div>
+    </Theming>;
 };
 
 const wrapper = document.getElementById('app');

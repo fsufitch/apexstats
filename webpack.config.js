@@ -24,14 +24,17 @@ let htmlLoader = { loader: 'html-loader' };
 let sassLoader = { loader: 'sass-loader', options: { sourceMap: true } };
 let cssLoader = {
     loader: 'css-loader', options: {
-        sourceMap: true, modules: {
-            localIdentName: '[path][name]__[local]--[hash:base64:5]',
-        }
+        // sourceMap: true,
+        modules: true,
+        // modules: {
+        //     localIdentName: '[path][name]__[local]--[hash:base64:5]',
+        // },
     }
 };
 let cssModulesTypescriptLoader = { loader: 'css-modules-typescript-loader' };
 let miniCssExtractLoader = { loader: MiniCssExtractPlugin.loader };
-let styleLoader = { loader: 'style-loader' };
+let CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// let styleLoader = { loader: 'style-loader' };
 let fileLoader = { loader: 'file-loader', options: { name: '[name]--[contenthash].[ext]' } };
 let urlLoader = {
     loader: 'url-loader', options: {
@@ -42,6 +45,8 @@ let urlLoader = {
 let yamlLoader = {
     loader: 'yaml-loader',
 }
+
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const MAIN = {
     mode: 'production',
@@ -75,6 +80,7 @@ const MAIN = {
     },
     plugins: [
         new MiniCssExtractPlugin(),
+        new CssMinimizerPlugin(),
         new ForkTsCheckerWebpackPlugin(),
         new HtmlWebPackPlugin({
             template: "./apexstats/index.html",
@@ -86,9 +92,11 @@ const MAIN = {
         new Dotenv({ systemvars: true }),
     ],
     optimization: {
-        splitChunks: {
-            // chunks: 'all',
-        },
+        splitChunks: { chunks: 'all' },
+        // minimize: true,
+        // minimizer: [
+        //     new CssMinimizerPlugin(),
+        // ]
     },
     devServer: {
         open: true,

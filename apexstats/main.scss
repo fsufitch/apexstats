@@ -1,0 +1,13 @@
+@import '~bootstrap-scss/bootstrap';
+
+body {
+    background: black;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+}
+
+
+.rootContainer {
+    @extend .container;
+    background: gray;
+}
