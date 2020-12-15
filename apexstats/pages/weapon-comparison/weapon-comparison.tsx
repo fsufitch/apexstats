@@ -1,7 +1,28 @@
+import React, { useState, useEffect } from 'react';
+
+import styles from 'apexstats/style';
 import { WeaponStats } from 'apexstats/game/stats';
-import React from 'react';
+import { defaultRows, rowChoices, WeaponComparisonRow } from './rows';
+
 
 export const WeaponComparison = () => {
+    const [rowIDs] = useState<string[]>(defaultRows);
+    const [columns, setColumns] = useState<WeaponStats[]>([]);
+
+    const rows = rowIDs.map(id => rowChoices
+        .find(row => (row as WeaponComparisonRow).id == id))
+        .filter(row => !!row)
+        .map(row => row as WeaponComparisonRow);
+
+    useEffect(() => {
+        setColumns([
+            new WeaponStats('p20'),
+            new WeaponStats('mozambique'),
+            new WeaponStats('lstar'),
+        ])
+    }, []);
+
+
     return <>
         <h2> Weapon Comparison </h2>
 
@@ -9,15 +30,30 @@ export const WeaponComparison = () => {
 
         <hr />
 
-        <h4> But just a sample... </h4>
-
-        <ul>
-            <li> Kraber headshot damage: {new WeaponStats('kraber').headshot()}</li>
-            <li> Prowler magazine size: {new WeaponStats('prowler').magazineSize()} </li>
-            <li> P2020 body DPS: {new WeaponStats('p20').dps()} </li>
-            <li> Devotion clip damage with a blue mag: {new WeaponStats('devotion', { mag: 2 }).clipDamage()} </li>
-            <li> Sentinel headshot clip damage with a purple mag, while amped: { new WeaponStats('sentinel', {firingMode: 'single_amp', mag: 3}).clipHeadshot() }</li>
-            <li> Time to go through a R-99 with no mag: { new WeaponStats('r99').clipTimeSeconds() } seconds </li>
-        </ul>
+        <table className={styles.table}>
+            <tr>
+                <th scope="col">
+                    <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Stat</button>
+                </th>
+                {columns.map((col) => <th scope="col">
+                    {col.weapon.name}
+                    <button className={`${styles.btn} ${styles['btn-danger']}`}>(x)</button>
+                </th>)}
+                <th>
+                    <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Weapon</button>
+                </th>
+            </tr>
+            
+            {rows.map((row) => <tr>
+                <th scope="row">
+                    {row.label}
+                    <button className={`${styles.btn} ${styles['btn-danger']}`}>(x)</button>
+                </th>
+                {columns.map((stat) => <td>
+                    {row.display(row.extract(stat))}
+                </td>)}
+                <td></td>
+            </tr>)}
+        </table>
     </>;
 }

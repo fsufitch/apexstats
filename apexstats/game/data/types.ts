@@ -44,6 +44,7 @@ export type FiringMode = {
 };
 
 export type Weapon = {
+    name: string;
     type: WeaponType;
     ammo: AmmoType;
     magazine: MagazineSizes;
