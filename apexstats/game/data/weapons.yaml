@@ -88,7 +88,7 @@ havoc:
       headshot: 2.0
       legshot: 0.75
       rpm: 672
-      note: ''
+      note: 'Firing speed assumes full wind-up, or Turbocharger mod'
 
 #
 
@@ -175,7 +175,7 @@ devotion:
       headshot: 2
       legshot: 0.8
       rpm: 900
-      note: ''
+      note: 'Firing speed assumes full wind-up'
 
 spitfire:
   name: M600 Spitfire
@@ -197,7 +197,7 @@ lstar:
   name: L-STAR EMG
   type: lmg
   ammo: energy
-  magazine: [ inf ]
+  magazine: []
   ads_move: 0.4
   modes:
     auto:
@@ -232,7 +232,7 @@ kraber:
   name: Kraber .50-cal Sniper
   type: sniper
   care_package: true
-  ammo: sniper
+  ammo: sniper+
   magazine: [4]
   ads_move: 0.35
   modes:
@@ -267,13 +267,17 @@ sentinel:
   magazine: [4, 5, 6, 7]
   ads_move: 0.35
   modes:
-    single:
+    single: &sentinel_single
       damage: 70
       burst: 1
       spread: 1
       headshot: 2.0
       legshot: 0.9
       rpm: 37.5
+    single_amp:
+      <<: *sentinel_single
+      damage: 88
+
 
 chrifle:
   name: Charge Rifle

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from 'apexstats/style';
-import { metadata } from 'apexstats/game';
+import { metadata } from 'apexstats/game/data';
 
 export const Footer = () => {
     return <div className={styles.footer}> 

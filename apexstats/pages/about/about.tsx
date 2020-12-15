@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { legends, weapons, metadata } from 'apexstats/game';
+import { legends, weapons, metadata } from 'apexstats/game/data';
 
 export const About = () => {
     const downloadGameData = () => {

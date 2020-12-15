@@ -2,3 +2,9 @@
 declare module "*.scss";
 declare module "*.png";
 declare module "*.jpg";
+
+declare module '*.yaml' {
+    const data: any;
+    export default data;
+}
+

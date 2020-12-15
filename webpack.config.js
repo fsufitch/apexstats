@@ -45,6 +45,9 @@ module.exports = env => {
     };
     let yamlLoader = {
         loader: 'yaml-loader',
+        options: {
+            merge: true,
+        },
     };
 
     return {
