@@ -2,9 +2,6 @@ import { WeaponStats } from 'apexstats/game/stats';
 import React from 'react';
 
 export const WeaponComparison = () => {
-    let x = new WeaponStats('sentinel', {firingMode: 'single_amp', mag: 3});
-
-    console.log(x);
     return <>
         <h2> Weapon Comparison </h2>
 

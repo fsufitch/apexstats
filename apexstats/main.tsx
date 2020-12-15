@@ -56,5 +56,3 @@ if (wrapper) {
 } else {
     console.error('No wrapper element found');
 }
-
-console.log('hello world');

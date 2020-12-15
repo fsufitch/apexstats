@@ -17,7 +17,6 @@ export class WeaponStats {
         if (weapons[this.weaponID] === undefined) {
             throw `Weapon ${this.weaponID} does not exist`;
         }
-        console.log(`Found weapon`, weapons[this.weaponID]);
         return weapons[this.weaponID];
     };
     private get mode() {
@@ -35,7 +34,6 @@ export class WeaponStats {
         if (mode === undefined) {
             throw `Firing mode ${this.weaponID}.${this.options.firingMode} does not exist`;
         }
-        console.log(`Found mode`, mode);
         return mode;
     }
 
