@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styles from 'apexstats/style';
 import { WeaponStats } from 'apexstats/game/stats';
 import { defaultRows, rowChoices, WeaponComparisonRow } from './rows';
+import { RemoveButton } from 'apexstats/common/remove-button';
 
 
 export const WeaponComparison = () => {
@@ -26,33 +27,32 @@ export const WeaponComparison = () => {
     return <>
         <h2> Weapon Comparison </h2>
 
-        <p> Coming soon&trade;!</p>
-
-        <hr />
-
+        <p>
+            <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Stat</button>
+            <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Weapon</button>
+        </p>
+        
         <table className={styles.table}>
             <tr>
                 <th scope="col">
-                    <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Stat</button>
+                    {/*empty*/}
                 </th>
                 {columns.map((col) => <th scope="col">
                     {col.weapon.name}
-                    <button className={`${styles.btn} ${styles['btn-danger']}`}>(x)</button>
+                    <RemoveButton />
                 </th>)}
                 <th>
-                    <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Weapon</button>
                 </th>
             </tr>
-            
+
             {rows.map((row) => <tr>
                 <th scope="row">
                     {row.label}
-                    <button className={`${styles.btn} ${styles['btn-danger']}`}>(x)</button>
+                    <RemoveButton />
                 </th>
                 {columns.map((stat) => <td>
                     {row.display(row.extract(stat))}
                 </td>)}
-                <td></td>
             </tr>)}
         </table>
     </>;

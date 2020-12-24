@@ -1,0 +1,10 @@
+.btn-remove {
+    @extend .btn;
+    @extend .btn-outline-danger;
+    @extend .p-0;
+    @extend .m-1;
+
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+}

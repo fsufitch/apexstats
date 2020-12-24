@@ -182,6 +182,7 @@ interface CssExports {
   'btn-outline-success': string;
   'btn-outline-warning': string;
   'btn-primary': string;
+  'btn-remove': string;
   'btn-secondary': string;
   'btn-sm': string;
   'btn-success': string;
