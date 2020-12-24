@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack').DefinePlugin;
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require("terser-webpack-plugin");
+const ProvidePlugin = require('webpack').ProvidePlugin;
 const path = require('path');
 
 const BUILD_DIR = path.join(__dirname, 'build');
@@ -91,6 +92,10 @@ module.exports = env => {
                 APP_DIR: JSON.stringify(BUILD_DIR),
             }),
             new Dotenv({ systemvars: true }),
+            new ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery',
+            }),
         ],
         optimization: {
             splitChunks: { chunks: 'all' },
