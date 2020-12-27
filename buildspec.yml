@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 15
+    commands:
+      - echo === Install Phase ===
+      - yum install -y zip
+      - npm install -g yarn
+  pre_build:
+    commands:
+      - echo === Pre-build Phase ===
+      - yarn install
+  build:
+    commands:
+      - echo === Build Phase ===
+      - yarn build
+  post_build:
+    commands:
+      - echo === Post-build Phase ===
+      - cd build/
+      - zip -9 build.zip *
+
+
+      
