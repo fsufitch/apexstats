@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import styles from 'apexstats/style';
+import { css } from 'apexstats/style';
 
 import { Theming, ThemeContext } from 'apexstats/style/themes';
 import { TopNavigation } from './nav';
@@ -18,10 +18,10 @@ const App = () => {
         <Theming>
             <ThemeContext.Consumer>
                 {({ themeClass }) => <>
-                    <div className={`${styles['page-background']} ${themeClass}`}></div>
-                    <div className={`${styles.container} ${themeClass}`}>
+                    <div className={`${css['page-background']} ${themeClass}`}></div>
+                    <div className={`${css.container} ${themeClass}`}>
                         <TopNavigation />
-                        <div className={styles.content}>
+                        <div className={css.content}>
                             <Switch>
                                 <Route exact path="/">
                                     <Home />

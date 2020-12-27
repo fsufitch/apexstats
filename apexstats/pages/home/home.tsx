@@ -1,20 +1,20 @@
 import React from 'react';
 
-import styles from 'apexstats/style';
+import { css } from 'apexstats/style';
 import { Link } from 'react-router-dom';
 
 export const Home = () => {
-    return <div className={styles.row}>
-        <div className={styles['col-md-6']}>
-            <div className={styles.jumbotron}> 
+    return <div className={css.row}>
+        <div className={css['col-md-6']}>
+            <div className={css.jumbotron}> 
             <h1> Apex Stats </h1>
-            <p className={styles.lead}>
+            <p className={css.lead}>
                 A collection of reference tools to improve your <em>Apex Legends</em> play.
                 <Link to="/about"> Learn more here!</Link>
             </p>
             </div>
         </div>
-        <div className={styles['col-md-6']}>
+        <div className={css['col-md-6']}>
             <h3>
                 <Link to="/weapons">Weapon Comparison</Link>
             </h3>

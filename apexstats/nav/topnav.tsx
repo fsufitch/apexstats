@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import styles from 'apexstats/style';
+import { css } from 'apexstats/style';
 import { Link } from 'react-router-dom';
 
 export const TopNavigation = () => {
@@ -10,27 +10,27 @@ export const TopNavigation = () => {
 
     useEffect(() => {
         if (navCollapsed) {
-            $(`.${styles['topnav-content']}`).hide('slow');
+            $(`.${css['topnav-content']}`).hide('slow');
         } else {
-            $(`.${styles['topnav-content']}`).show('slow');
+            $(`.${css['topnav-content']}`).show('slow');
         }
     }, [navCollapsed]);
 
-    return <nav className={styles.topnav}>
-        <Link to="/" className={styles['navbar-brand']}>Brand</Link>
-        <button className={styles['topnav-collapser']} onClick={toggleNavCollapsed}>
-            <span className={styles['navbar-toggler-icon']}></span>
+    return <nav className={css.topnav}>
+        <Link to="/" className={css['navbar-brand']}>Brand</Link>
+        <button className={css['topnav-collapser']} onClick={toggleNavCollapsed}>
+            <span className={css['navbar-toggler-icon']}></span>
         </button>
-        <div className={styles['topnav-content']}>
+        <div className={css['topnav-content']}>
             <ul>
-                <li> 
-                    <Link to="/weapons">Weapon Comparison</Link>
-                 </li>
                 <li>
-                    <Link to="/ttk">TTK Simulation </Link> 
+                    <Link to="/weapons">Weapon Comparison</Link>
                 </li>
                 <li>
-                    <Link to="/about">About</Link> 
+                    <Link to="/ttk">TTK Simulation </Link>
+                </li>
+                <li>
+                    <Link to="/about">About</Link>
                 </li>
             </ul>
         </div>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import styles from 'apexstats/style';
+import { css } from 'apexstats/style';
 import { WeaponStats } from 'apexstats/game/stats';
 import { defaultRows, rowChoices, WeaponComparisonRow } from './rows';
 import { RemoveButton } from 'apexstats/common/remove-button';
+import { WeaponComparisonNav } from './comparison-nav';
 
 
 export const WeaponComparison = () => {
@@ -23,16 +24,22 @@ export const WeaponComparison = () => {
         ])
     }, []);
 
+    const addStat = () => {
+
+    }
+
+    const addWeapon = () => {
+
+    }
 
     return <>
         <h2> Weapon Comparison </h2>
 
-        <p>
-            <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Stat</button>
-            <button className={`${styles.btn} ${styles['btn-primary']}`}>(+) Add Weapon</button>
-        </p>
-        
-        <table className={styles.table}>
+        <WeaponComparisonNav
+            onAddStat={addStat}
+            onAddWeapon={addWeapon} />
+
+        <table className={css.table}>
             <tr>
                 <th scope="col">
                     {/*empty*/}

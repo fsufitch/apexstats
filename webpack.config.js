@@ -110,6 +110,9 @@ module.exports = env => {
         devServer: {
             open: true,
             historyApiFallback: true,
-        }
+        },
+        cache: {
+            type: 'filesystem',
+        },
     };
 };
