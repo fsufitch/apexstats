@@ -6,6 +6,7 @@ phases:
       nodejs: 12
     commands:
       - echo === Install Phase ===
+      - pwd
       - yum install -y zip
       - npm install -g yarn
   pre_build:
@@ -27,3 +28,7 @@ artifacts:
     build/*
   name: apexstats-artifact
   discard-paths: yes
+
+cache:
+  paths:
+    - 'node_modules/'
