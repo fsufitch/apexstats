@@ -7,7 +7,6 @@ phases:
     commands:
       - echo === Install Phase ===
       - pwd
-      - yum install -y zip
       - npm install -g yarn
   pre_build:
     commands:
@@ -20,8 +19,7 @@ phases:
   post_build:
     commands:
       - echo === Post-build Phase ===
-      - cd build/
-      - zip -9 build.zip *
+      - echo Nothing to do
 
 artifacts:
   files:
