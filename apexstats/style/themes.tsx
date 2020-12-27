@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, FunctionComponent } from 'react';
 
-import styles from './index.scss';
+import { css } from './css-export';
 
 const LOCAL_STORAGE_KEY = 'apexstats.theme';
 
@@ -9,8 +9,8 @@ export type Theme = 'light' | 'dark';
 export const DEFAULT_THEME = 'light' as Theme;
 
 const themeClass = (theme: Theme) => ({
-    light: styles['theme-light'],
-    dark: styles['theme-dark'],
+    light: css['theme-light'],
+    dark: css['theme-dark'],
 }[theme || DEFAULT_THEME]);
 
 export const ThemeContext = createContext({
