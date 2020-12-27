@@ -22,5 +22,8 @@ phases:
       - cd build/
       - zip -9 build.zip *
 
-
-      
+artifacts:
+  files:
+    build/*
+  name: apexstats-artifact
+  discard-paths: yes
