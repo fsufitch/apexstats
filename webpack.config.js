@@ -55,10 +55,7 @@ module.exports = env => {
         mode: prod ? 'production' : 'development',
         devtool: prod ? false : 'inline-source-map',
         entry: {
-            app: [
-                './apexstats/main.tsx',
-                './apexstats/vendor.ts',
-            ],
+            app: './apexstats/main.tsx',
         },
         output: {
             path: BUILD_DIR,
@@ -98,7 +95,11 @@ module.exports = env => {
             }),
         ],
         optimization: {
-            splitChunks: { chunks: 'all' },
+            splitChunks: { 
+                chunks: 'all',
+                name: 'vendor',
+                maxSize: 128000,
+            },
             minimize: true,
             minimizer: [
                 new CssMinimizerPlugin(),
