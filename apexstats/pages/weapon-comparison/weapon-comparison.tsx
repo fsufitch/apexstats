@@ -25,11 +25,11 @@ export const WeaponComparison = () => {
     }, []);
 
     const addStat = () => {
-
+        console.log('add stat clicked');
     }
 
     const addWeapon = () => {
-
+        console.log('add weapon clicked');
     }
 
     return <>
@@ -40,27 +40,31 @@ export const WeaponComparison = () => {
             onAddWeapon={addWeapon} />
 
         <table className={css.table}>
-            <tr>
-                <th scope="col">
-                    {/*empty*/}
-                </th>
-                {columns.map((col) => <th scope="col">
-                    {col.weapon.name}
-                    <RemoveButton />
-                </th>)}
-                <th>
-                </th>
-            </tr>
+            <thead>
+                <tr>
+                    <th scope="col">
+                        {/*empty*/}
+                    </th>
+                    {columns.map((col, i) => <th scope="col" key={i}>
+                        {col.weapon.name}
+                        <RemoveButton />
+                    </th>)}
+                    <th>
+                    </th>
+                </tr>
+            </thead>
 
-            {rows.map((row) => <tr>
-                <th scope="row">
-                    {row.label}
-                    <RemoveButton />
-                </th>
-                {columns.map((stat) => <td>
-                    {row.display(row.extract(stat))}
-                </td>)}
-            </tr>)}
+            <tbody>
+                {rows.map((row, i) => <tr key={i}>
+                    <th scope="row">
+                        {row.label}
+                        <RemoveButton />
+                    </th>
+                    {columns.map((stat, i) => <td key={i}>
+                        {row.display(row.extract(stat))}
+                    </td>)}
+                </tr>)}
+            </tbody>
         </table>
     </>;
 }

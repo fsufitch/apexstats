@@ -5,32 +5,25 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack').DefinePlugin;
 const Dotenv = require('dotenv-webpack');
-const TerserPlugin = require("terser-webpack-plugin");
 const ProvidePlugin = require('webpack').ProvidePlugin;
 const path = require('path');
 
 const BUILD_DIR = path.join(__dirname, 'build');
 
 
-// var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
 module.exports = env => {
     const prod = (!env || !env.development);
 
-    let babelLoader = { loader: 'babel-loader' };
-
-    let tsLoader = {
-        loader: 'ts-loader',
-    };
-
+    let tsLoader = { loader: 'ts-loader', options: { compilerOptions: { sourceMap: !prod } } };
     let htmlLoader = { loader: 'html-loader' };
-    let sassLoader = { loader: 'sass-loader', options: { sourceMap: true } };
+    let sassLoader = { loader: 'sass-loader', options: { sourceMap: !prod } };
     let cssLoader = {
-        loader: 'css-loader', options: {
+        loader: 'css-loader',
+        options: {
             sourceMap: !prod,
             modules: true,
             modules: {
-                localIdentName: prod ? '[hash:base64:8]': '[path][name]__[local]--[hash:base64:5]',
+                localIdentName: prod ? '[hash:base64:8]' : '[path][name]__[local]--[hash:base64:5]',
             },
         }
     };
@@ -53,7 +46,7 @@ module.exports = env => {
 
     return {
         mode: prod ? 'production' : 'development',
-        devtool: prod ? false : 'inline-source-map',
+        devtool: prod ? false : 'source-map',
         entry: {
             app: './apexstats/main.tsx',
         },
@@ -70,7 +63,7 @@ module.exports = env => {
         },
         module: {
             rules: [
-                { test: /\.tsx?$/i, use: [babelLoader, tsLoader] },
+                { test: /\.tsx?$/i, use: [tsLoader] },
                 { test: /\.html$/i, use: [htmlLoader] },
                 { test: /\.s[ac]ss/i, use: [miniCssExtractLoader, cssModulesTypescriptLoader, cssLoader, sassLoader] },
                 { test: /\.(png|jpe?g|gif)$/i, use: [urlLoader] },
@@ -95,21 +88,23 @@ module.exports = env => {
             }),
         ],
         optimization: {
-            splitChunks: { 
+            moduleIds: 'natural',
+            chunkIds: 'natural',
+            splitChunks: {
                 chunks: 'all',
                 name: 'vendor',
-                maxSize: 128000,
+                maxSize: 256000,
             },
-            minimize: true,
+            minimize: prod,
             minimizer: [
                 new CssMinimizerPlugin(),
-                new TerserPlugin({
-                    extractComments: false,
-                }),
+                '...',
             ]
         },
         devServer: {
             open: true,
+            compress: true,
+            progress: true,
             historyApiFallback: true,
         },
         cache: {
