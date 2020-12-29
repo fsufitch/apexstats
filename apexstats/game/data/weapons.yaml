@@ -1,5 +1,6 @@
 flatline:
   name: VK-47 Flatline
+  sort_key: 1001
   type: ar
   ammo: heavy
   magazine: [20, 25, 28, 30]
@@ -18,6 +19,7 @@ flatline:
 
 scout:
   name: G7 Scout
+  sort_key: 1002
   type: ar
   ammo: light
   magazine: [10, 15, 18, 20]
@@ -38,6 +40,7 @@ scout:
 
 hemlok:
   name: Hemlok Burst AR
+  sort_key: 1003
   type: ar
   ammo: heavy
   magazine: [18, 24, 27, 30]
@@ -58,6 +61,7 @@ hemlok:
 
 r301:
   name: R-301 Carbine
+  sort_key: 1004
   type: ar
   ammo: light
   magazine: [18, 20, 25, 28]
@@ -76,6 +80,7 @@ r301:
 
 havoc:
   name: HAVOC Rifle
+  sort_key: 1005
   type: ar
   ammo: energy
   magazine: [24, 28, 32, 36]
@@ -94,6 +99,7 @@ havoc:
 
 alternator:
   name: Alternator SMG
+  sort_key: 2001
   type: smg
   ammo: light
   magazine: [19, 22, 25, 27]
@@ -110,6 +116,7 @@ alternator:
 
 prowler:
   name: Prowler Burst PDW
+  sort_key: 2002
   type: smg
   care_package: true
   ammo: heavy+
@@ -129,6 +136,7 @@ prowler:
 
 r99:
   name: R-99 SMG
+  sort_key: 2003
   type: smg
   ammo: light
   magazine: [20, 22, 24, 27]
@@ -145,6 +153,7 @@ r99:
 
 volt:
   name: Volt SMG
+  sort_key: 2004
   type: smg
   ammo: energy
   magazine: [19, 21, 23, 26]
@@ -163,6 +172,7 @@ volt:
 
 devotion:
   name: Devotion LMG
+  sort_key: 3001
   type: lmg
   ammo: energy
   magazine: [36, 40, 44, 48]
@@ -179,6 +189,7 @@ devotion:
 
 spitfire:
   name: M600 Spitfire
+  sort_key: 3002
   type: lmg
   ammo: heavy
   magazine: [35, 40, 45, 55]
@@ -195,6 +206,7 @@ spitfire:
 
 lstar:
   name: L-STAR EMG
+  sort_key: 3003
   type: lmg
   ammo: energy
   magazine: []
@@ -213,6 +225,7 @@ lstar:
 
 longbow:
   name: Longbow DMR
+  sort_key: 3001
   type: sniper
   ammo: sniper
   magazine: [6, 8, 10, 12]
@@ -230,6 +243,7 @@ longbow:
 
 kraber:
   name: Kraber .50-cal Sniper
+  sort_key: 3002
   type: sniper
   care_package: true
   ammo: sniper+
@@ -247,6 +261,7 @@ kraber:
 
 3take:
   name: Triple Take
+  sort_key: 3003
   type: sniper
   ammo: sniper
   magazine: [6, 7, 8, 9]
@@ -262,6 +277,7 @@ kraber:
 
 sentinel:
   name: Sentinel
+  sort_key: 3004
   type: sniper
   ammo: sniper
   magazine: [4, 5, 6, 7]
@@ -281,6 +297,7 @@ sentinel:
 
 chrifle:
   name: Charge Rifle
+  sort_key: 3005
   type: sniper
   ammo: sniper
   magazine: [8]
@@ -298,6 +315,7 @@ chrifle:
 
 eva:
   name: EVA-8 Auto
+  sort_key: 4001
   type: sg
   ammo: shell
   magazine: [8]
@@ -317,6 +335,7 @@ eva:
 
 mastiff:
   name: Mastiff Shotgun
+  sort_key: 4002
   type: sg
   ammo: shell
   magazine: [6]
@@ -332,6 +351,7 @@ mastiff:
 
 mozambique:
   name: Mozambique Shotgun
+  sort_key: 4003
   type: sg
   ammo: shell
   magazine: [4]
@@ -348,6 +368,7 @@ mozambique:
 
 peacekeeper:
   name: Peacekeeper
+  sort_key: 4004
   type: sg
   ammo: shell
   magazine: [5]
@@ -365,6 +386,7 @@ peacekeeper:
 
 re45:
   name: RE-45 Auto
+  sort_key: 5001
   type: pistol
   ammo: light
   magazine: [16, 19, 22, 25]
@@ -380,6 +402,7 @@ re45:
 
 p20:
   name: P2020
+  sort_key: 5002
   type: pistol
   ammo: light
   magazine: [12, 14, 16, 18]
@@ -396,6 +419,7 @@ p20:
 
 wingman:
   name: Wingman
+  sort_key: 5003
   type: pistol
   ammo: heavy
   magazine: [5, 6, 7, 8]

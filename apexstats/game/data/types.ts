@@ -1,5 +1,5 @@
 /** Game classification of weapon */
-export type WeaponType = 'ar' | 'smg' | 'lmg' | 'sniper' | 'sg' | 'pistol';
+export type WeaponTypeID = 'ar' | 'smg' | 'lmg' | 'sniper' | 'sg' | 'pistol';
 
 /** Game classification of ammo type; types with '+' suffix indicate "special" ammo for care package weapons */
 export type AmmoType = 'light' | 'heavy' | 'energy' | 'sniper' | 'shell' | 'light+' | 'heavy+' | 'energy+' | 'sniper+' | 'shell+';
@@ -45,7 +45,8 @@ export type FiringMode = {
 
 export type Weapon = {
     name: string;
-    type: WeaponType;
+    type: WeaponTypeID;
+    sort_key: number;
     ammo: AmmoType;
     magazine: MagazineSizes;
     /** Percentage of usual move speed when in ADS with a weapon */
@@ -61,4 +62,4 @@ export type Weapon = {
     modes: { [id in FiringModeID]?: FiringMode },
 }
 
-export type WeaponDB = { [id: string]: Weapon }
+export type WeaponDB = {[id: string]: Weapon};

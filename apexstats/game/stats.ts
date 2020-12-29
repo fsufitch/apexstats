@@ -1,4 +1,4 @@
-import { weapons, FiringModeID } from './data';
+import { weapons , FiringModeID } from './data';
 
 export type WeaponStatCategory = 'base' | 'damage' | 'handling';
 export type Unit = 'damage' | 'second' | 'percent';

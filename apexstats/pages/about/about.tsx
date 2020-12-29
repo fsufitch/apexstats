@@ -4,7 +4,7 @@ import { legends, weapons, metadata } from 'apexstats/game/data';
 
 export const About = () => {
     const downloadGameData = () => {
-        const data = JSON.stringify({legends, weapons, metadata}, null, 2);
+        const data = JSON.stringify({legends, weapons: weapons, metadata}, null, 2);
         const bytes = new Blob([data], {type: 'application/json'});
 
         const a = window.document.createElement('a');
@@ -25,7 +25,7 @@ export const About = () => {
         <h4> Where is the data from? </h4>
         <p>
             Data is currently sourced from the <a href="https://apexlegends.gamepedia.com/">Apex Legends on Gamepedia</a>.
-            The data spans {Object.keys(legends).length} legends and {Object.keys(weapons).length}, and represents game state on {metadata.gameVersion}.
+            The data spans {Object.keys(legends).length} legends and {Object.keys(weapons).length} weapons, and represents game state on {metadata.gameVersion}.
             You can download the site's raw game data as JSON by clicking <a href="javascript:void(0)" onClick={downloadGameData}>here</a>.
         </p>
         <h4> Isn't this accomplished already (or even better) by the wiki itself, or by X other site? </h4> 
