@@ -16,7 +16,7 @@ export class WeaponStats {
     description(): number {
         throw new Error('Method not implemented.');
     }
-    constructor(private weaponID: string, private config: WeaponConfiguration={}) { }
+    constructor(public weaponID: string, private config: WeaponConfiguration={}) { }
 
     get weapon() {
         if (weapons[this.weaponID] === undefined) {

@@ -1,42 +1,73 @@
 import React, { useState, useEffect } from 'react';
 
 import { WeaponStats } from 'apexstats/game/stats';
-import { defaultRows, rowChoices, WeaponComparisonRow } from './rows';
+import { FiringModeID, weapons } from 'apexstats/game/data';
+import { defaltRowIDs, rowChoices, WeaponComparisonRow } from './rows';
 import { RemoveButton } from 'apexstats/common/remove-button';
-import { WeaponComparisonNav } from './comparison-nav';
+import { WeaponComparisonNav, WeaponModeSuffixes } from './comparison-nav';
 
+interface ColumnSpec {
+    weaponID: string,
+    modeID: FiringModeID,
+}
 
 export const WeaponComparison = () => {
-    const [rowIDs] = useState<string[]>(defaultRows);
+    const [rowIDs, setRowIDs] = useState<Set<string>>(new Set(defaltRowIDs));
+    const [columnSpecs, setColumnSpecs] = useState<ColumnSpec[]>([{ weaponID: 'p20', modeID: 'single' as FiringModeID }]);
+
+    const [rows, setRows] = useState<WeaponComparisonRow[]>([]);
     const [columns, setColumns] = useState<WeaponStats[]>([]);
 
-    const rows = rowIDs.map(id => rowChoices
-        .find(row => (row as WeaponComparisonRow).id == id))
-        .filter(row => !!row)
-        .map(row => row as WeaponComparisonRow);
+    useEffect(() => setRows(rowChoices
+        .map(r => r as WeaponComparisonRow)
+        .filter(r => rowIDs.has(r.id))
+    ), [rowIDs]);
 
-    useEffect(() => {
-        setColumns([
-            new WeaponStats('p20'),
-            new WeaponStats('mozambique'),
-            new WeaponStats('lstar'),
-        ])
-    }, []);
+    useEffect(() => setColumns(columnSpecs
+        .map(({weaponID, modeID}) => new WeaponStats(weaponID, {firingMode: modeID}))
+    ), [columnSpecs]);
 
-    const addStat = (statID: string|null) => {
-        console.log(`add stat clicked: ${statID}`);
+    const addRow = (rowID: string | null) => {
+        if (!rowID) { return; }
+        const newRowIDs = new Set(rowIDs);
+        newRowIDs.add(rowID);
+        setRowIDs(newRowIDs);
     }
 
-    const addWeapon = (weaponID: string|null) => {
-        console.log(`add weapon clicked: ${weaponID}`);
+    const addColumn = (columnID: string | null) => {
+        if (!columnID) {
+            console.error('Tried to add empty column ID')
+            return;
+        }
+
+        const modeID = Object.keys(WeaponModeSuffixes)
+            .find(suffix => columnID.endsWith(suffix)) as (FiringModeID | undefined);
+        if (modeID === undefined) {
+            console.error(`Tried to add column ID without firing mode: ${columnID}`)
+            return;
+        }
+
+        const weaponID = columnID.split(WeaponModeSuffixes[modeID], 2)[0];
+        if (!weapons[weaponID]) {
+            console.error(`Unknown weapon '${weaponID}' in ID: ${columnID}`);
+            return;
+        }
+
+        if (!!columnSpecs.find(it => it.weaponID === weaponID && it.modeID === modeID)) {
+            console.warn(`Tried to add duplicate weapon spec ${columnID}`);
+            return;
+        }
+
+        const newColumnSpecs = [...columnSpecs, {weaponID, modeID}];
+        setColumnSpecs(newColumnSpecs);
     }
 
     return <>
         <h2> Weapon Comparison </h2>
 
         <WeaponComparisonNav
-            onAddStat={addStat}
-            onAddWeapon={addWeapon} />
+            onAddStat={addRow}
+            onAddWeapon={addColumn} />
 
         <table className="table">
             <thead>

@@ -45,4 +45,4 @@ export const rowChoices: (WeaponComparisonRow | Divider)[] = [
     { id: 'h-recoil', label: 'Recoil multiplier', extract: s => s.recoil(), display: asRaw },
 ];
 
-export const defaultRows = ['f-mag', 'd-dmg', 'd-head', 'd-dps', 'd-mag', 'h-mag-time' ];
+export const defaltRowIDs = ['f-mag', 'd-dmg', 'd-head', 'd-dps', 'd-mag', 'h-mag-time' ];
