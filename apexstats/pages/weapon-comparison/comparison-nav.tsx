@@ -11,6 +11,7 @@ interface Props {
     onAddWeapon?: (id: string | null) => void;
     onAddStat?: (id: string | null) => void;
     onExportCSV?: () => void;
+    onClear?: () => void;
 }
 
 export const WeaponModeSuffixes = {
@@ -39,10 +40,11 @@ const statChoices = rowChoices.map(row => Object.keys(row).includes('id')
     ? weaponComparisonRowToStatChoice(row as WeaponComparisonRow)
     : { id: '', label: row.label, header: true });
 
-export const WeaponComparisonNav: FunctionComponent<Props> = ({ onAddWeapon, onAddStat, onExportCSV }) => {
+export const WeaponComparisonNav: FunctionComponent<Props> = ({ onAddWeapon, onAddStat, onExportCSV, onClear}) => {
     onAddWeapon ??= () => { };
     onAddStat ??= () => { };
     onExportCSV ??= () => { };
+    onClear ??= () => { };
 
     return <>
         <ul className={css["nav"]}>
@@ -53,7 +55,10 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({ onAddWeapon, onA
                 <CustomDropdown title={'(+) Add Weapon'} onSelect={onAddWeapon} choices={weaponChoices} />
             </li>
             <li className="nav-item">
-                <button className="btn btn-link" onClick={onExportCSV}> Export CSV </button>
+                <button className="btn btn-outline-danger" onClick={onClear}>Clear</button>
             </li>
+            {/* <li className="nav-item">
+                <button className="btn btn-link" onClick={onExportCSV}> Export CSV </button>
+            </li> */}
         </ul></>;
 }

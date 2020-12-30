@@ -14,7 +14,7 @@ interface ColumnSpec {
 
 export const WeaponComparison = () => {
     const [rowIDs, setRowIDs] = useState<Set<string>>(new Set(defaltRowIDs));
-    const [columnSpecs, setColumnSpecs] = useState<ColumnSpec[]>([{ weaponID: 'p20', modeID: 'single' as FiringModeID }]);
+    const [columnSpecs, setColumnSpecs] = useState<ColumnSpec[]>([]);
 
     const [rows, setRows] = useState<WeaponComparisonRow[]>([]);
     const [columns, setColumns] = useState<WeaponStats[]>([]);
@@ -74,12 +74,18 @@ export const WeaponComparison = () => {
         setRowIDs(newRowIDs);
     }
 
+    const clear = () => {
+        setColumnSpecs([]);
+        setRowIDs(new Set());
+    }
+
     return <>
         <h2> Weapon Comparison </h2>
 
         <WeaponComparisonNav
             onAddStat={addRow}
-            onAddWeapon={addColumn} />
+            onAddWeapon={addColumn} 
+            onClear={clear}/>
 
         <table className="table">
             <thead>
