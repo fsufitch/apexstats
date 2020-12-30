@@ -5,6 +5,7 @@ import { FiringModeID, weapons } from 'apexstats/game/data';
 import { defaltRowIDs, rowChoices, WeaponComparisonRow } from './rows';
 import { RemoveButton } from 'apexstats/common/remove-button';
 import { WeaponComparisonNav, WeaponModeSuffixes } from './comparison-nav';
+import { weaponName } from 'apexstats/game/strings';
 
 interface ColumnSpec {
     weaponID: string,
@@ -62,6 +63,17 @@ export const WeaponComparison = () => {
         setColumnSpecs(newColumnSpecs);
     }
 
+    const removeColumn = (weaponID: string, modeID: FiringModeID) => {
+        setColumnSpecs(columnSpecs.filter(
+            spec => spec.weaponID !== weaponID || spec.modeID !== modeID));
+    }
+
+    const removeRow = (rowID: string) => {
+        const newRowIDs = new Set(rowIDs);
+        newRowIDs.delete(rowID);
+        setRowIDs(newRowIDs);
+    }
+
     return <>
         <h2> Weapon Comparison </h2>
 
@@ -76,8 +88,8 @@ export const WeaponComparison = () => {
                         {/*empty*/}
                     </th>
                     {columns.map((col, i) => <th scope="col" key={i}>
-                        {col.weapon.name}
-                        <RemoveButton />
+                        {weaponName(col.weaponID, col.firingModeID)}
+                        <RemoveButton onClick={() => removeColumn(col.weaponID, col.firingModeID)}/>
                     </th>)}
                     <th>
                     </th>
@@ -88,7 +100,7 @@ export const WeaponComparison = () => {
                 {rows.map((row, i) => <tr key={i}>
                     <th scope="row">
                         {row.label}
-                        <RemoveButton />
+                        <RemoveButton onClick={() => removeRow(row.id)}/>
                     </th>
                     {columns.map((stat, i) => <td key={i}>
                         {row.display(row.extract(stat))}

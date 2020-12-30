@@ -24,7 +24,8 @@ export class WeaponStats {
         }
         return weapons[this.weaponID];
     };
-    get mode() {
+
+    get firingModeID() {
         const supportedModes = Object.keys(this.weapon.modes) as FiringModeID[];
         let modeID = this.config.firingMode;
         if (modeID === undefined && supportedModes.length < 2) {
@@ -34,10 +35,14 @@ export class WeaponStats {
         if (modeID == undefined) {
             throw `Firing mode not specified for ${this.weaponID} but required`;
         }
+        return modeID;
+    }
 
+    get mode() {
+        const modeID = this.firingModeID;
         const mode = this.weapon.modes[modeID];
         if (mode === undefined) {
-            throw `Firing mode ${this.weaponID}.${this.config.firingMode} does not exist`;
+            throw `Firing mode ${this.weaponID}.${modeID} does not exist`;
         }
         return mode;
     }
