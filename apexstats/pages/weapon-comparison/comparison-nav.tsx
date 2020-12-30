@@ -59,7 +59,6 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onA
 
     return <>
         <ul className={css["nav"]}>
-            
             <li className="nav-item">
                 <CustomDropdown title={'(+) Add Stat'} onSelect={onAddStat} choices={statChoices} />
             </li>

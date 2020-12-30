@@ -88,18 +88,17 @@ export const WeaponComparison = () => {
             onAddWeapon={addColumn}
             onClear={clear} />
 
-        <table className="table">
+        <table className="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
                     <th scope="col">
                         {/*empty*/}
                     </th>
-                    {columns.map((col, i) => <th scope="col" key={i}>
-                        {weaponName(col.weaponID, col.firingModeID)}
+                    {columns.map((col, i) => <th scope="col" key={i} className="text-center">
                         <RemoveButton onClick={() => removeColumn(col.weaponID, col.firingModeID)} />
+                        {weaponName(col.weaponID, col.firingModeID)}
                     </th>)}
-                    <th>
-                    </th>
+                    
                 </tr>
             </thead>
 
