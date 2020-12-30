@@ -8,7 +8,7 @@ export interface WeaponComparisonRow {
 }
 
 interface Divider {
-    groupLabel: string;
+    label: string;
 }
 
 const asRaw = (n: number) => `${n}`;
@@ -16,7 +16,7 @@ const asTwoDecimal = (n: number) => new Intl.NumberFormat(undefined, { minimumFr
 const asPercent = (n: number) => new Intl.NumberFormat(undefined, { style: 'percent' }).format(n);
 
 export const rowChoices: (WeaponComparisonRow | Divider)[] = [
-    { groupLabel: 'Fundamentals' },
+    { label: 'Fundamentals' },
 
     { id: 'f-dmg', label: 'Damage per bullet, body', extract: s => s.bulletDamage(), display: asRaw },
     { id: 'f-spr', label: 'Bullets per round (spread)', extract: s => s.mode.spread, display: asRaw },
@@ -27,7 +27,7 @@ export const rowChoices: (WeaponComparisonRow | Divider)[] = [
     { id: 'f-leg', label: 'Legshot multiplier', extract: s => s.legshotMultiplier(), display: asPercent },
     { id: 'f-adsm', label: 'ADS move speed', extract: s => s.weapon.ads_move, display: asPercent },
 
-    { groupLabel: 'Damage' },
+    { label: 'Damage' },
 
     { id: 'd-dmg', label: 'Damage', extract: s => s.damage(), display: asRaw },
     { id: 'd-head', label: 'Headshot damage', extract: s => s.headshot(), display: asRaw },
@@ -39,7 +39,7 @@ export const rowChoices: (WeaponComparisonRow | Divider)[] = [
     { id: 'd-mag-head', label: 'Headshot damage per magazine', extract: s => s.clipHeadshot(), display: asRaw },
     { id: 'd-mag-leg', label: 'Legshot damage per magazine', extract: s => s.clipLegshot(), display: asRaw },
 
-    { groupLabel: 'Handling' },
+    { label: 'Handling' },
 
     { id: 'h-mag-time', label: 'Time to empty magazine (s)', extract: s => s.clipTimeSeconds(), display: asTwoDecimal },
     { id: 'h-recoil', label: 'Recoil multiplier', extract: s => s.recoil(), display: asRaw },

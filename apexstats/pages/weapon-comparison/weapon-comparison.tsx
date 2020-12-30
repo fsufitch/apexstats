@@ -23,12 +23,12 @@ export const WeaponComparison = () => {
         ])
     }, []);
 
-    const addStat = () => {
-        console.log('add stat clicked');
+    const addStat = (statID: string|null) => {
+        console.log(`add stat clicked: ${statID}`);
     }
 
-    const addWeapon = () => {
-        console.log('add weapon clicked');
+    const addWeapon = (weaponID: string|null) => {
+        console.log(`add weapon clicked: ${weaponID}`);
     }
 
     return <>

@@ -1,53 +1,42 @@
 import React, { FunctionComponent } from 'react';
+import { Dropdown } from 'react-bootstrap';
+
+import css from './dropdown.module.sass';
 
 export interface DropdownChoice {
     id: string,
-    text: string,
+    label: string,
     header?: boolean,
 }
 
 interface DropdownProps {
     title: string,
     choices: DropdownChoice[],
-    onPick?: (id: string) => void,
+    onSelect?: (id: string | null) => void,
 }
 
-const Choice = (props: { choice: DropdownChoice, onPicked: (e: React.SyntheticEvent) => void }) => {
+const Choice: FunctionComponent<DropdownChoice> = ({ id, label, header }) => {
     return <>
-        {!!props.choice.header ? <>
-            <li><hr className="dropdown-divider" /></li>
-            <li>
-                <span className="dropdown-item-text">
-                    <strong>{props.choice.text}</strong>
-                </span>
-            </li>
-        </> : <li><a href="#"
-            className="dropdown-item"
-            onClick={props.onPicked}>
-            {props.choice.text}
-        </a></li>
+        {!!header ?
+            <Dropdown.Header> <strong>{label}</strong> </Dropdown.Header>
+            :
+            <Dropdown.Item eventKey={id}>{label}</Dropdown.Item>
         }
     </>;
 }
 
-export const Dropdown: FunctionComponent<DropdownProps> = (props) => {
-    const optionPicked = (e: React.SyntheticEvent, id: string) => {
-        const cb = props.onPick ?? (() => { });
-        cb(id);
-        e.preventDefault();
-    }
+export const CustomDropdown: FunctionComponent<DropdownProps> = (props) => {
+    const onSelect = props.onSelect ?? (() => { });
 
-    return <div className="dropdown">
-        <button type="button"
-            className="btn btn-primary dropdown-toggle"
-            data-bs-toggle="dropdown"
-            data-bs-display="static">
+    return <Dropdown onSelect={onSelect}>
+        <Dropdown.Toggle variant="primary">
             {props.title}
-        </button>
-        <ul className="dropdown-menu">
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu className={css['scrollable']} data-bs-display="static">
             {props.choices.map((choice, i) =>
-                <Choice key={i} choice={choice} onPicked={(e) => optionPicked(e, choice.id)} />
+                <Choice key={i} id={choice.id} label={choice.label} header={choice.header} />
             )}
-        </ul>
-    </div>;
+        </Dropdown.Menu>
+    </Dropdown>;
 }
