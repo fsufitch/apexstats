@@ -51,9 +51,7 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onA
     const [tooltip, setTooltip] = useState<boolean>(!!showTooltip);
 
     useEffect(() => {
-        if (showTooltip) {
-            setTooltip(true);
-        }
+        setTooltip(!!showTooltip);
     }, [showTooltip]);
 
     const target = useRef<any>(null);

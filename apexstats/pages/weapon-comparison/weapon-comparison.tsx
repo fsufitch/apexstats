@@ -105,11 +105,11 @@ export const WeaponComparison = () => {
 
             <tbody>
                 {rows.map((row, i) => <tr key={i}>
-                    <th scope="row">
+                    <th scope="row" className="text-right">
                         {row.label}
                         <RemoveButton onClick={() => removeRow(row.id)} />
                     </th>
-                    {columns.map((stat, i) => <td key={i}>
+                    {columns.map((stat, i) => <td key={i} className="text-right">
                         {row.display(row.extract(stat))}
                     </td>)}
                 </tr>)}
