@@ -103,5 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
+# We're using yarn, not npm
+package-lock.json
+
 # Build artifacts
 build/

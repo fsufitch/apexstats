@@ -10,24 +10,22 @@ const path = require('path');
 
 const BUILD_DIR = path.join(__dirname, 'build');
 
-
 module.exports = env => {
     const prod = (!env || !env.development);
+
+    const cssModuleIdent = prod ? "[hash:base64:8]" : "[path][name]__[local]--[hash:base64:5]";
 
     let tsLoader = { loader: 'ts-loader', options: { compilerOptions: { sourceMap: !prod } } };
     let htmlLoader = { loader: 'html-loader' };
     let sassLoader = { loader: 'sass-loader', options: { sourceMap: !prod } };
-    let cssLoader = {
-        loader: 'css-loader',
-        options: {
-            sourceMap: !prod,
-            modules: true,
-            modules: {
-                localIdentName: prod ? '[hash:base64:8]' : '[path][name]__[local]--[hash:base64:5]',
-            },
+    let cssLoader = { loader: 'css-loader', options: { 
+        sourceMap: !prod,
+        modules: {
+            auto: true,
+            localIdentName: cssModuleIdent,
         }
-    };
-    let cssModulesTypescriptLoader = { loader: 'css-modules-typescript-loader' };
+    } };
+    let typescriptCssModulesLoader = { loader: '@teamsupercell/typings-for-css-modules-loader' }
     let miniCssExtractLoader = { loader: MiniCssExtractPlugin.loader };
     let CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
     let fileLoader = { loader: 'file-loader', options: { name: prod ? '[contenthash].ext' : '[name]--[contenthash].[ext]' } };
@@ -65,14 +63,13 @@ module.exports = env => {
             rules: [
                 { test: /\.tsx?$/i, use: [tsLoader] },
                 { test: /\.html$/i, use: [htmlLoader] },
-                { test: /\.s[ac]ss/i, use: [miniCssExtractLoader, cssModulesTypescriptLoader, cssLoader, sassLoader] },
+                { test: /\.s[ac]ss/i, use: [miniCssExtractLoader, typescriptCssModulesLoader, cssLoader, sassLoader] },
                 { test: /\.(png|jpe?g|gif)$/i, use: [urlLoader] },
                 { test: /\.ya?ml$/i, use: [yamlLoader], type: 'json' },
             ]
         },
         plugins: [
             new MiniCssExtractPlugin(),
-            new CssMinimizerPlugin(),
             new ForkTsCheckerWebpackPlugin(),
             new HtmlWebPackPlugin({
                 template: "./apexstats/index.html",

@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
 
-import { css } from 'apexstats/style';
-
 export interface DropdownChoice {
     id: string,
     text: string,
@@ -17,14 +15,14 @@ interface DropdownProps {
 const Choice = (props: { choice: DropdownChoice, onPicked: (e: React.SyntheticEvent) => void }) => {
     return <>
         {!!props.choice.header ? <>
-            <li><hr className={css('dropdown-divider')} /></li>
+            <li><hr className="dropdown-divider" /></li>
             <li>
-                <span className={css('dropdown-item-text')}>
+                <span className="dropdown-item-text">
                     <strong>{props.choice.text}</strong>
                 </span>
             </li>
         </> : <li><a href="#"
-            className={css('dropdown-item')}
+            className="dropdown-item"
             onClick={props.onPicked}>
             {props.choice.text}
         </a></li>
@@ -39,14 +37,14 @@ export const Dropdown: FunctionComponent<DropdownProps> = (props) => {
         e.preventDefault();
     }
 
-    return <div className={css.dropdown + " dropdown"} id="wtf">
+    return <div className="dropdown">
         <button type="button"
-            className={css('btn', 'btn-primary', 'dropdown-toggle') + ' dropdown-toggle'}
+            className="btn btn-primary dropdown-toggle"
             data-bs-toggle="dropdown"
             data-bs-display="static">
             {props.title}
         </button>
-        <ul className={css('dropdown-menu')}>
+        <ul className="dropdown-menu">
             {props.choices.map((choice, i) =>
                 <Choice key={i} choice={choice} onPicked={(e) => optionPicked(e, choice.id)} />
             )}

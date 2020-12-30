@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { css } from 'apexstats/style';
+import { Container } from 'react-bootstrap';
+
+import './main.global.sass';
+import css from './main.module.sass';
 
 import { Theming, ThemeContext } from 'apexstats/style/themes';
 import { TopNavigation } from './nav';
@@ -19,9 +22,9 @@ const App = () => {
             <ThemeContext.Consumer>
                 {({ themeClass }) => <>
                     <div className={`${css['page-background']} ${themeClass}`}></div>
-                    <div className={`${css.container} ${themeClass}`}>
+                    <Container>
                         <TopNavigation />
-                        <div className={css.content}>
+                        <div className="mt-3 mb-3">
                             <Switch>
                                 <Route exact path="/">
                                     <Home />
@@ -42,7 +45,7 @@ const App = () => {
                         </div>
 
                         <Footer />
-                    </div>
+                    </Container>
                 </>}
             </ThemeContext.Consumer>
         </Theming>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { css } from 'apexstats/style';
+import css from './remove-button.module.sass';
 
 export const RemoveButton: FunctionComponent<{ onClick?: (e: React.MouseEvent) => void }> = ({ onClick }) => {
     onClick = onClick ?? (() => { });

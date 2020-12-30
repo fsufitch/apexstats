@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { css } from 'apexstats/style';
 import { WeaponStats } from 'apexstats/game/stats';
 import { defaultRows, rowChoices, WeaponComparisonRow } from './rows';
 import { RemoveButton } from 'apexstats/common/remove-button';
@@ -39,7 +38,7 @@ export const WeaponComparison = () => {
             onAddStat={addStat}
             onAddWeapon={addWeapon} />
 
-        <table className={css.table}>
+        <table className="table">
             <thead>
                 <tr>
                     <th scope="col">

@@ -1,8 +1,5 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent } from "react";
 
-// import * as bootstrap from 'bootstrap';
-
-import { css } from "apexstats/style";
 import { Dropdown, DropdownChoice } from "apexstats/common/dropdown";
 import { weapons, weaponTypeIDs, weaponTypes } from "apexstats/game/data";
 import { weaponTypeName } from "apexstats/game/strings";
@@ -28,28 +25,16 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({ onAddWeapon, onA
     onAddStat ??= () => { };
     onExportCSV ??= () => { };
 
-    console.log(weaponChoices);
-
-    useEffect(() => {
-        // const dd = new bootstrap.Dropdown($("#wtf")[0]);
-        // console.log(dd);
-        // dd.toggle();
-    }, []);
-
     return <>
-    
-    <Dropdown title={'xxx'} onPick={onAddWeapon} choices={weaponChoices} />
-
-
-    <ul className={css.nav}>
-        <li className={css['nav-item']}>
+    <ul className="nav">
+        <li className="nav-item">
             <Dropdown title={'(+) Add Stat'} onPick={onAddStat} choices={[]} />
         </li>
-        <li className={css["nav-item"]}>
+        <li className="nav-item">
             <Dropdown title={'(+) Add Weapon'} onPick={onAddWeapon} choices={weaponChoices} />
         </li>
-        <li className={css["nav-item"]}>
-            <button className={css('btn', 'btn-link')} onClick={onExportCSV}> Export CSV </button>
+        <li className="nav-item">
+            <button className="btn btn-link" onClick={onExportCSV}> Export CSV </button>
         </li>
     </ul></>;
 }

@@ -10,9 +10,9 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "yaml": "^1.10.0"
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "webpack serve",
@@ -24,6 +24,7 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
     "@types/bootstrap": "^5.0.1",
     "@types/jquery": "^3.5.5",
     "@types/popper.js": "^1.11.0",
@@ -47,11 +48,13 @@
     "ts-loader": "^8.0.11",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "typescript": "^4.1.2",
+    "typings-for-css-modules-loader": "^1.7.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
+    "yaml": "^1.10.0",
     "yaml-loader": "^0.6.0"
   }
 }
