@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 import css from './dropdown.module.sass';
@@ -13,6 +13,7 @@ interface DropdownProps {
     title: string,
     choices: DropdownChoice[],
     onSelect?: (id: string | null) => void,
+    ref?: React.Ref<any>,
 }
 
 const Choice: FunctionComponent<DropdownChoice> = ({ id, label, header }) => {
@@ -25,10 +26,11 @@ const Choice: FunctionComponent<DropdownChoice> = ({ id, label, header }) => {
     </>;
 }
 
-export const CustomDropdown: FunctionComponent<DropdownProps> = (props) => {
+const CustomDropdownRenderFunction: ForwardRefRenderFunction<any, DropdownProps> = (props, ref) => {
     const onSelect = props.onSelect ?? (() => { });
 
-    return <Dropdown onSelect={onSelect}>
+    console.log('ref', ref);
+    return <Dropdown ref={ref} onSelect={onSelect}>
         <Dropdown.Toggle variant="primary">
             {props.title}
         </Dropdown.Toggle>
@@ -40,3 +42,5 @@ export const CustomDropdown: FunctionComponent<DropdownProps> = (props) => {
         </Dropdown.Menu>
     </Dropdown>;
 }
+
+export const CustomDropdown = forwardRef(CustomDropdownRenderFunction);

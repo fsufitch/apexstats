@@ -25,7 +25,7 @@ export const WeaponComparison = () => {
     ), [rowIDs]);
 
     useEffect(() => setColumns(columnSpecs
-        .map(({weaponID, modeID}) => new WeaponStats(weaponID, {firingMode: modeID}))
+        .map(({ weaponID, modeID }) => new WeaponStats(weaponID, { firingMode: modeID }))
     ), [columnSpecs]);
 
     const addRow = (rowID: string | null) => {
@@ -59,7 +59,7 @@ export const WeaponComparison = () => {
             return;
         }
 
-        const newColumnSpecs = [...columnSpecs, {weaponID, modeID}];
+        const newColumnSpecs = [...columnSpecs, { weaponID, modeID }];
         setColumnSpecs(newColumnSpecs);
     }
 
@@ -83,9 +83,10 @@ export const WeaponComparison = () => {
         <h2> Weapon Comparison </h2>
 
         <WeaponComparisonNav
+            showTooltip={rowIDs.size===0 || columnSpecs.length===0}
             onAddStat={addRow}
-            onAddWeapon={addColumn} 
-            onClear={clear}/>
+            onAddWeapon={addColumn}
+            onClear={clear} />
 
         <table className="table">
             <thead>
@@ -95,7 +96,7 @@ export const WeaponComparison = () => {
                     </th>
                     {columns.map((col, i) => <th scope="col" key={i}>
                         {weaponName(col.weaponID, col.firingModeID)}
-                        <RemoveButton onClick={() => removeColumn(col.weaponID, col.firingModeID)}/>
+                        <RemoveButton onClick={() => removeColumn(col.weaponID, col.firingModeID)} />
                     </th>)}
                     <th>
                     </th>
@@ -106,7 +107,7 @@ export const WeaponComparison = () => {
                 {rows.map((row, i) => <tr key={i}>
                     <th scope="row">
                         {row.label}
-                        <RemoveButton onClick={() => removeRow(row.id)}/>
+                        <RemoveButton onClick={() => removeRow(row.id)} />
                     </th>
                     {columns.map((stat, i) => <td key={i}>
                         {row.display(row.extract(stat))}
