@@ -11,7 +11,7 @@ export type AmmoType = 'light' | 'heavy' | 'energy' | 'sniper' | 'shell' | 'ligh
  * */
 export type MagazineSizes = [] | [number] | [number, number, number, number];
 
-export type FiringModeID = 'single' | 'single_amp' | 'burst' | 'auto';
+export type FiringModeID = 'unknown' | 'single' | 'single_amp' | 'burst' | 'auto';
 
 /** Firing speed multipliers corresponding to white, blue, and purple shotgun bolts */
 export type ShotgunBoltFiringSpeed = [number, number, number];

@@ -21,6 +21,7 @@ export const WeaponModeSuffixes = {
     single_amp: '++single-amp',
     burst: '++burst',
     auto: '++auto',
+    unknown: '++??',
 }
 
 const weaponChoices = weaponTypeIDs.map(typeID => [

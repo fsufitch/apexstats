@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
+    "js-base64": "^3.6.0",
     "popper.js": "^1.16.1",
     "protobufjs": "^6.10.2",
     "react": "^17.0.1",

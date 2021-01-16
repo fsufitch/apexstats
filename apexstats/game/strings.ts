@@ -16,6 +16,7 @@ export const firingModeName = (mode: FiringModeID) => ({
     single_amp: "semi-auto + amped",
     burst: "burst",
     auto: "auto",
+    unknown: 'unknown',
 }[mode]);
 
 export const weaponName = (id: string, mode: FiringModeID) => {

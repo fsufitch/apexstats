@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
+import { useLocation, useHistory } from 'react-router-dom';
+
 import { WeaponStats } from 'apexstats/game/stats';
 import { FiringModeID, weapons } from 'apexstats/game/data';
 import { defaltRowIDs, rowChoices, WeaponComparisonRow } from './rows';
 import { RemoveButton } from 'apexstats/common/remove-button';
 import { WeaponComparisonNav, WeaponModeSuffixes } from './comparison-nav';
 import { weaponName } from 'apexstats/game/strings';
+import { ColumnSpec, deserialize, serialize } from './serialization';
 
-interface ColumnSpec {
-    weaponID: string,
-    modeID: FiringModeID,
-}
 
 export const WeaponComparison = () => {
     const [rowIDs, setRowIDs] = useState<Set<string>>(new Set(defaltRowIDs));
     const [columnSpecs, setColumnSpecs] = useState<ColumnSpec[]>([]);
 
     const [rows, setRows] = useState<WeaponComparisonRow[]>([]);
-    const [columns, setColumns] = useState<WeaponStats[]>([]);
+    const [columns, setColumns] = useState<WeaponStats[]>([]);    
 
     useEffect(() => setRows(rowChoices
         .map(r => r as WeaponComparisonRow)
@@ -78,6 +77,30 @@ export const WeaponComparison = () => {
         setColumnSpecs([]);
         setRowIDs(new Set());
     }
+
+    const location = useLocation();
+    const history = useHistory();
+    
+    useEffect(() => {
+        // When rows or columns are updated, update the hash
+        const newHash = serialize(rowIDs, columnSpecs);
+        const newLocation = {...location, hash: newHash};
+        history.replace(newLocation);
+    }, [rowIDs, columnSpecs]);
+
+    useEffect(() => {
+        // On load, try to set the table from the URL
+        try {
+            const { rowIDs, columnSpecs } = deserialize(location.hash);
+            setRowIDs(new Set(rowIDs));
+            setColumnSpecs(columnSpecs);
+
+        } catch (e) {
+            console.log('illegal hash', location.hash, e);
+            const newLocation = {...location, hash: ''};
+            history.replace(newLocation);
+        }
+    }, []);
 
     return <>
         <h2> Weapon Comparison </h2>
