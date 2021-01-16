@@ -1,0 +1,1 @@
+export const IF_YOU_SEE_THIS_THEN_PROTOS_WERE_NOT_BUILT = "See README on how to build them";

@@ -9,14 +9,17 @@
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "protobufjs": "^6.10.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
   },
   "scripts": {
-    "start": "webpack serve",
-    "build": "webpack"
+    "start": "yarn protos && webpack serve",
+    "build": "yarn protos && webpack",
+    "protos": "node apexstats/common/protos/build.js",
+    "postinstall": "yarn protos"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",

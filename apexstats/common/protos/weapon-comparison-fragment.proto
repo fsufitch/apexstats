@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+message WeaponComparisonSpecMessage {
+    repeated string rowIDs = 1;
+    repeated ColumnSpecMessage columnSpecs = 2;
+
+    message ColumnSpecMessage {
+        string weaponID = 1;
+        FiringModeEnum firingMode = 2;
+
+        enum FiringModeEnum {
+            UNKNOWN = 0;
+            SINGLE = 1;
+            SINGLE_AMP = 2;
+            BURST = 3;
+            AUTO = 4;
+        }
+    }
+}
