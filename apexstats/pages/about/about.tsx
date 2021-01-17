@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { legends, weapons, metadata } from 'apexstats/game/data';
+import { GameDBContext } from 'apexstats/game/data/gamedb-context';
 
 export const About = () => {
     const downloadGameData = () => {
@@ -34,6 +35,26 @@ export const About = () => {
                 </a>
                 .
             </p>
+            <GameDBContext.Consumer>
+                {({ gameDB, error, loaded }) => (
+                    <p>
+                        A new version of the data is deserialized via protocol buffer.{' '}
+                        {!loaded ? (
+                            <>The data has not yet loaded</>
+                        ) : error ? (
+                            <>
+                                There was error loading the data: <code>{error}</code>
+                            </>
+                        ) : (
+                            <>
+                                The data was successfully loaded. It contains {gameDB?.raw.weapons.length} weapons and{' '}
+                                {gameDB?.raw.legends.length} legends.
+                            </>
+                        )}
+                    </p>
+                )}
+            </GameDBContext.Consumer>
+
             <h4> Isn&apos;t this accomplished already (or even better) by the wiki itself, or by X other site? </h4>
             <p>
                 Yes and no. It is true, this site provides no &quot;new&quot; information. Instead, the aim is to be an{' '}
