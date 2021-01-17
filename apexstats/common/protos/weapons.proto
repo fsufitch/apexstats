@@ -22,7 +22,7 @@ message WeaponMode {
     uint32 shotsPerRound = 4;
     float headshotMultiplier = 5;
     float legshotMultiplier = 6;
-    uint32 rpm = 7;
+    float rpm = 7;
     string note = 8;
 }
 

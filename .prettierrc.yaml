@@ -15,3 +15,10 @@ arrowParens: 'always'
 
 jsxSingleQuote: false
 jsxBracketSameLine: false
+
+overrides:
+  - files:
+      - '*.yml'
+      - '*.yaml'
+    options:
+      tabWidth: 2
