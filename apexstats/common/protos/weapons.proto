@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+import "enums.proto";
+
+message WeaponStats {
+    Weapon id = 1;
+    string name = 2;
+    WeaponType type = 3;
+    AmmoType ammoType = 4;
+    bool ammoSpecial = 5;
+    uint32 magazine = 6;
+    float adsMoveSpeed = 7;
+    repeated WeaponMode modes = 8;
+    repeated Modifier modifiers = 9;
+}
+
+message WeaponMode {
+    WeaponModeType type = 0;
+    uint32 damagePerPellet = 1;
+    uint32 pelletsPerShot = 2;
+    uint32 ammoPerShot = 3;
+    uint32 shotsPerRound = 4;
+    float headshotMultiplier = 5;
+    float legshotMultiplier = 6;
+    uint32 rpm = 7;
+    string note = 8;
+}
+
+message Modifier {
+    ModifierType type = 0;
+    repeated StatChanges statChanges = 1;
+}
+
+message StatChanges {
+    Rarity rarity = 0;
+    string notes = 1;
+
+    // Barrel stab
+    float recoilMultiplier = 2;
+    float randomnessMultiplier = 3;
+
+    // Shotgun bolt
+    float rpmMultiplier = 4;
+
+    // Light, heavy, and sniper mags
+    uint32 magazine = 5;
+
+    // Stocks
+    float switchSpeedMultiplier = 6;
+
+    // Double tap
+    uint32 shotsPerRound = 7;
+
+    // Hammerpoint
+    uint32 unshieldedDamage = 8;
+
+    // Quickdraw
+    // ?? 
+
+    // Skullpiercer
+    float headshotMultiplier = 9;
+
+    // Turbocharger
+    // ??
+
+    // Sentinel Amp
+    uint32 damagePerPellet = 10;
+}
+
+message WeaponConfiguration {
+    Weapon weaponID = 0;
+    WeaponModeType mode = 1;
+    repeated EquippedModifier modifiers = 2;
+}
+
+message EquippedModifier {
+    ModifierType type = 0;
+    Rarity rarity = 1;
+}

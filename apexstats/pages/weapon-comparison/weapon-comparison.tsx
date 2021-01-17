@@ -100,7 +100,7 @@ export const WeaponComparison = () => {
             const newLocation = {...location, hash: ''};
             history.replace(newLocation);
         }
-    }, []);
+    }, [location.hash]);
 
     return <>
         <h2> Weapon Comparison </h2>

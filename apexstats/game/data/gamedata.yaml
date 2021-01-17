@@ -1,0 +1,105 @@
+# File must match the schema of RawGameData in apexlegends/common/protos/gamedata.proto
+
+
+# ===== Metadata =====
+version: 2020-12-09
+
+
+# ===== Commonly used macros (ignored by schema) =====
+
+__macros:
+  stocks:
+    common: &stock_common
+      rarity: COMMON
+      switchSpeedMultiplier: 1.15
+    rare: &stock_rare
+      rarity: COMMON
+      switchSpeedMultiplier: 1.25
+    epic: &stock_epic
+      rarity: COMMON
+      switchSpeedMultiplier: 1.35
+
+
+# ===== Weapons =====
+weapons:
+  - id: FLATLINE
+    name: VK-47 Flatline
+    type: AR
+    ammoType: HEAVY
+    ammoSpecial: false
+    magazine: 20
+    adsMoveSpeed: 0.5
+    modes: 
+      - &flatline_semi
+        type: SEMI_AUTO
+        damagePerPellet: 19
+        pelletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2.0
+        legshotMultiplier: 0.75
+        rpm: 600
+      - <<: *flatline_semi  # inherit from semi-auto mode
+        type: AUTO
+    modifiers: 
+      - type: HEAVY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 25
+          - rarity: RARE
+            magazine: 28
+          - rarity: EPIC
+            magazine: 30
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+
+# ===== Legends =====
+legends:
+  - id: BANGALORE
+    name: Bangalore
+
+  - id: WRAITH
+    name: Wraith
+
+  - id: MIRAGE
+    name: Mirage
+
+  - id: OCTANE
+    name: Octane
+
+  - id: REVENANT
+    name: Revenant
+
+  - id: HORIZON
+    name: Horizon
+
+  - id: GIBRALTAR
+    name: Gibraltar
+
+  - id: CAUSTIC
+    name: Caustic
+  
+  - id: WATTSON
+    name: Wattson
+
+  - id: RAMPART
+    name: Rampart
+
+  - id: LIFELINE
+    name: Lifeline
+
+  - id: LOBA
+    name: Loba
+
+  - id: BLOODHOUND
+    name: Bloodhound
+
+  - id: PATHFINDER
+    name: Pathfinder
+
+  - id: CRYPTO
+    name: Crypto

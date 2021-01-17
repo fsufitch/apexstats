@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "enums.proto";
+import "weapons.proto";
+
+message RawGameData {
+    string version = 0;
+    repeated WeaponStats weapons = 1;
+    repeated LegendStats legends = 2;
+}

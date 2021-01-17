@@ -1,0 +1,184 @@
+syntax = "proto3";
+
+enum Rarity {
+    option allow_alias = true;
+
+    DEFAULT = 0;
+    NO_RARITY = 0;
+    NONE = 0;
+
+    LEVEL_1 = 1;
+    L1 = 1;
+    WHITE = 1;
+    COMMON = 1;
+
+    LEVEL_2 = 2;
+    L2 = 2;
+    BLUE = 2;
+    RARE = 2;
+
+    LEVEL_3 = 3;
+    L3 = 3;
+    PURPLE = 3;
+    EPIC = 3;
+    
+    LEVEL_4 = 4;
+    L4 = 4;
+    GOLD = 4;
+    YELLOW = 4;
+    LEGENDARY = 4;
+
+    LEVEL_5 = 5;
+    L5 = 5;
+    RED = 5;
+    HEIRLOOM = 5;
+}
+
+enum WeaponType {
+    option allow_alias = true;
+    UNKNOWN = 0;
+
+    ASSAULT_RIFLE = 1;
+    AR = 1;
+
+    SUBMACHINE_GUN = 2;
+    SMG = 2;
+
+    LIGHT_MACHINE_GUN = 3;
+    LMG = 3;
+
+    SNIPER_RIFLE = 4;
+    SR = 4;
+    SNIPER = 4;
+
+    SHOTGUN = 5;
+    SG = 5;
+}
+
+enum WeaponModeType {
+    option allow_alias = true;
+    UNKNOWN = 0;
+
+    SEMI_AUTOMATIC = 1;
+    SEMI_AUTO = 1;
+    SINGLE = 1;
+
+    BURST_FIRE = 2;
+    BURST = 2;
+
+    AUTOMATIC = 3;
+    AUTO = 3;
+}
+
+enum AmmoType {
+    UNKNOWN = 0;
+    LIGHT = 1;
+    HEAVY = 2;
+    ENERGY = 3;
+    SHOTGUN = 4;
+    SNIPER = 5;
+}
+
+enum ModifierType {
+    option allow_alias = true;
+    UNKNOWN = 0;
+
+    BARREL_STABILIZER = 1;
+    BARREL_STAB = 1;
+    STAB = 1;
+
+    SHOTGUN_BOLT = 2;
+    BOLT = 2;
+
+    EXTENDED_LIGHT_MAGAZINE = 3;
+    LIGHT_MAGAZINE = 3;
+    LIGHT_MAG = 3;
+
+    EXTENDED_HEAVY_MAGAZINE = 4;
+    HEAVY_MAGAZINE = 4;
+    HEAVY_MAG = 4;
+
+    EXTENDED_SNIPER_MAGAZINE = 5;
+    SNIPER_MAGAZINE = 5;
+    SNIPER_MAG = 5;
+
+    STANDARD_STOCK = 6;
+    STOCK = 6;
+
+    SNIPER_STOCK = 7;
+
+    SENTINEL_AMP_MODE = 8;
+
+    DOUBLE_TAP_TRIGGER = 9;
+    DOUBLE_TAP = 9;
+
+    HAMMERPOINT_ROUNDS = 10;
+    HAMMERPOINT = 10;
+    HAMMER = 10;
+
+    QUICKDRAW_HOLSTER = 11;
+    QUICKDRAW = 11;
+
+    SKULLPIERCER_RIFLING = 12;
+    SKULLPIERCER = 12;
+
+    TURBOCHARGER = 13;
+    TURBO = 13;
+}
+
+enum Weapon {
+    UNKNOWN = 0;
+
+    FLATLINE = 1;
+    SCOUT = 2;
+    HEMLOK = 3;
+    R301 = 4;
+    HAVOC = 5;
+
+    ALTERNATOR = 6;
+    PROWLER = 7;
+    R99 = 8;
+    VOLT = 9;
+
+    DEVOTION = 10;
+    SPITFIRE = 11;
+    LSTAR = 12;
+
+    LONGBOW = 13;
+    KRABER = 14;
+    TRIPLE_TAKE = 15;
+    SENTINEL = 16;
+    CHARGE_RIFLE = 17;
+
+    EVA = 18;
+    MASTIFF = 19;
+    MOZAMBIQUE = 20;
+    PEACEKEEPER = 21;
+
+    RE45 = 22;
+    P2020 = 23;
+    WINGMAN = 24;
+}
+
+enum Legend {
+    UNKNOWN = 0;
+
+    BANGALORE = 1;
+    WRAITH = 2;
+    MIRAGE = 3;
+    OCTANE = 4;
+    REVENANT = 5;
+    HORIZON = 6;
+
+    GIBRALTAR = 7;
+    CAUSTIC = 8;
+    WATTSON = 9;
+    RAMPART = 10;
+
+    LIFELINE = 11;
+    LOBA = 12;
+
+    BLOODHOUND = 13;
+    PATHFINDER = 14;
+    CRYPTO = 15;
+}

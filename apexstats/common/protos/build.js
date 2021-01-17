@@ -2,8 +2,10 @@ const path = require('path');
 const { pbjs, pbts } = require('protobufjs/cli');
 
 const args = [
-    '-t', 'static-module', '-w', 'commonjs', 
-    '-o', path.join(__dirname, 'protos.generated.js'), 
+    '--target', 'static-module', 
+    '--wrap', 'commonjs', 
+    '--path', __dirname,
+    '--out', path.join(__dirname, 'protos.generated.js'), 
     path.join(__dirname, '*.proto'),
 ];
 console.log('Building protos with args:', args);
