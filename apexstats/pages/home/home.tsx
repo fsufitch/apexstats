@@ -22,7 +22,7 @@ export const Home = () => {
             <h3>
                 <Link to="/ttk">TTK Simulation</Link>
             </h3>
-            <p> Can a Mozambique take anyone down without reloading? Does Octane's regeneration make him more resistant to getting shot? What's the deal with Gibraltar's shield anyway? </p>
+            <p> Can a Mozambique take anyone down without reloading? Does Octane&apos;s regeneration make him more resistant to getting shot? What&apos;s the deal with Gibraltar&apos;s shield anyway? </p>
         </div>
     </div>;
-}
+};

@@ -5,4 +5,4 @@ export const TTKSimulation = () => {
         <h2>TTK Simulation</h2>
         <p> Coming soon&trade;!</p>
     </>;
-}
+};

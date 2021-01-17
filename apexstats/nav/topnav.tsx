@@ -37,4 +37,4 @@ export const TopNavigation = () => {
         </div>
     </nav>;
 
-}
+};

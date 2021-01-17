@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const { pbjs, pbts } = require('protobufjs/cli');
 
@@ -10,7 +11,7 @@ const args = [
 ];
 console.log('Building protos with args:', args);
 pbjs.main(args, err => {
-    if (!!err) {
+    if (err) {
         console.error('Error building protos:', err);
         return;
     }
@@ -22,9 +23,9 @@ pbjs.main(args, err => {
     ];
     console.log('Building protos typings with args:', args);
     pbts.main(args, err => {
-        if (!!err) {
+        if (err) {
             console.error('Error building protos typings', err);
         }
         console.log('Protos typings successfully built.');
-    })
+    });
 });

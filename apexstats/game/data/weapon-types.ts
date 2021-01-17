@@ -1,4 +1,4 @@
-import { WeaponDB, WeaponTypeID } from "./types";
+import { WeaponDB, WeaponTypeID } from './types';
 
 export const typeIDs: WeaponTypeID[] = ['ar', 'smg', 'lmg', 'sniper', 'sg', 'pistol'];
 
@@ -10,4 +10,4 @@ export const buildWeaponTypes = (weapons: WeaponDB) =>
     }))
     .reduce(
         (prev, curr) => Object.assign(prev, curr)
-    ) as {[id in WeaponTypeID]: string[]}
+    ) as {[id in WeaponTypeID]: string[]};

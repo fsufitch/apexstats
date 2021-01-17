@@ -32,18 +32,18 @@ export const WeaponComparison = () => {
         const newRowIDs = new Set(rowIDs);
         newRowIDs.add(rowID);
         setRowIDs(newRowIDs);
-    }
+    };
 
     const addColumn = (columnID: string | null) => {
         if (!columnID) {
-            console.error('Tried to add empty column ID')
+            console.error('Tried to add empty column ID');
             return;
         }
 
         const modeID = Object.keys(WeaponModeSuffixes)
             .find(suffix => columnID.endsWith(suffix)) as (FiringModeID | undefined);
         if (modeID === undefined) {
-            console.error(`Tried to add column ID without firing mode: ${columnID}`)
+            console.error(`Tried to add column ID without firing mode: ${columnID}`);
             return;
         }
 
@@ -53,30 +53,30 @@ export const WeaponComparison = () => {
             return;
         }
 
-        if (!!columnSpecs.find(it => it.weaponID === weaponID && it.modeID === modeID)) {
+        if (columnSpecs.find(it => it.weaponID === weaponID && it.modeID === modeID)) {
             console.warn(`Tried to add duplicate weapon spec ${columnID}`);
             return;
         }
 
         const newColumnSpecs = [...columnSpecs, { weaponID, modeID }];
         setColumnSpecs(newColumnSpecs);
-    }
+    };
 
     const removeColumn = (weaponID: string, modeID: FiringModeID) => {
         setColumnSpecs(columnSpecs.filter(
             spec => spec.weaponID !== weaponID || spec.modeID !== modeID));
-    }
+    };
 
     const removeRow = (rowID: string) => {
         const newRowIDs = new Set(rowIDs);
         newRowIDs.delete(rowID);
         setRowIDs(newRowIDs);
-    }
+    };
 
     const clear = () => {
         setColumnSpecs([]);
         setRowIDs(new Set());
-    }
+    };
 
     const location = useLocation();
     const history = useHistory();
@@ -138,4 +138,4 @@ export const WeaponComparison = () => {
             </tbody>
         </table>
     </>;
-}
+};

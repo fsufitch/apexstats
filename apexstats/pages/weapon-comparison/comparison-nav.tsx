@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-import { CustomDropdown } from "apexstats/common/dropdown";
-import { FiringModeID, weapons, weaponTypeIDs, weaponTypes } from "apexstats/game/data";
-import { weaponName, weaponTypeName } from "apexstats/game/strings";
-import { rowChoices, WeaponComparisonRow } from "./rows";
+import { CustomDropdown } from 'apexstats/common/dropdown';
+import { FiringModeID, weapons, weaponTypeIDs, weaponTypes } from 'apexstats/game/data';
+import { weaponName, weaponTypeName } from 'apexstats/game/strings';
+import { rowChoices, WeaponComparisonRow } from './rows';
 
 import css from './comparison-nav.module.sass';
-import { Overlay, Tooltip } from "react-bootstrap";
+import { Overlay, Tooltip } from 'react-bootstrap';
 
 interface Props {
     showTooltip?: boolean;
@@ -22,7 +22,7 @@ export const WeaponModeSuffixes = {
     burst: '++burst',
     auto: '++auto',
     unknown: '++??',
-}
+};
 
 const weaponChoices = weaponTypeIDs.map(typeID => [
     { id: '', label: weaponTypeName(typeID), header: true },
@@ -43,11 +43,12 @@ const statChoices = rowChoices.map(row => Object.keys(row).includes('id')
     ? weaponComparisonRowToStatChoice(row as WeaponComparisonRow)
     : { id: '', label: row.label, header: true });
 
-export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onAddWeapon, onAddStat, onExportCSV, onClear }) => {
-    onAddWeapon ??= () => { };
-    onAddStat ??= () => { };
-    onExportCSV ??= () => { };
-    onClear ??= () => { };
+export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onAddWeapon, onAddStat, onExportCSV, onClear }: Props) => {
+    onAddWeapon ??= () => void(0);
+    onAddStat ??= () => void(0);
+    onClear ??= () => void(0);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onExportCSV ??= () => void(0);
 
     const [tooltip, setTooltip] = useState<boolean>(!!showTooltip);
 
@@ -59,7 +60,7 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onA
     console.log('created ref', target);
 
     return <>
-        <ul className={css["nav"]}>
+        <ul className={css['nav']}>
             <li className="nav-item">
                 <CustomDropdown title={'(+) Add Stat'} onSelect={onAddStat} choices={statChoices} />
             </li>
@@ -79,4 +80,4 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onA
             </li>
         </ul>
     </>;
-}
+};

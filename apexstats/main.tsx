@@ -1,20 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Container } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
 
-import "./main.global.sass";
-import css from "./main.module.sass";
+import './main.global.sass';
+import css from './main.module.sass';
 
-import { Theming, ThemeContext } from "apexstats/style/themes";
-import { TopNavigation } from "./nav";
-import { Home } from "./pages/home";
-import { About } from "./pages/about";
-import { TTKSimulation } from "./pages/ttk-simulation";
-import { WeaponComparison } from "./pages/weapon-comparison";
-import { Footer } from "./nav/footer";
-import { GameDBLoader } from "./game/data/gamedb-context";
+import { Theming, ThemeContext } from 'apexstats/style/themes';
+import { TopNavigation } from './nav';
+import { Home } from './pages/home';
+import { About } from './pages/about';
+import { TTKSimulation } from './pages/ttk-simulation';
+import { WeaponComparison } from './pages/weapon-comparison';
+import { Footer } from './nav/footer';
+import { GameDBLoader } from './game/data/gamedb-context';
 
 const App = () => {
   return (
@@ -25,7 +25,7 @@ const App = () => {
             {({ themeClass }) => (
               <>
                 <div
-                  className={`${css["page-background"]} ${themeClass}`}
+                  className={`${css['page-background']} ${themeClass}`}
                 ></div>
                 <Container>
                   <TopNavigation />
@@ -58,10 +58,10 @@ const App = () => {
   );
 };
 
-const wrapper = document.getElementById("app");
+const wrapper = document.getElementById('app');
 
 if (wrapper) {
   ReactDOM.render(<App />, wrapper);
 } else {
-  console.error("No wrapper element found");
+  console.error('No wrapper element found');
 }

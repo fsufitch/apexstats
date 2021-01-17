@@ -1,7 +1,7 @@
 import { Base64 } from 'js-base64';
 
-import { WeaponComparisonSpecMessage } from "apexstats/common/protos";
-import { FiringModeID } from "apexstats/game/data";
+import { WeaponComparisonSpecMessage } from 'apexstats/common/protos';
+import { FiringModeID } from 'apexstats/game/data';
 
 export interface ColumnSpec {
     weaponID: string,
@@ -19,7 +19,7 @@ export const serialize = (rowIDs: Iterable<string>, columnSpecs: ColumnSpec[]) =
 
     const bytes = WeaponComparisonSpecMessage.encode(message).finish();
     return Base64.fromUint8Array(bytes);
-}
+};
 
 export const deserialize = (fragment: string): {rowIDs: string[], columnSpecs: ColumnSpec[]} => {
     const bytes = Base64.toUint8Array(fragment);
@@ -28,10 +28,10 @@ export const deserialize = (fragment: string): {rowIDs: string[], columnSpecs: C
         rowIDs: message.rowIDs,
         columnSpecs: message.columnSpecs.map(s => ({
             weaponID: `${s.weaponID}`,
-            modeID: fromFiringModeEnum(s.firingMode!!),
+            modeID: fromFiringModeEnum(s.firingMode || WeaponComparisonSpecMessage.ColumnSpecMessage.FiringModeEnum.UNKNOWN),
         })),
-    }
-}
+    };
+};
 
 const toFiringModeEnum = (mode: FiringModeID) => {
     switch (mode) {
@@ -41,7 +41,7 @@ const toFiringModeEnum = (mode: FiringModeID) => {
         case 'auto': return WeaponComparisonSpecMessage.ColumnSpecMessage.FiringModeEnum.AUTO;
         default: return WeaponComparisonSpecMessage.ColumnSpecMessage.FiringModeEnum.UNKNOWN;
     }
-}
+};
 
 const fromFiringModeEnum = (mode: WeaponComparisonSpecMessage.ColumnSpecMessage.FiringModeEnum) => {
     switch (mode) {
@@ -51,4 +51,4 @@ const fromFiringModeEnum = (mode: WeaponComparisonSpecMessage.ColumnSpecMessage.
         case WeaponComparisonSpecMessage.ColumnSpecMessage.FiringModeEnum.AUTO: return 'auto';
         default: return 'unknown';
     }
-}
+};

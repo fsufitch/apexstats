@@ -23,7 +23,7 @@ export class WeaponStats {
             throw `Weapon ${this.weaponID} does not exist`;
         }
         return weapons[this.weaponID];
-    };
+    }
 
     get firingModeID() {
         const supportedModes = Object.keys(this.weapon.modes) as FiringModeID[];
@@ -47,7 +47,7 @@ export class WeaponStats {
         return mode;
     }
 
-    bulletDamage = () => this.config.hammerpoint ? this.mode.damage_hammerpoint!! : this.mode.damage;
+    bulletDamage = () => this.config.hammerpoint ? this.mode.damage_hammerpoint || 0 : this.mode.damage;
     bulletHeadshot = () => this.bulletDamage() * this.headshotMultiplier();
     bulletLegshot = () => this.bulletDamage() * this.legshotMultiplier();
 
@@ -55,10 +55,10 @@ export class WeaponStats {
     headshot = () => this.damage() * this.headshotMultiplier();
     legshot = () => this.damage() * this.legshotMultiplier();
 
-    headshotMultiplier = () => this.config.skullpiercer ? this.mode.headshot_skullpiercer!! : this.mode.headshot;
+    headshotMultiplier = () => this.config.skullpiercer ? this.mode.headshot_skullpiercer || 0 : this.mode.headshot;
     legshotMultiplier = () => this.mode.legshot;
 
-    rpm = () => this.mode.rpm * (this.config.bolt ? this.weapon.shotgun_bolt_rpm_multiplier!![this.config.bolt - 1] : 1)
+    rpm = () => this.mode.rpm * (this.config.bolt &&  this.weapon.shotgun_bolt_rpm_multiplier ? this.weapon.shotgun_bolt_rpm_multiplier[this.config.bolt - 1] : 1)
     rps = () => this.rpm() / 60
     magazineSize = () => {
         switch(this.weapon.magazine.length) {
@@ -84,5 +84,5 @@ export class WeaponStats {
     clipHeadshot = () => this.magazineSize() * this.headshot();
     clipLegshot = () => this.magazineSize() * this.legshot();
 
-    recoil = () => !this.config.barrel ? 1.0 : (this.weapon.barrel_recoil_multiplier!![this.config.barrel-1] ?? 1.0);
+    recoil = () => this.config.barrel && this.weapon.barrel_recoil_multiplier ? (this.weapon.barrel_recoil_multiplier[this.config.barrel-1] ?? 1.0) : 1.0;
 }

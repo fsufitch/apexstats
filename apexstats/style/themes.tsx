@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, FunctionComponent } from 'react';
+import React, { useState, useEffect, createContext, FunctionComponent, PropsWithChildren } from 'react';
 
 const LOCAL_STORAGE_KEY = 'apexstats.theme';
 
@@ -14,10 +14,10 @@ const themeClass = (theme: Theme) => ({
 export const ThemeContext = createContext({
     theme: DEFAULT_THEME,
     themeClass: themeClass(DEFAULT_THEME),
-    setTheme: (theme: Theme) => { },
+    setTheme: (_: Theme) => {void(_);},
 });
 
-export const Theming: FunctionComponent<{}> = (props) => {
+export const Theming: FunctionComponent = (props: PropsWithChildren<unknown>) => {
     const [theme, setThemeState] = useState<Theme>(DEFAULT_THEME);
 
     // Load the extant theme from local storage
@@ -29,9 +29,9 @@ export const Theming: FunctionComponent<{}> = (props) => {
     const setTheme = (newTheme: Theme) => {
         localStorage.setItem(LOCAL_STORAGE_KEY, newTheme);
         setThemeState(newTheme);
-    }
+    };
 
     return <ThemeContext.Provider value={{ theme, themeClass: themeClass(theme), setTheme }}>
         {props.children}
     </ThemeContext.Provider>;
-}
+};

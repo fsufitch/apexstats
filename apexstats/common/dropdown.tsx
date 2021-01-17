@@ -16,18 +16,18 @@ interface DropdownProps {
     ref?: React.Ref<any>,
 }
 
-const Choice: FunctionComponent<DropdownChoice> = ({ id, label, header }) => {
+const Choice: FunctionComponent<DropdownChoice> = ({ id, label, header }: DropdownChoice) => {
     return <>
-        {!!header ?
+        {header ?
             <Dropdown.Header> <strong>{label}</strong> </Dropdown.Header>
             :
             <Dropdown.Item eventKey={id}>{label}</Dropdown.Item>
         }
     </>;
-}
+};
 
-const CustomDropdownRenderFunction: ForwardRefRenderFunction<any, DropdownProps> = (props, ref) => {
-    const onSelect = props.onSelect ?? (() => { });
+const CustomDropdownRenderFunction: ForwardRefRenderFunction<any, DropdownProps> = (props: DropdownProps, ref) => {
+    const onSelect = props.onSelect ?? void(0);
 
     console.log('ref', ref);
     return <Dropdown ref={ref} onSelect={onSelect}>
@@ -41,6 +41,6 @@ const CustomDropdownRenderFunction: ForwardRefRenderFunction<any, DropdownProps>
             )}
         </Dropdown.Menu>
     </Dropdown>;
-}
+};
 
 export const CustomDropdown = forwardRef(CustomDropdownRenderFunction);
