@@ -10,25 +10,35 @@ import { WeaponComparisonNav, WeaponModeSuffixes } from './comparison-nav';
 import { weaponName } from 'apexstats/game/strings';
 import { ColumnSpec, deserialize, serialize } from './serialization';
 
-
 export const WeaponComparison = () => {
     const [rowIDs, setRowIDs] = useState<Set<string>>(new Set(defaltRowIDs));
     const [columnSpecs, setColumnSpecs] = useState<ColumnSpec[]>([]);
 
     const [rows, setRows] = useState<WeaponComparisonRow[]>([]);
-    const [columns, setColumns] = useState<WeaponStats[]>([]);    
+    const [columns, setColumns] = useState<WeaponStats[]>([]);
 
-    useEffect(() => setRows(rowChoices
-        .map(r => r as WeaponComparisonRow)
-        .filter(r => rowIDs.has(r.id))
-    ), [rowIDs]);
+    useEffect(
+        () =>
+            setRows(
+                rowChoices.map((r) => r as WeaponComparisonRow).filter((r) => rowIDs.has(r.id))
+            ),
+        [rowIDs]
+    );
 
-    useEffect(() => setColumns(columnSpecs
-        .map(({ weaponID, modeID }) => new WeaponStats(weaponID, { firingMode: modeID }))
-    ), [columnSpecs]);
+    useEffect(
+        () =>
+            setColumns(
+                columnSpecs.map(
+                    ({ weaponID, modeID }) => new WeaponStats(weaponID, { firingMode: modeID })
+                )
+            ),
+        [columnSpecs]
+    );
 
     const addRow = (rowID: string | null) => {
-        if (!rowID) { return; }
+        if (!rowID) {
+            return;
+        }
         const newRowIDs = new Set(rowIDs);
         newRowIDs.add(rowID);
         setRowIDs(newRowIDs);
@@ -40,8 +50,9 @@ export const WeaponComparison = () => {
             return;
         }
 
-        const modeID = Object.keys(WeaponModeSuffixes)
-            .find(suffix => columnID.endsWith(suffix)) as (FiringModeID | undefined);
+        const modeID = Object.keys(WeaponModeSuffixes).find((suffix) =>
+            columnID.endsWith(suffix)
+        ) as FiringModeID | undefined;
         if (modeID === undefined) {
             console.error(`Tried to add column ID without firing mode: ${columnID}`);
             return;
@@ -53,7 +64,7 @@ export const WeaponComparison = () => {
             return;
         }
 
-        if (columnSpecs.find(it => it.weaponID === weaponID && it.modeID === modeID)) {
+        if (columnSpecs.find((it) => it.weaponID === weaponID && it.modeID === modeID)) {
             console.warn(`Tried to add duplicate weapon spec ${columnID}`);
             return;
         }
@@ -63,8 +74,9 @@ export const WeaponComparison = () => {
     };
 
     const removeColumn = (weaponID: string, modeID: FiringModeID) => {
-        setColumnSpecs(columnSpecs.filter(
-            spec => spec.weaponID !== weaponID || spec.modeID !== modeID));
+        setColumnSpecs(
+            columnSpecs.filter((spec) => spec.weaponID !== weaponID || spec.modeID !== modeID)
+        );
     };
 
     const removeRow = (rowID: string) => {
@@ -80,11 +92,11 @@ export const WeaponComparison = () => {
 
     const location = useLocation();
     const history = useHistory();
-    
+
     useEffect(() => {
         // When rows or columns are updated, update the hash
         const newHash = serialize(rowIDs, columnSpecs);
-        const newLocation = {...location, hash: newHash};
+        const newLocation = { ...location, hash: newHash };
         history.replace(newLocation);
     }, [rowIDs, columnSpecs]);
 
@@ -94,48 +106,55 @@ export const WeaponComparison = () => {
             const { rowIDs, columnSpecs } = deserialize(location.hash);
             setRowIDs(new Set(rowIDs));
             setColumnSpecs(columnSpecs);
-
         } catch (e) {
             console.log('illegal hash', location.hash, e);
-            const newLocation = {...location, hash: ''};
+            const newLocation = { ...location, hash: '' };
             history.replace(newLocation);
         }
     }, [location.hash]);
 
-    return <>
-        <h2> Weapon Comparison </h2>
+    return (
+        <>
+            <h2> Weapon Comparison </h2>
 
-        <WeaponComparisonNav
-            showTooltip={rowIDs.size===0 || columnSpecs.length===0}
-            onAddStat={addRow}
-            onAddWeapon={addColumn}
-            onClear={clear} />
+            <WeaponComparisonNav
+                showTooltip={rowIDs.size === 0 || columnSpecs.length === 0}
+                onAddStat={addRow}
+                onAddWeapon={addColumn}
+                onClear={clear}
+            />
 
-        <table className="table table-bordered table-hover table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        {/*empty*/}
-                    </th>
-                    {columns.map((col, i) => <th scope="col" key={i} className="text-center">
-                        <RemoveButton onClick={() => removeColumn(col.weaponID, col.firingModeID)} />
-                        {weaponName(col.weaponID, col.firingModeID)}
-                    </th>)}
-                    
-                </tr>
-            </thead>
+            <table className="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">{/*empty*/}</th>
+                        {columns.map((col, i) => (
+                            <th scope="col" key={i} className="text-center">
+                                <RemoveButton
+                                    onClick={() => removeColumn(col.weaponID, col.firingModeID)}
+                                />
+                                {weaponName(col.weaponID, col.firingModeID)}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
 
-            <tbody>
-                {rows.map((row, i) => <tr key={i}>
-                    <th scope="row" className="text-right">
-                        {row.label}
-                        <RemoveButton onClick={() => removeRow(row.id)} />
-                    </th>
-                    {columns.map((stat, i) => <td key={i} className="text-right">
-                        {row.display(row.extract(stat))}
-                    </td>)}
-                </tr>)}
-            </tbody>
-        </table>
-    </>;
+                <tbody>
+                    {rows.map((row, i) => (
+                        <tr key={i}>
+                            <th scope="row" className="text-right">
+                                {row.label}
+                                <RemoveButton onClick={() => removeRow(row.id)} />
+                            </th>
+                            {columns.map((stat, i) => (
+                                <td key={i} className="text-right">
+                                    {row.display(row.extract(stat))}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
+    );
 };

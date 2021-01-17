@@ -1,4 +1,10 @@
-import React, { useState, useEffect, createContext, FunctionComponent, PropsWithChildren } from 'react';
+import React, {
+    useState,
+    useEffect,
+    createContext,
+    FunctionComponent,
+    PropsWithChildren,
+} from 'react';
 
 const LOCAL_STORAGE_KEY = 'apexstats.theme';
 
@@ -6,15 +12,18 @@ export type Theme = 'light' | 'dark';
 
 export const DEFAULT_THEME = 'light' as Theme;
 
-const themeClass = (theme: Theme) => ({
-    light: 'theme-light',
-    dark: 'theme-dark',
-}[theme || DEFAULT_THEME]);
+const themeClass = (theme: Theme) =>
+    ({
+        light: 'theme-light',
+        dark: 'theme-dark',
+    }[theme || DEFAULT_THEME]);
 
 export const ThemeContext = createContext({
     theme: DEFAULT_THEME,
     themeClass: themeClass(DEFAULT_THEME),
-    setTheme: (_: Theme) => {void(_);},
+    setTheme: (_: Theme) => {
+        void _;
+    },
 });
 
 export const Theming: FunctionComponent = (props: PropsWithChildren<unknown>) => {
@@ -22,7 +31,7 @@ export const Theming: FunctionComponent = (props: PropsWithChildren<unknown>) =>
 
     // Load the extant theme from local storage
     useEffect(() => {
-        const theme = localStorage.getItem(LOCAL_STORAGE_KEY) as Theme || DEFAULT_THEME;
+        const theme = (localStorage.getItem(LOCAL_STORAGE_KEY) as Theme) || DEFAULT_THEME;
         setThemeState(theme);
     }, []);
 
@@ -31,7 +40,9 @@ export const Theming: FunctionComponent = (props: PropsWithChildren<unknown>) =>
         setThemeState(newTheme);
     };
 
-    return <ThemeContext.Provider value={{ theme, themeClass: themeClass(theme), setTheme }}>
-        {props.children}
-    </ThemeContext.Provider>;
+    return (
+        <ThemeContext.Provider value={{ theme, themeClass: themeClass(theme), setTheme }}>
+            {props.children}
+        </ThemeContext.Provider>
+    );
 };

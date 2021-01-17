@@ -1,10 +1,10 @@
-import { weapons , FiringModeID } from './data';
+import { weapons, FiringModeID } from './data';
 
 export type WeaponStatCategory = 'base' | 'damage' | 'handling';
 export type Unit = 'damage' | 'second' | 'percent';
 
 export interface WeaponConfiguration {
-    firingMode?: FiringModeID,
+    firingMode?: FiringModeID;
     mag?: 0 | 1 | 2 | 3;
     bolt?: 0 | 1 | 2 | 3;
     barrel?: 0 | 1 | 2 | 3 | 4;
@@ -16,7 +16,7 @@ export class WeaponStats {
     description(): number {
         throw new Error('Method not implemented.');
     }
-    constructor(public weaponID: string, private config: WeaponConfiguration={}) { }
+    constructor(public weaponID: string, private config: WeaponConfiguration = {}) {}
 
     get weapon() {
         if (weapons[this.weaponID] === undefined) {
@@ -47,7 +47,8 @@ export class WeaponStats {
         return mode;
     }
 
-    bulletDamage = () => this.config.hammerpoint ? this.mode.damage_hammerpoint || 0 : this.mode.damage;
+    bulletDamage = () =>
+        this.config.hammerpoint ? this.mode.damage_hammerpoint || 0 : this.mode.damage;
     bulletHeadshot = () => this.bulletDamage() * this.headshotMultiplier();
     bulletLegshot = () => this.bulletDamage() * this.legshotMultiplier();
 
@@ -55,13 +56,18 @@ export class WeaponStats {
     headshot = () => this.damage() * this.headshotMultiplier();
     legshot = () => this.damage() * this.legshotMultiplier();
 
-    headshotMultiplier = () => this.config.skullpiercer ? this.mode.headshot_skullpiercer || 0 : this.mode.headshot;
+    headshotMultiplier = () =>
+        this.config.skullpiercer ? this.mode.headshot_skullpiercer || 0 : this.mode.headshot;
     legshotMultiplier = () => this.mode.legshot;
 
-    rpm = () => this.mode.rpm * (this.config.bolt &&  this.weapon.shotgun_bolt_rpm_multiplier ? this.weapon.shotgun_bolt_rpm_multiplier[this.config.bolt - 1] : 1)
-    rps = () => this.rpm() / 60
+    rpm = () =>
+        this.mode.rpm *
+        (this.config.bolt && this.weapon.shotgun_bolt_rpm_multiplier
+            ? this.weapon.shotgun_bolt_rpm_multiplier[this.config.bolt - 1]
+            : 1);
+    rps = () => this.rpm() / 60;
     magazineSize = () => {
-        switch(this.weapon.magazine.length) {
+        switch (this.weapon.magazine.length) {
             case 0:
                 return Infinity;
             case 1:
@@ -69,10 +75,10 @@ export class WeaponStats {
             case 4:
                 return this.weapon.magazine[this.config.mag || 0];
         }
-    }
-    clipTimeSeconds = () => this.magazineSize() / this.rps()
+    };
+    clipTimeSeconds = () => this.magazineSize() / this.rps();
 
-    dps = () => this.damage() * this.rps()
+    dps = () => this.damage() * this.rps();
     dpsHeadshot = () => this.headshot() * this.rps();
     dpsLegshot = () => this.legshot() * this.rps();
 
@@ -84,5 +90,8 @@ export class WeaponStats {
     clipHeadshot = () => this.magazineSize() * this.headshot();
     clipLegshot = () => this.magazineSize() * this.legshot();
 
-    recoil = () => this.config.barrel && this.weapon.barrel_recoil_multiplier ? (this.weapon.barrel_recoil_multiplier[this.config.barrel-1] ?? 1.0) : 1.0;
+    recoil = () =>
+        this.config.barrel && this.weapon.barrel_recoil_multiplier
+            ? this.weapon.barrel_recoil_multiplier[this.config.barrel - 1] ?? 1.0
+            : 1.0;
 }

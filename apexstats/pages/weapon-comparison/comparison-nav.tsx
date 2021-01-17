@@ -24,31 +24,44 @@ export const WeaponModeSuffixes = {
     unknown: '++??',
 };
 
-const weaponChoices = weaponTypeIDs.map(typeID => [
-    { id: '', label: weaponTypeName(typeID), header: true },
-    ...weaponTypes[typeID].map(id => ['single', 'single_amp', 'burst', 'auto']
-        .map(mode => mode as FiringModeID)
-        .filter(mode => !!weapons[id].modes[mode])
-        .map(mode => ({
-            id: `${id}${WeaponModeSuffixes[mode]}`,
-            label: weaponName(id, mode),
-            header: false,
-        })))
-        .reduce((acc, curr) => acc.concat(curr)),
-]).reduce((acc, curr) => acc.concat(curr));
+const weaponChoices = weaponTypeIDs
+    .map((typeID) => [
+        { id: '', label: weaponTypeName(typeID), header: true },
+        ...weaponTypes[typeID]
+            .map((id) =>
+                ['single', 'single_amp', 'burst', 'auto']
+                    .map((mode) => mode as FiringModeID)
+                    .filter((mode) => !!weapons[id].modes[mode])
+                    .map((mode) => ({
+                        id: `${id}${WeaponModeSuffixes[mode]}`,
+                        label: weaponName(id, mode),
+                        header: false,
+                    }))
+            )
+            .reduce((acc, curr) => acc.concat(curr)),
+    ])
+    .reduce((acc, curr) => acc.concat(curr));
 
 const weaponComparisonRowToStatChoice = ({ id, label }: WeaponComparisonRow) => ({ id, label });
 
-const statChoices = rowChoices.map(row => Object.keys(row).includes('id')
-    ? weaponComparisonRowToStatChoice(row as WeaponComparisonRow)
-    : { id: '', label: row.label, header: true });
+const statChoices = rowChoices.map((row) =>
+    Object.keys(row).includes('id')
+        ? weaponComparisonRowToStatChoice(row as WeaponComparisonRow)
+        : { id: '', label: row.label, header: true }
+);
 
-export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onAddWeapon, onAddStat, onExportCSV, onClear }: Props) => {
-    onAddWeapon ??= () => void(0);
-    onAddStat ??= () => void(0);
-    onClear ??= () => void(0);
+export const WeaponComparisonNav: FunctionComponent<Props> = ({
+    showTooltip,
+    onAddWeapon,
+    onAddStat,
+    onExportCSV,
+    onClear,
+}: Props) => {
+    onAddWeapon ??= () => void 0;
+    onAddStat ??= () => void 0;
+    onClear ??= () => void 0;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onExportCSV ??= () => void(0);
+    onExportCSV ??= () => void 0;
 
     const [tooltip, setTooltip] = useState<boolean>(!!showTooltip);
 
@@ -59,25 +72,37 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({ showTooltip, onA
     const target = useRef<any>(null);
     console.log('created ref', target);
 
-    return <>
-        <ul className={css['nav']}>
-            <li className="nav-item">
-                <CustomDropdown title={'(+) Add Stat'} onSelect={onAddStat} choices={statChoices} />
-            </li>
+    return (
+        <>
+            <ul className={css['nav']}>
+                <li className="nav-item">
+                    <CustomDropdown
+                        title={'(+) Add Stat'}
+                        onSelect={onAddStat}
+                        choices={statChoices}
+                    />
+                </li>
 
-            <span ref={target}></span>
-            <Overlay target={target.current} show={tooltip} placement="bottom">
-                <Tooltip id="add-stat-tooltip" onClick={() => setTooltip(false)}>
-                    Select some stats and weapons to get started!
-                </Tooltip>
-            </Overlay>
+                <span ref={target}></span>
+                <Overlay target={target.current} show={tooltip} placement="bottom">
+                    <Tooltip id="add-stat-tooltip" onClick={() => setTooltip(false)}>
+                        Select some stats and weapons to get started!
+                    </Tooltip>
+                </Overlay>
 
-            <li className="nav-item">
-                <CustomDropdown title={'(+) Add Weapon'} onSelect={onAddWeapon} choices={weaponChoices} />
-            </li>
-            <li className="nav-item">
-                <button className="btn btn-outline-danger" onClick={onClear}>Clear</button>
-            </li>
-        </ul>
-    </>;
+                <li className="nav-item">
+                    <CustomDropdown
+                        title={'(+) Add Weapon'}
+                        onSelect={onAddWeapon}
+                        choices={weaponChoices}
+                    />
+                </li>
+                <li className="nav-item">
+                    <button className="btn btn-outline-danger" onClick={onClear}>
+                        Clear
+                    </button>
+                </li>
+            </ul>
+        </>
+    );
 };

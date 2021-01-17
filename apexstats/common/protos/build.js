@@ -3,14 +3,18 @@ const path = require('path');
 const { pbjs, pbts } = require('protobufjs/cli');
 
 const args = [
-    '--target', 'static-module', 
-    '--wrap', 'commonjs', 
-    '--path', __dirname,
-    '--out', path.join(__dirname, 'protos.generated.js'), 
+    '--target',
+    'static-module',
+    '--wrap',
+    'commonjs',
+    '--path',
+    __dirname,
+    '--out',
+    path.join(__dirname, 'protos.generated.js'),
     path.join(__dirname, '*.proto'),
 ];
 console.log('Building protos with args:', args);
-pbjs.main(args, err => {
+pbjs.main(args, (err) => {
     if (err) {
         console.error('Error building protos:', err);
         return;
@@ -18,11 +22,12 @@ pbjs.main(args, err => {
     console.log('Protos successfully built.');
 
     const args = [
-        '-o', path.join(__dirname, 'protos.generated.d.ts'),
+        '-o',
+        path.join(__dirname, 'protos.generated.d.ts'),
         path.join(__dirname, 'protos.generated.js'),
     ];
     console.log('Building protos typings with args:', args);
-    pbts.main(args, err => {
+    pbts.main(args, (err) => {
         if (err) {
             console.error('Error building protos typings', err);
         }

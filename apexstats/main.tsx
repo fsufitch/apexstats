@@ -17,51 +17,49 @@ import { Footer } from './nav/footer';
 import { GameDBLoader } from './game/data/gamedb-context';
 
 const App = () => {
-  return (
-    <Router>
-      <GameDBLoader>
-        <Theming>
-          <ThemeContext.Consumer>
-            {({ themeClass }) => (
-              <>
-                <div
-                  className={`${css['page-background']} ${themeClass}`}
-                ></div>
-                <Container>
-                  <TopNavigation />
-                  <div className="mt-3 mb-3">
-                    <Switch>
-                      <Route exact path="/">
-                        <Home />
-                      </Route>
-                      <Route path="/weapons">
-                        <WeaponComparison />
-                      </Route>
-                      <Route path="/ttk">
-                        <TTKSimulation />
-                      </Route>
-                      <Route exact path="/about">
-                        <About />
-                      </Route>
-                      <Route path="*">404</Route>
-                    </Switch>
-                  </div>
+    return (
+        <Router>
+            <GameDBLoader>
+                <Theming>
+                    <ThemeContext.Consumer>
+                        {({ themeClass }) => (
+                            <>
+                                <div className={`${css['page-background']} ${themeClass}`}></div>
+                                <Container>
+                                    <TopNavigation />
+                                    <div className="mt-3 mb-3">
+                                        <Switch>
+                                            <Route exact path="/">
+                                                <Home />
+                                            </Route>
+                                            <Route path="/weapons">
+                                                <WeaponComparison />
+                                            </Route>
+                                            <Route path="/ttk">
+                                                <TTKSimulation />
+                                            </Route>
+                                            <Route exact path="/about">
+                                                <About />
+                                            </Route>
+                                            <Route path="*">404</Route>
+                                        </Switch>
+                                    </div>
 
-                  <Footer />
-                </Container>
-              </>
-            )}
-          </ThemeContext.Consumer>
-        </Theming>
-      </GameDBLoader>
-    </Router>
-  );
+                                    <Footer />
+                                </Container>
+                            </>
+                        )}
+                    </ThemeContext.Consumer>
+                </Theming>
+            </GameDBLoader>
+        </Router>
+    );
 };
 
 const wrapper = document.getElementById('app');
 
 if (wrapper) {
-  ReactDOM.render(<App />, wrapper);
+    ReactDOM.render(<App />, wrapper);
 } else {
-  console.error('No wrapper element found');
+    console.error('No wrapper element found');
 }

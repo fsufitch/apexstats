@@ -1,6 +1,6 @@
 import { RawGameData } from 'apexstats/common/protos';
 
-export const parseGameData = (gameDataYAML: {[k: string]: any}) => {
+export const parseGameData = (gameDataYAML: { [k: string]: any }) => {
     const verificationMessage = RawGameData.verify(gameDataYAML);
     if (verificationMessage) {
         return {

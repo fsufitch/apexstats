@@ -8,89 +8,89 @@
 #     - recon
 
 bloodhound:
-  name: Bloodhound
-  type: 'recon'
-  perks:
-    - recon
+    name: Bloodhound
+    type: 'recon'
+    perks:
+        - recon
 
 gibraltar:
-  name: Gibraltar
-  type: 'recon'
-  perks:
-    - fortified
+    name: Gibraltar
+    type: 'recon'
+    perks:
+        - fortified
 
 lifeline:
-  name: Lifeline
-  type: 'recon'
-  perks:
-    - lowProfile
+    name: Lifeline
+    type: 'recon'
+    perks:
+        - lowProfile
 
 pathfinder:
-  name: Pathfinder
-  type: 'recon'
-  perks:
-    - lowProfile
-    - recon
+    name: Pathfinder
+    type: 'recon'
+    perks:
+        - lowProfile
+        - recon
 
 wraith:
-  name: Wraith
-  type: 'recon'
-  perks:
-    - lowProfile
+    name: Wraith
+    type: 'recon'
+    perks:
+        - lowProfile
 
 #
 
 bangalore:
-  name: Bangalore
-  type: 'recon'
-  perks: []
+    name: Bangalore
+    type: 'recon'
+    perks: []
 
 caustic:
-  name: Caustic
-  type: 'recon'
-  perks:
-    - fortified
+    name: Caustic
+    type: 'recon'
+    perks:
+        - fortified
 
 mirage:
-  name: Mirage
-  type: 'recon'
-  perks: []
+    name: Mirage
+    type: 'recon'
+    perks: []
 
 octane:
-  name: Octane
-  type: 'recon'
-  perks: []
+    name: Octane
+    type: 'recon'
+    perks: []
 
 wattson:
-  name: Wattson
-  type: 'recon'
-  perks:
-    - lowProfile
+    name: Wattson
+    type: 'recon'
+    perks:
+        - lowProfile
 
 #
 
 crypto:
-  name: Crypto
-  type: 'recon'
-  perks:
-    - recon
+    name: Crypto
+    type: 'recon'
+    perks:
+        - recon
 
 revenant:
-  name: Revenant
-  type: 'recon'
-  perks: []
+    name: Revenant
+    type: 'recon'
+    perks: []
 
 loba:
-  name: Loba
-  type: 'recon'
-  perks: []
+    name: Loba
+    type: 'recon'
+    perks: []
 
 rampart:
-  name: Rampart
-  type: 'recon'
-  perks: []
+    name: Rampart
+    type: 'recon'
+    perks: []
 
 horizon:
-  name: Horizon
-  type: 'recon'
-  perks: []
+    name: Horizon
+    type: 'recon'
+    perks: []

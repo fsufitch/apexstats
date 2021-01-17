@@ -2,12 +2,22 @@
 export type WeaponTypeID = 'ar' | 'smg' | 'lmg' | 'sniper' | 'sg' | 'pistol';
 
 /** Game classification of ammo type; types with '+' suffix indicate "special" ammo for care package weapons */
-export type AmmoType = 'light' | 'heavy' | 'energy' | 'sniper' | 'shell' | 'light+' | 'heavy+' | 'energy+' | 'sniper+' | 'shell+';
+export type AmmoType =
+    | 'light'
+    | 'heavy'
+    | 'energy'
+    | 'sniper'
+    | 'shell'
+    | 'light+'
+    | 'heavy+'
+    | 'energy+'
+    | 'sniper+'
+    | 'shell+';
 
 /** List of magazine sizes a weapon can handle:
  * - empty list means "no magazine" (e.g. L-STAR)
  * - single element means no magazine upgrade (e.g. shotguns)
- * - 4-element list corresponds to upgrade-able mag: [none, white, blue, purple] 
+ * - 4-element list corresponds to upgrade-able mag: [none, white, blue, purple]
  * */
 export type MagazineSizes = [] | [number] | [number, number, number, number];
 
@@ -59,7 +69,7 @@ export type Weapon = {
     /** Shotgun firing speed multipliers; null if shotgun bolts unsupported */
     shotgun_bolt_rpm_multiplier?: ShotgunBoltFiringSpeed;
 
-    modes: { [id in FiringModeID]?: FiringMode },
-}
+    modes: { [id in FiringModeID]?: FiringMode };
+};
 
-export type WeaponDB = {[id: string]: Weapon};
+export type WeaponDB = { [id: string]: Weapon };
