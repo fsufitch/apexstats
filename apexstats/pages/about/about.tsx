@@ -2,6 +2,16 @@ import React from 'react';
 
 import { legends, weapons, metadata } from 'apexstats/game/data';
 import { GameDBContext } from 'apexstats/game/data/gamedb-context';
+import { useWeaponStats } from 'apexstats/game/weapon-stats';
+import {
+    EquippedModifier,
+    ModifierType,
+    Rarity,
+    Weapon,
+    WeaponConfiguration,
+    WeaponModeType,
+} from 'apexstats/common/protos';
+import { Base64 } from 'js-base64';
 
 export const About = () => {
     const downloadGameData = () => {
@@ -16,10 +26,33 @@ export const About = () => {
         document.body.removeChild(a);
     };
 
+    const { weaponStats: ws } = useWeaponStats(13);
+
+    const wc = WeaponConfiguration.create({
+        weaponID: Weapon.LONGBOW,
+        mode: WeaponModeType.SEMI_AUTOMATIC,
+        modifiers: [
+            EquippedModifier.create({ rarity: Rarity.RARE, type: ModifierType.BARREL_STAB }),
+            EquippedModifier.create({ rarity: Rarity.EPIC, type: ModifierType.SNIPER_MAG }),
+            EquippedModifier.create({ rarity: Rarity.LEGENDARY, type: ModifierType.SKULLPIERCER }),
+            EquippedModifier.create({ rarity: Rarity.EPIC, type: ModifierType.SNIPER_STOCK }),
+        ],
+    });
+
+    const bytes = WeaponConfiguration.encode(wc).finish();
+    const b64 = Base64.fromUint8Array(bytes, true);
+    const json = JSON.stringify(wc.toJSON());
+
     return (
         <>
             <h2> About </h2>
             <h4> What is this site? </h4>
+            <p>{!ws ? 'nope' : JSON.stringify(ws.toJSON())}</p>
+            <p>
+                <code>
+                    [{bytes.length}] {bytes.toString()} &rarr; [{b64.length}] {b64} &rarr; {json}
+                </code>
+            </p>
             <p>
                 This site is intended to be useful as a quick reference while playing Apex Legends. It attempts to
                 answer a variety of numbers-oriented questions so you don&apos;t have to think about them in length.

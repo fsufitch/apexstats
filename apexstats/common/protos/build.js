@@ -9,6 +9,8 @@ const args = [
     'commonjs',
     '--path',
     __dirname,
+    '--no-delimited',
+    '--force-message', // Needed due to bizarre bug
     '--out',
     path.join(__dirname, 'protos.generated.js'),
     path.join(__dirname, '*.proto'),
