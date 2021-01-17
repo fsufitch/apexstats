@@ -1,17 +1,17 @@
 # https://prettier.io/docs/en/options.html
 
-endOfLine: "lf"
+endOfLine: 'lf'
 
-printWidth: 100
+printWidth: 120
 tabWidth: 4
 useTabs: false
 
 semi: true
 singleQuote: true
 
-trailingComma: "es5"
+trailingComma: 'es5'
 bracketSpacing: true
-arrowParens: "always"
+arrowParens: 'always'
 
 jsxSingleQuote: false
 jsxBracketSameLine: false

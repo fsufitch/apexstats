@@ -13,9 +13,7 @@ interface Divider {
 
 const asRaw = (n: number) => `${n}`;
 const asTwoDecimal = (n: number) =>
-    new Intl.NumberFormat(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(
-        n
-    );
+    new Intl.NumberFormat(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 const asPercent = (n: number) => new Intl.NumberFormat(undefined, { style: 'percent' }).format(n);
 
 export const rowChoices: (WeaponComparisonRow | Divider)[] = [

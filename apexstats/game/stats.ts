@@ -47,8 +47,7 @@ export class WeaponStats {
         return mode;
     }
 
-    bulletDamage = () =>
-        this.config.hammerpoint ? this.mode.damage_hammerpoint || 0 : this.mode.damage;
+    bulletDamage = () => (this.config.hammerpoint ? this.mode.damage_hammerpoint || 0 : this.mode.damage);
     bulletHeadshot = () => this.bulletDamage() * this.headshotMultiplier();
     bulletLegshot = () => this.bulletDamage() * this.legshotMultiplier();
 
@@ -56,8 +55,7 @@ export class WeaponStats {
     headshot = () => this.damage() * this.headshotMultiplier();
     legshot = () => this.damage() * this.legshotMultiplier();
 
-    headshotMultiplier = () =>
-        this.config.skullpiercer ? this.mode.headshot_skullpiercer || 0 : this.mode.headshot;
+    headshotMultiplier = () => (this.config.skullpiercer ? this.mode.headshot_skullpiercer || 0 : this.mode.headshot);
     legshotMultiplier = () => this.mode.legshot;
 
     rpm = () =>

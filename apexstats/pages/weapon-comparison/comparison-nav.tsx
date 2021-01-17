@@ -76,11 +76,7 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({
         <>
             <ul className={css['nav']}>
                 <li className="nav-item">
-                    <CustomDropdown
-                        title={'(+) Add Stat'}
-                        onSelect={onAddStat}
-                        choices={statChoices}
-                    />
+                    <CustomDropdown title={'(+) Add Stat'} onSelect={onAddStat} choices={statChoices} />
                 </li>
 
                 <span ref={target}></span>
@@ -91,11 +87,7 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({
                 </Overlay>
 
                 <li className="nav-item">
-                    <CustomDropdown
-                        title={'(+) Add Weapon'}
-                        onSelect={onAddWeapon}
-                        choices={weaponChoices}
-                    />
+                    <CustomDropdown title={'(+) Add Weapon'} onSelect={onAddWeapon} choices={weaponChoices} />
                 </li>
                 <li className="nav-item">
                     <button className="btn btn-outline-danger" onClick={onClear}>

@@ -17,21 +17,10 @@ export const WeaponComparison = () => {
     const [rows, setRows] = useState<WeaponComparisonRow[]>([]);
     const [columns, setColumns] = useState<WeaponStats[]>([]);
 
-    useEffect(
-        () =>
-            setRows(
-                rowChoices.map((r) => r as WeaponComparisonRow).filter((r) => rowIDs.has(r.id))
-            ),
-        [rowIDs]
-    );
+    useEffect(() => setRows(rowChoices.map((r) => r as WeaponComparisonRow).filter((r) => rowIDs.has(r.id))), [rowIDs]);
 
     useEffect(
-        () =>
-            setColumns(
-                columnSpecs.map(
-                    ({ weaponID, modeID }) => new WeaponStats(weaponID, { firingMode: modeID })
-                )
-            ),
+        () => setColumns(columnSpecs.map(({ weaponID, modeID }) => new WeaponStats(weaponID, { firingMode: modeID }))),
         [columnSpecs]
     );
 
@@ -50,9 +39,9 @@ export const WeaponComparison = () => {
             return;
         }
 
-        const modeID = Object.keys(WeaponModeSuffixes).find((suffix) =>
-            columnID.endsWith(suffix)
-        ) as FiringModeID | undefined;
+        const modeID = Object.keys(WeaponModeSuffixes).find((suffix) => columnID.endsWith(suffix)) as
+            | FiringModeID
+            | undefined;
         if (modeID === undefined) {
             console.error(`Tried to add column ID without firing mode: ${columnID}`);
             return;
@@ -74,9 +63,7 @@ export const WeaponComparison = () => {
     };
 
     const removeColumn = (weaponID: string, modeID: FiringModeID) => {
-        setColumnSpecs(
-            columnSpecs.filter((spec) => spec.weaponID !== weaponID || spec.modeID !== modeID)
-        );
+        setColumnSpecs(columnSpecs.filter((spec) => spec.weaponID !== weaponID || spec.modeID !== modeID));
     };
 
     const removeRow = (rowID: string) => {
@@ -130,9 +117,7 @@ export const WeaponComparison = () => {
                         <th scope="col">{/*empty*/}</th>
                         {columns.map((col, i) => (
                             <th scope="col" key={i} className="text-center">
-                                <RemoveButton
-                                    onClick={() => removeColumn(col.weaponID, col.firingModeID)}
-                                />
+                                <RemoveButton onClick={() => removeColumn(col.weaponID, col.firingModeID)} />
                                 {weaponName(col.weaponID, col.firingModeID)}
                             </th>
                         ))}

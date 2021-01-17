@@ -31,10 +31,7 @@ const Choice: FunctionComponent<DropdownChoice> = ({ id, label, header }: Dropdo
     );
 };
 
-const CustomDropdownRenderFunction: ForwardRefRenderFunction<any, DropdownProps> = (
-    props: DropdownProps,
-    ref
-) => {
+const CustomDropdownRenderFunction: ForwardRefRenderFunction<any, DropdownProps> = (props: DropdownProps, ref) => {
     const onSelect = props.onSelect ?? void 0;
 
     console.log('ref', ref);

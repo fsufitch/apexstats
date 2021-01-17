@@ -20,8 +20,8 @@ export const Home = () => {
                 </h3>
                 <p>
                     {' '}
-                    Which weapon does more DPS? How long does it take to empty a magazine? Check it
-                    out and compare/contrast different weapons here.
+                    Which weapon does more DPS? How long does it take to empty a magazine? Check it out and
+                    compare/contrast different weapons here.
                 </p>
                 <hr />
                 <h3>
@@ -29,9 +29,8 @@ export const Home = () => {
                 </h3>
                 <p>
                     {' '}
-                    Can a Mozambique take anyone down without reloading? Does Octane&apos;s
-                    regeneration make him more resistant to getting shot? What&apos;s the deal with
-                    Gibraltar&apos;s shield anyway?{' '}
+                    Can a Mozambique take anyone down without reloading? Does Octane&apos;s regeneration make him more
+                    resistant to getting shot? What&apos;s the deal with Gibraltar&apos;s shield anyway?{' '}
                 </p>
             </div>
         </div>

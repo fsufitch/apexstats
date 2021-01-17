@@ -1,10 +1,4 @@
-import React, {
-    useState,
-    useEffect,
-    createContext,
-    FunctionComponent,
-    PropsWithChildren,
-} from 'react';
+import React, { useState, useEffect, createContext, FunctionComponent, PropsWithChildren } from 'react';
 
 const LOCAL_STORAGE_KEY = 'apexstats.theme';
 

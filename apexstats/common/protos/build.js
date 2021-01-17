@@ -21,11 +21,7 @@ pbjs.main(args, (err) => {
     }
     console.log('Protos successfully built.');
 
-    const args = [
-        '-o',
-        path.join(__dirname, 'protos.generated.d.ts'),
-        path.join(__dirname, 'protos.generated.js'),
-    ];
+    const args = ['-o', path.join(__dirname, 'protos.generated.d.ts'), path.join(__dirname, 'protos.generated.js')];
     console.log('Building protos typings with args:', args);
     pbts.main(args, (err) => {
         if (err) {

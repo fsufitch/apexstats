@@ -6,9 +6,7 @@ interface RemoveButtonProps {
     onClick?: (e: React.MouseEvent) => void;
 }
 
-export const RemoveButton: FunctionComponent<RemoveButtonProps> = ({
-    onClick,
-}: RemoveButtonProps) => {
+export const RemoveButton: FunctionComponent<RemoveButtonProps> = ({ onClick }: RemoveButtonProps) => {
     onClick = onClick ?? void 0;
     return (
         <button className={css['btn-remove']} onClick={onClick}>

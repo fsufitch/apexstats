@@ -1,10 +1,4 @@
-import React, {
-    createContext,
-    FunctionComponent,
-    PropsWithChildren,
-    useEffect,
-    useState,
-} from 'react';
+import React, { createContext, FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
 
 import { parseGameData, ApexGameDB } from './gamedb';
 import gameDataYAML from './gamedata.yaml';
@@ -40,9 +34,5 @@ export const GameDBLoader: FunctionComponent = (props: PropsWithChildren<unknown
         }
     }, []);
 
-    return (
-        <GameDBContext.Provider value={{ loaded, gameDB: gameDB, error }}>
-            {props?.children}
-        </GameDBContext.Provider>
-    );
+    return <GameDBContext.Provider value={{ loaded, gameDB: gameDB, error }}>{props?.children}</GameDBContext.Provider>;
 };
