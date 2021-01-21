@@ -1,1 +1,1 @@
-export * from './protos.generated';
+export * from './gen';

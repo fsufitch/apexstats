@@ -1,6 +1,6 @@
 declare namespace RemoveButtonModuleSassNamespace {
   export interface IRemoveButtonModuleSass {
-    "btn-remove": string;
+    'btn-remove': string;
   }
 }
 

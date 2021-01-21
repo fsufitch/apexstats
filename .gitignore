@@ -108,3 +108,6 @@ package-lock.json
 
 # Build artifacts
 build/
+
+# VScode lol
+.vscode/

@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import css from './nav.module.sass';
 
-import { metadata } from 'apexstats/game/data';
+import { GameDBContext } from 'apexstats/common/db';
 
 export const Footer = () => {
-    return <div className={css['footer']}>
-        <p>
-            Apex Stats is an independent fan tool, and  not affiliated with Apex Legends, Respawn Entertainment, or any other official sources. Game data: <code>{metadata.gameVersion}</code>.
-        </p>
-    </div>
-}
+    const { gameDB } = useContext(GameDBContext);
+    return (
+        <div className={css['footer']}>
+            <p>
+                Apex Stats is an independent fan tool, and not affiliated with Apex Legends, Respawn Entertainment, or
+                any other official sources. Game data: <code>{gameDB?.version()}</code>.
+            </p>
+        </div>
+    );
+};

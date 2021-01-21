@@ -1,0 +1,867 @@
+# File must match the schema of RawGameData in apexlegends/common/protos/gamedata.proto
+
+# ===== Metadata =====
+version: 2020-12-09
+
+# ===== Commonly used macros (ignored by schema) =====
+
+__macros:
+  stabs:
+    common: &stab_common
+      rarity: COMMON
+      recoilMultiplier: 0.9
+      randomnessMultiplier: .85
+    rare: &stab_rare
+      rarity: RARE
+      recoilMultiplier: 0.85
+      randomnessMultiplier: .8
+    epic: &stab_epic
+      rarity: EPIC
+      recoilMultiplier: 0.8
+      randomnessMultiplier: .7
+    legendary: &stab_legendary
+      rarity: LEGENDARY
+      recoilMultiplier: 0.8
+      randomnessMultiplier: .7
+      notes: 'Reduced muzzle flash'
+  stocks:
+    common: &stock_common
+      rarity: COMMON
+      switchSpeedMultiplier: 1.15
+    rare: &stock_rare
+      rarity: RARE
+      switchSpeedMultiplier: 1.25
+    epic: &stock_epic
+      rarity: EPIC
+      switchSpeedMultiplier: 1.35
+  hopups:
+    doubletap: &double_tap
+      rarity: EPIC
+      shotsPerRound: 2
+
+# ===== Weapons =====
+# --- Assault Rifles
+
+weapons:
+  - id: FLATLINE
+    name: VK-47 Flatline
+    type: AR
+    ammoType: HEAVY
+    ammoSpecial: false
+    magazine: 20
+    adsMoveMultiplier: 0.5
+    modes:
+      - &flatline_semi
+        type: SEMI_AUTO
+        damagePerBullet: 19
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2.0
+        legshotMultiplier: 0.75
+        roundsPerMinute: 600
+      - <<: *flatline_semi # inherit from semi-auto mode
+        type: AUTO
+    modifiers:
+      - type: HEAVY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 25
+          - rarity: RARE
+            magazine: 28
+          - rarity: EPIC
+            magazine: 30
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  - id: SCOUT
+    name: G7 Scout
+    type: AR
+    ammoType: LIGHT
+    ammoSpecial: false
+    magazine: 10
+    adsMoveMultiplier: 0.35
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 34
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.75
+        legshotMultiplier: 0.75
+        roundsPerMinute: 240
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: LIGHT_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 15
+          - rarity: RARE
+            magazine: 18
+          - rarity: EPIC
+            magazine: 20
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+      - type: DOUBLE_TAP
+        statChanges:
+          - <<: *double_tap
+
+  - id: HEMLOK
+    name: Hemlok Burst AR
+    type: AR
+    ammoType: HEAVY
+    ammoSpecial: false
+    magazine: 18
+    adsMoveMultiplier: 0.5
+    modes:
+      - &hemlok_semi
+        type: SEMI_AUTO
+        damagePerBullet: 22
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.75
+        legshotMultiplier: 0.75
+        roundsPerMinute: 384
+      - <<: *hemlok_semi
+        type: BURST
+        shotsPerRound: 3
+        roundsPerMinute: 643
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: HEAVY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 24
+          - rarity: RARE
+            magazine: 27
+          - rarity: EPIC
+            magazine: 30
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  - id: R301
+    name: R-301 Carbine
+    type: AR
+    ammoType: LIGHT
+    ammoSpecial: false
+    magazine: 18
+    adsMoveMultiplier: 0.5
+    modes:
+      - &r301_semi
+        type: SEMI_AUTO
+        damagePerBullet: 14
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2.0
+        legshotMultiplier: 0.75
+        roundsPerMinute: 816
+      - <<: *r301_semi
+        type: AUTO
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: LIGHT_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 20
+          - rarity: RARE
+            magazine: 25
+          - rarity: EPIC
+            magazine: 28
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  - id: HAVOC
+    name: HAVOC Rifle
+    type: AR
+    ammoType: ENERGY
+    ammoSpecial: false
+    magazine: 24
+    adsMoveMultiplier: 0.5
+    modes:
+      - type: AUTO
+        damagePerBullet: 18
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2.0
+        legshotMultiplier: 0.75
+        roundsPerMinute: 672
+    modifiers:
+      - type: ENERGY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 28
+          - rarity: RARE
+            magazine: 32
+          - rarity: EPIC
+            magazine: 36
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+      - type: TURBO
+        statChanges: [] # ??
+
+  # --- SMGs
+
+  - id: ALTERNATOR
+    name: Alternator SMG
+    type: SMG
+    ammoType: LIGHT
+    ammoSpecial: false
+    magazine: 19
+    adsMoveMultiplier: 0.85
+    modes:
+      - type: AUTO
+        damagePerBullet: 15
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.5
+        legshotMultiplier: 0.75
+        roundsPerMinute: 640
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: LIGHT_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 22
+          - rarity: RARE
+            magazine: 25
+          - rarity: EPIC
+            magazine: 27
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  - id: PROWLER
+    name: Prowler Burst PDW
+    type: SMG
+    ammoType: HEAVY
+    ammoSpecial: true
+    magazine: 35
+    adsMoveMultiplier: 0.85
+    modes:
+      - &prowler_burst
+        type: BURST
+        damagePerBullet: 15
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 5
+        headshotMultiplier: 1.5
+        legshotMultiplier: 0.75
+        roundsPerMinute: 800
+      - <<: *prowler_burst
+        type: AUTO
+        shotsPerRound: 1
+
+  - id: R99
+    name: R-99 SMG
+    type: SMG
+    ammoType: LIGHT
+    ammoSpecial: false
+    magazine: 20
+    adsMoveMultiplier: 0.85
+    modes:
+      - type: AUTO
+        damagePerBullet: 11
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.5
+        legshotMultiplier: 0.75
+        roundsPerMinute: 1080
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: LIGHT_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 22
+          - rarity: RARE
+            magazine: 24
+          - rarity: EPIC
+            magazine: 27
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  - id: VOLT
+    name: Volt SMG
+    type: SMG
+    ammoType: ENERGY
+    ammoSpecial: false
+    magazine: 19
+    adsMoveMultiplier: 0.85
+    modes:
+      - type: AUTO
+        damagePerBullet: 16
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.5
+        legshotMultiplier: 0.75
+        roundsPerMinute: 783
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: ENERGY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 21
+          - rarity: RARE
+            magazine: 23
+          - rarity: EPIC
+            magazine: 26
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  # --- LMGs
+
+  - id: DEVOTION
+    name: Devotion LMG
+    type: LMG
+    ammoType: ENERGY
+    ammoSpecial: false
+    magazine: 36
+    adsMoveMultiplier: 0.4
+    modes:
+      - type: AUTO
+        damagePerBullet: 16
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2
+        legshotMultiplier: 0.8
+        roundsPerMinute: 900
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: ENERGY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 40
+          - rarity: RARE
+            magazine: 44
+          - rarity: EPIC
+            magazine: 48
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+      - type: TURBO
+        statChanges: [] # ??
+
+  - id: SPITFIRE
+    name: M600 Spitfire
+    type: LMG
+    ammoType: HEAVY
+    ammoSpecial: false
+    magazine: 35
+    adsMoveMultiplier: 0.4
+    modes:
+      - type: AUTO
+        damagePerBullet: 18
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2
+        legshotMultiplier: 0.8
+        roundsPerMinute: 512
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: HEAVY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 40
+          - rarity: RARE
+            magazine: 45
+          - rarity: EPIC
+            magazine: 55
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  - id: LSTAR
+    name: L-STAR EMG
+    type: LMG
+    ammoType: ENERGY
+    ammoSpecial: false
+    magazine: 0
+    adsMoveMultiplier: 0.4
+    modes:
+      - type: AUTO
+        damagePerBullet: 18
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2
+        legshotMultiplier: 0.8
+        roundsPerMinute: 600
+    modifiers:
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  # ---
+
+  - id: LONGBOW
+    name: Longbow DMR
+    type: SNIPER
+    ammoType: SNIPER_AMMO
+    ammoSpecial: false
+    magazine: 6
+    adsMoveMultiplier: 0.35
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 55
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2
+        legshotMultiplier: 0.8
+        roundsPerMinute: 86
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: SNIPER_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 8
+          - rarity: RARE
+            magazine: 10
+          - rarity: EPIC
+            magazine: 12
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+      - type: SKULLPIERCER
+        statChanges:
+          - rarity: LEGENDARY
+            headshotMultiplier: 2.5
+
+  - id: KRABER
+    name: Kraber .50-cal Sniper
+    type: SNIPER
+    ammoType: SNIPER_AMMO
+    ammoSpecial: true
+    magazine: 4
+    adsMoveMultiplier: 0.35
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 145
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 3
+        legshotMultiplier: 0.8
+        roundsPerMinute: 36
+        notes: 'Bolt-action between shots'
+
+  - id: TRIPLE_TAKE
+    name: Triple Take
+    type: SNIPER
+    ammoType: SNIPER_AMMO
+    ammoSpecial: false
+    magazine: 6
+    adsMoveMultiplier: 0.35
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 55
+        bulletsPerShot: 3
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2
+        legshotMultiplier: 0.9
+        roundsPerMinute: 72
+    modifiers:
+      - type: SNIPER_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 7
+          - rarity: RARE
+            magazine: 8
+          - rarity: EPIC
+            magazine: 9
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  - id: SENTINEL
+    name: Sentinel
+    type: SNIPER
+    ammoType: SNIPER_AMMO
+    ammoSpecial: false
+    magazine: 4
+    adsMoveMultiplier: 0.35
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 70
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2
+        legshotMultiplier: 0.9
+        roundsPerMinute: 37.5
+    modifiers:
+      - type: SNIPER_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 5
+          - rarity: RARE
+            magazine: 6
+          - rarity: EPIC
+            magazine: 7
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+      - type: SENTINEL_AMP_MODE
+        statChanges:
+          - damagePerBullet: 88
+
+  - id: CHARGE_RIFLE
+    name: Charge Rifle
+    type: SNIPER
+    ammoType: SNIPER_AMMO
+    ammoSpecial: false
+    magazine: 8
+    adsMoveMultiplier: 0.35
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 45
+        bulletsPerShot: 1
+        ammoPerShot: 2
+        shotsPerRound: 2
+        headshotMultiplier: 2
+        legshotMultiplier: 0.9
+        roundsPerMinute: 30
+        notes: '15 ticks of 3 damage, 1 burst of 45'
+    modifiers:
+      - type: STOCK
+        statChanges:
+          - <<: *stock_common
+          - <<: *stock_rare
+          - <<: *stock_epic
+
+  # --- Shotguns
+
+  - id: EVA
+    name: EVA-8 Auto
+    type: SHOTGUN
+    ammoType: SHELL
+    ammoSpecial: false
+    magazine: 8
+    adsMoveMultiplier: 0.9
+    modes:
+      - type: AUTO
+        damagePerBullet: 7
+        bulletsPerShot: 9
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.25
+        legshotMultiplier: 1
+        roundsPerMinute: 128
+    modifiers:
+      - type: BOLT
+        statChanges:
+          - rarity: COMMON
+            rpmMultiplier: 1.1
+          - rarity: RARE
+            rpmMultiplier: 1.2
+          - rarity: EPIC
+            rpmMultiplier: 1.25
+      - <<: *double_tap
+
+  - id: MASTIFF
+    name: Mastiff Shotgun
+    type: SHOTGUN
+    ammoType: SHELL
+    ammoSpecial: false
+    magazine: 6
+    adsMoveMultiplier: 0.9
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 13
+        bulletsPerShot: 8
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.25
+        legshotMultiplier: 1
+        roundsPerMinute: 60
+    modifiers:
+      - type: BOLT
+        statChanges:
+          - rarity: COMMON
+            rpmMultiplier: 1.075
+          - rarity: RARE
+            rpmMultiplier: 1.13
+          - rarity: EPIC
+            rpmMultiplier: 1.16
+
+  - id: MOZAMBIQUE
+    name: Mozambique Shotgun
+    type: SHOTGUN
+    ammoType: SHELL
+    ammoSpecial: false
+    magazine: 4
+    adsMoveMultiplier: 1
+    modes:
+      - type: AUTO
+        damagePerBullet: 15
+        bulletsPerShot: 3
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.5
+        legshotMultiplier: 0.8
+        roundsPerMinute: 180
+    modifiers:
+      - type: BOLT
+        statChanges:
+          - rarity: COMMON
+            rpmMultiplier: 1.1
+          - rarity: RARE
+            rpmMultiplier: 1.2
+          - rarity: EPIC
+            rpmMultiplier: 1.25
+      - type: HAMMERPOINT
+        statChanges:
+          - rarity: EPIC
+            unshieldedDamage: 34
+
+  - id: PEACEKEEPER
+    name: Peacekeeper
+    type: SHOTGUN
+    ammoType: SHELL
+    ammoSpecial: true
+    magazine: 5
+    adsMoveMultiplier: 0.9
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 10
+        bulletsPerShot: 11
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.25
+        legshotMultiplier: 0.8
+        roundsPerMinute: 58
+
+  # --- Pistols
+
+  - id: RE45
+    name: RE-45 Auto
+    type: PISTOL
+    ammoType: LIGHT
+    ammoSpecial: false
+    magazine: 16
+    adsMoveMultiplier: 0.95
+    modes:
+      - type: AUTO
+        damagePerBullet: 12
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.5
+        legshotMultiplier: 0.9
+        roundsPerMinute: 750
+    modifiers:
+      - type: BARREL_STAB
+        stat_changes:
+          - <<: *stab_common
+          - <<: *stab_rare
+          - <<: *stab_epic
+          - <<: *stab_legendary
+      - type: LIGHT_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 19
+          - rarity: RARE
+            magazine: 22
+          - rarity: EPIC
+            magazine: 25
+      - type: QUICKDRAW
+        statChanges:
+          - rarity: EPIC
+            # ??
+
+  - id: P2020
+    name: P2020
+    type: PISTOL
+    ammoType: LIGHT
+    ammoSpecial: false
+    magazine: 12
+    adsMoveMultiplier: 1
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 15
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 1.5
+        legshotMultiplier: 0.9
+        roundsPerMinute: 430
+    modifiers:
+      - type: LIGHT_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 14
+          - rarity: RARE
+            magazine: 16
+          - rarity: EPIC
+            magazine: 18
+      - type: HAMMERPOINT
+        statChanges:
+          - rarity: EPIC
+            unshieldedDamage: 36
+
+  - id: WINGMAN
+    name: Wingman
+    type: PISTOL
+    ammoType: HEAVY
+    ammoSpecial: false
+    magazine: 5
+    adsMoveMultiplier: 1
+    modes:
+      - type: SEMI_AUTO
+        damagePerBullet: 45
+        bulletsPerShot: 1
+        ammoPerShot: 1
+        shotsPerRound: 1
+        headshotMultiplier: 2
+        legshotMultiplier: 0.9
+        roundsPerMinute: 156
+    modifiers:
+      - type: HEAVY_MAG
+        statChanges:
+          - rarity: COMMON
+            magazine: 6
+          - rarity: RARE
+            magazine: 7
+          - rarity: EPIC
+            magazine: 8
+      - type: QUICKDRAW
+        statChanges:
+          - rarity: EPIC
+            # ??
+          - rarity: LEGENDARY
+            headshotMultiplier: 2.5
+
+# ===== Legends =====
+legends:
+  - id: BANGALORE
+    name: Bangalore
+
+  - id: WRAITH
+    name: Wraith
+
+  - id: MIRAGE
+    name: Mirage
+
+  - id: OCTANE
+    name: Octane
+
+  - id: REVENANT
+    name: Revenant
+
+  - id: HORIZON
+    name: Horizon
+
+  - id: GIBRALTAR
+    name: Gibraltar
+
+  - id: CAUSTIC
+    name: Caustic
+
+  - id: WATTSON
+    name: Wattson
+
+  - id: RAMPART
+    name: Rampart
+
+  - id: LIFELINE
+    name: Lifeline
+
+  - id: LOBA
+    name: Loba
+
+  - id: BLOODHOUND
+    name: Bloodhound
+
+  - id: PATHFINDER
+    name: Pathfinder
+
+  - id: CRYPTO
+    name: Crypto

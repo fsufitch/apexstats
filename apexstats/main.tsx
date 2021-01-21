@@ -14,42 +14,46 @@ import { About } from './pages/about';
 import { TTKSimulation } from './pages/ttk-simulation';
 import { WeaponComparison } from './pages/weapon-comparison';
 import { Footer } from './nav/footer';
-
+import { GameDBLoader } from './common/db';
 
 const App = () => {
-    return <Router>
-        <Theming>
-            <ThemeContext.Consumer>
-                {({ themeClass }) => <>
-                    <div className={`${css['page-background']} ${themeClass}`}></div>
-                    <Container>
-                        <TopNavigation />
-                        <div className="mt-3 mb-3">
-                            <Switch>
-                                <Route exact path="/">
-                                    <Home />
-                                </Route>
-                                <Route path="/weapons">
-                                    <WeaponComparison />
-                                </Route>
-                                <Route path="/ttk">
-                                    <TTKSimulation />
-                                </Route>
-                                <Route exact path="/about">
-                                    <About />
-                                </Route>
-                                <Route path="*">
-                                    404
-                                </Route>
-                            </Switch>
-                        </div>
+    return (
+        <Router>
+            <GameDBLoader>
+                <Theming>
+                    <ThemeContext.Consumer>
+                        {({ themeClass }) => (
+                            <>
+                                <div className={`${css['page-background']} ${themeClass}`}></div>
+                                <Container>
+                                    <TopNavigation />
+                                    <div className="mt-3 mb-3">
+                                        <Switch>
+                                            <Route exact path="/">
+                                                <Home />
+                                            </Route>
+                                            <Route path="/weapons">
+                                                <WeaponComparison />
+                                            </Route>
+                                            <Route path="/ttk">
+                                                <TTKSimulation />
+                                            </Route>
+                                            <Route exact path="/about">
+                                                <About />
+                                            </Route>
+                                            <Route path="*">404</Route>
+                                        </Switch>
+                                    </div>
 
-                        <Footer />
-                    </Container>
-                </>}
-            </ThemeContext.Consumer>
-        </Theming>
-    </Router>;
+                                    <Footer />
+                                </Container>
+                            </>
+                        )}
+                    </ThemeContext.Consumer>
+                </Theming>
+            </GameDBLoader>
+        </Router>
+    );
 };
 
 const wrapper = document.getElementById('app');

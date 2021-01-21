@@ -17,24 +17,33 @@ export const TopNavigation = () => {
         }
     }, [navCollapsed]);
 
-    return <nav className={css.navbar}>
-        <Link to="/" className={css.brand}>Brand</Link>
-        <button className="navbar-toggler" onClick={toggleNavCollapsed}>
-            <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse">
-            <ul className="navbar-nav">
-                <li className="nav-item">
-                    <Link className="nav-link" to="/weapons">Weapon Comparison</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/ttk">TTK Simulation </Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/about">About</Link>
-                </li>
-            </ul>
-        </div>
-    </nav>;
-
-}
+    return (
+        <nav className={css.navbar}>
+            <Link to="/" className={css.brand}>
+                Brand
+            </Link>
+            <button className="navbar-toggler" onClick={toggleNavCollapsed}>
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse">
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/weapons">
+                            Weapon Comparison
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/ttk">
+                            TTK Simulation{' '}
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/about">
+                            About
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    );
+};

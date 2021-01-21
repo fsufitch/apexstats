@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+import "enums.proto";
+
+message LegendStats {
+    Legend id = 1;
+    string name = 2;
+}

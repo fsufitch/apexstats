@@ -1,3 +1,3 @@
 ((window) => {
     window.$ = window.jQuery = jQuery;
-})(window as any)
+})(window as any);

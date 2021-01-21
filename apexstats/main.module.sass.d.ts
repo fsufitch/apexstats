@@ -1,6 +1,6 @@
 declare namespace MainModuleSassNamespace {
   export interface IMainModuleSass {
-    "page-background": string;
+    'page-background': string;
   }
 }
 
