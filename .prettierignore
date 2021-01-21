@@ -1,2 +1,4 @@
 *.generated.*
 *.sass.d.ts
+**/gen/**/*
+tsconfig.json

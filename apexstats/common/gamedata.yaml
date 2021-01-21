@@ -49,17 +49,17 @@ weapons:
     ammoType: HEAVY
     ammoSpecial: false
     magazine: 20
-    adsMoveSpeed: 0.5
+    adsMoveMultiplier: 0.5
     modes:
       - &flatline_semi
         type: SEMI_AUTO
-        damagePerPellet: 19
-        pelletsPerShot: 1
+        damagePerBullet: 19
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2.0
         legshotMultiplier: 0.75
-        rpm: 600
+        roundsPerMinute: 600
       - <<: *flatline_semi # inherit from semi-auto mode
         type: AUTO
     modifiers:
@@ -83,16 +83,16 @@ weapons:
     ammoType: LIGHT
     ammoSpecial: false
     magazine: 10
-    adsMoveSpeed: 0.35
+    adsMoveMultiplier: 0.35
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 34
-        pelletsPerShot: 1
+        damagePerBullet: 34
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.75
         legshotMultiplier: 0.75
-        rpm: 240
+        roundsPerMinute: 240
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -123,21 +123,21 @@ weapons:
     ammoType: HEAVY
     ammoSpecial: false
     magazine: 18
-    adsMoveSpeed: 0.5
+    adsMoveMultiplier: 0.5
     modes:
       - &hemlok_semi
         type: SEMI_AUTO
-        damagePerPellet: 22
-        pelletsPerShot: 1
+        damagePerBullet: 22
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.75
         legshotMultiplier: 0.75
-        rpm: 384
+        roundsPerMinute: 384
       - <<: *hemlok_semi
         type: BURST
         shotsPerRound: 3
-        rpm: 643
+        roundsPerMinute: 643
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -165,17 +165,17 @@ weapons:
     ammoType: LIGHT
     ammoSpecial: false
     magazine: 18
-    adsMoveSpeed: 0.5
+    adsMoveMultiplier: 0.5
     modes:
       - &r301_semi
         type: SEMI_AUTO
-        damagePerPellet: 14
-        pelletsPerShot: 1
+        damagePerBullet: 14
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2.0
         legshotMultiplier: 0.75
-        rpm: 816
+        roundsPerMinute: 816
       - <<: *r301_semi
         type: AUTO
     modifiers:
@@ -205,16 +205,16 @@ weapons:
     ammoType: ENERGY
     ammoSpecial: false
     magazine: 24
-    adsMoveSpeed: 0.5
+    adsMoveMultiplier: 0.5
     modes:
       - type: AUTO
-        damagePerPellet: 18
-        pelletsPerShot: 1
+        damagePerBullet: 18
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2.0
         legshotMultiplier: 0.75
-        rpm: 672
+        roundsPerMinute: 672
     modifiers:
       - type: ENERGY_MAG
         statChanges:
@@ -240,16 +240,16 @@ weapons:
     ammoType: LIGHT
     ammoSpecial: false
     magazine: 19
-    adsMoveSpeed: 0.85
+    adsMoveMultiplier: 0.85
     modes:
       - type: AUTO
-        damagePerPellet: 15
-        pelletsPerShot: 1
+        damagePerBullet: 15
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.5
         legshotMultiplier: 0.75
-        rpm: 640
+        roundsPerMinute: 640
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -277,17 +277,17 @@ weapons:
     ammoType: HEAVY
     ammoSpecial: true
     magazine: 35
-    adsMoveSpeed: 0.85
+    adsMoveMultiplier: 0.85
     modes:
       - &prowler_burst
         type: BURST
-        damagePerPellet: 15
-        pelletsPerShot: 1
+        damagePerBullet: 15
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 5
         headshotMultiplier: 1.5
         legshotMultiplier: 0.75
-        rpm: 800
+        roundsPerMinute: 800
       - <<: *prowler_burst
         type: AUTO
         shotsPerRound: 1
@@ -298,16 +298,16 @@ weapons:
     ammoType: LIGHT
     ammoSpecial: false
     magazine: 20
-    adsMoveSpeed: 0.85
+    adsMoveMultiplier: 0.85
     modes:
       - type: AUTO
-        damagePerPellet: 11
-        pelletsPerShot: 1
+        damagePerBullet: 11
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.5
         legshotMultiplier: 0.75
-        rpm: 1080
+        roundsPerMinute: 1080
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -335,16 +335,16 @@ weapons:
     ammoType: ENERGY
     ammoSpecial: false
     magazine: 19
-    adsMoveSpeed: 0.85
+    adsMoveMultiplier: 0.85
     modes:
       - type: AUTO
-        damagePerPellet: 16
-        pelletsPerShot: 1
+        damagePerBullet: 16
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.5
         legshotMultiplier: 0.75
-        rpm: 783
+        roundsPerMinute: 783
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -374,16 +374,16 @@ weapons:
     ammoType: ENERGY
     ammoSpecial: false
     magazine: 36
-    adsMoveSpeed: 0.4
+    adsMoveMultiplier: 0.4
     modes:
       - type: AUTO
-        damagePerPellet: 16
-        pelletsPerShot: 1
+        damagePerBullet: 16
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2
         legshotMultiplier: 0.8
-        rpm: 900
+        roundsPerMinute: 900
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -413,16 +413,16 @@ weapons:
     ammoType: HEAVY
     ammoSpecial: false
     magazine: 35
-    adsMoveSpeed: 0.4
+    adsMoveMultiplier: 0.4
     modes:
       - type: AUTO
-        damagePerPellet: 18
-        pelletsPerShot: 1
+        damagePerBullet: 18
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2
         legshotMultiplier: 0.8
-        rpm: 512
+        roundsPerMinute: 512
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -450,16 +450,16 @@ weapons:
     ammoType: ENERGY
     ammoSpecial: false
     magazine: 0
-    adsMoveSpeed: 0.4
+    adsMoveMultiplier: 0.4
     modes:
       - type: AUTO
-        damagePerPellet: 18
-        pelletsPerShot: 1
+        damagePerBullet: 18
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2
         legshotMultiplier: 0.8
-        rpm: 600
+        roundsPerMinute: 600
     modifiers:
       - type: STOCK
         statChanges:
@@ -472,19 +472,19 @@ weapons:
   - id: LONGBOW
     name: Longbow DMR
     type: SNIPER
-    ammoType: SNIPER
+    ammoType: SNIPER_AMMO
     ammoSpecial: false
     magazine: 6
-    adsMoveSpeed: 0.35
+    adsMoveMultiplier: 0.35
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 55
-        pelletsPerShot: 1
+        damagePerBullet: 55
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2
         legshotMultiplier: 0.8
-        rpm: 86
+        roundsPerMinute: 86
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -513,37 +513,37 @@ weapons:
   - id: KRABER
     name: Kraber .50-cal Sniper
     type: SNIPER
-    ammoType: SNIPER
+    ammoType: SNIPER_AMMO
     ammoSpecial: true
     magazine: 4
-    adsMoveSpeed: 0.35
+    adsMoveMultiplier: 0.35
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 145
-        pelletsPerShot: 1
+        damagePerBullet: 145
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 3
         legshotMultiplier: 0.8
-        rpm: 36
+        roundsPerMinute: 36
         notes: 'Bolt-action between shots'
 
   - id: TRIPLE_TAKE
     name: Triple Take
     type: SNIPER
-    ammoType: SNIPER
+    ammoType: SNIPER_AMMO
     ammoSpecial: false
     magazine: 6
-    adsMoveSpeed: 0.35
+    adsMoveMultiplier: 0.35
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 55
-        pelletsPerShot: 3
+        damagePerBullet: 55
+        bulletsPerShot: 3
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2
         legshotMultiplier: 0.9
-        rpm: 72
+        roundsPerMinute: 72
     modifiers:
       - type: SNIPER_MAG
         statChanges:
@@ -562,19 +562,19 @@ weapons:
   - id: SENTINEL
     name: Sentinel
     type: SNIPER
-    ammoType: SNIPER
+    ammoType: SNIPER_AMMO
     ammoSpecial: false
     magazine: 4
-    adsMoveSpeed: 0.35
+    adsMoveMultiplier: 0.35
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 70
-        pelletsPerShot: 1
+        damagePerBullet: 70
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2
         legshotMultiplier: 0.9
-        rpm: 37.5
+        roundsPerMinute: 37.5
     modifiers:
       - type: SNIPER_MAG
         statChanges:
@@ -591,24 +591,24 @@ weapons:
           - <<: *stock_epic
       - type: SENTINEL_AMP_MODE
         statChanges:
-          - damagePerPellet: 88
+          - damagePerBullet: 88
 
   - id: CHARGE_RIFLE
     name: Charge Rifle
     type: SNIPER
-    ammoType: SNIPER
+    ammoType: SNIPER_AMMO
     ammoSpecial: false
     magazine: 8
-    adsMoveSpeed: 0.35
+    adsMoveMultiplier: 0.35
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 45
-        pelletsPerShot: 1
+        damagePerBullet: 45
+        bulletsPerShot: 1
         ammoPerShot: 2
         shotsPerRound: 2
         headshotMultiplier: 2
         legshotMultiplier: 0.9
-        rpm: 30
+        roundsPerMinute: 30
         notes: '15 ticks of 3 damage, 1 burst of 45'
     modifiers:
       - type: STOCK
@@ -622,19 +622,19 @@ weapons:
   - id: EVA
     name: EVA-8 Auto
     type: SHOTGUN
-    ammoType: SHOTGUN
+    ammoType: SHELL
     ammoSpecial: false
     magazine: 8
-    adsMoveSpeed: 0.9
+    adsMoveMultiplier: 0.9
     modes:
       - type: AUTO
-        damagePerPellet: 7
-        pelletsPerShot: 9
+        damagePerBullet: 7
+        bulletsPerShot: 9
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.25
         legshotMultiplier: 1
-        rpm: 128
+        roundsPerMinute: 128
     modifiers:
       - type: BOLT
         statChanges:
@@ -649,19 +649,19 @@ weapons:
   - id: MASTIFF
     name: Mastiff Shotgun
     type: SHOTGUN
-    ammoType: SHOTGUN
+    ammoType: SHELL
     ammoSpecial: false
     magazine: 6
-    adsMoveSpeed: 0.9
+    adsMoveMultiplier: 0.9
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 13
-        pelletsPerShot: 8
+        damagePerBullet: 13
+        bulletsPerShot: 8
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.25
         legshotMultiplier: 1
-        rpm: 60
+        roundsPerMinute: 60
     modifiers:
       - type: BOLT
         statChanges:
@@ -675,19 +675,19 @@ weapons:
   - id: MOZAMBIQUE
     name: Mozambique Shotgun
     type: SHOTGUN
-    ammoType: SHOTGUN
+    ammoType: SHELL
     ammoSpecial: false
     magazine: 4
-    adsMoveSpeed: 1
+    adsMoveMultiplier: 1
     modes:
       - type: AUTO
-        damagePerPellet: 15
-        pelletsPerShot: 3
+        damagePerBullet: 15
+        bulletsPerShot: 3
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.5
         legshotMultiplier: 0.8
-        rpm: 180
+        roundsPerMinute: 180
     modifiers:
       - type: BOLT
         statChanges:
@@ -705,19 +705,19 @@ weapons:
   - id: PEACEKEEPER
     name: Peacekeeper
     type: SHOTGUN
-    ammoType: SHOTGUN
+    ammoType: SHELL
     ammoSpecial: true
     magazine: 5
-    adsMoveSpeed: 0.9
+    adsMoveMultiplier: 0.9
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 10
-        pelletsPerShot: 11
+        damagePerBullet: 10
+        bulletsPerShot: 11
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.25
         legshotMultiplier: 0.8
-        rpm: 58
+        roundsPerMinute: 58
 
   # --- Pistols
 
@@ -727,16 +727,16 @@ weapons:
     ammoType: LIGHT
     ammoSpecial: false
     magazine: 16
-    adsMoveSpeed: 0.95
+    adsMoveMultiplier: 0.95
     modes:
       - type: AUTO
-        damagePerPellet: 12
-        pelletsPerShot: 1
+        damagePerBullet: 12
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.5
         legshotMultiplier: 0.9
-        rpm: 750
+        roundsPerMinute: 750
     modifiers:
       - type: BARREL_STAB
         stat_changes:
@@ -763,16 +763,16 @@ weapons:
     ammoType: LIGHT
     ammoSpecial: false
     magazine: 12
-    adsMoveSpeed: 1
+    adsMoveMultiplier: 1
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 15
-        pelletsPerShot: 1
+        damagePerBullet: 15
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 1.5
         legshotMultiplier: 0.9
-        rpm: 430
+        roundsPerMinute: 430
     modifiers:
       - type: LIGHT_MAG
         statChanges:
@@ -793,16 +793,16 @@ weapons:
     ammoType: HEAVY
     ammoSpecial: false
     magazine: 5
-    adsMoveSpeed: 1
+    adsMoveMultiplier: 1
     modes:
       - type: SEMI_AUTO
-        damagePerPellet: 45
-        pelletsPerShot: 1
+        damagePerBullet: 45
+        bulletsPerShot: 1
         ammoPerShot: 1
         shotsPerRound: 1
         headshotMultiplier: 2
         legshotMultiplier: 0.9
-        rpm: 156
+        roundsPerMinute: 156
     modifiers:
       - type: HEAVY_MAG
         statChanges:

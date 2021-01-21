@@ -3,8 +3,6 @@ syntax = "proto3";
 enum Rarity {
     option allow_alias = true;
 
-    DEFAULT = 0;
-    NO_RARITY = 0;
     NONE = 0;
 
     LEVEL_1 = 1;
@@ -36,7 +34,7 @@ enum Rarity {
 
 enum WeaponType {
     option allow_alias = true;
-    UNKNOWN = 0;
+    WEAPON_TYPE_UNKNOWN = 0;
 
     ASSAULT_RIFLE = 1;
     AR = 1;
@@ -53,11 +51,13 @@ enum WeaponType {
 
     SHOTGUN = 5;
     SG = 5;
+
+    PISTOL = 6;
 }
 
 enum WeaponModeType {
     option allow_alias = true;
-    UNKNOWN = 0;
+    WEAPON_MODE_UNKNOWN = 0;
 
     SEMI_AUTOMATIC = 1;
     SEMI_AUTO = 1;
@@ -71,17 +71,17 @@ enum WeaponModeType {
 }
 
 enum AmmoType {
-    UNKNOWN = 0;
+    AMMO_UNKNOWN = 0;
     LIGHT = 1;
     HEAVY = 2;
     ENERGY = 3;
-    SHOTGUN = 4;
-    SNIPER = 5;
+    SHELL = 4;
+    SNIPER_AMMO = 5;
 }
 
 enum ModifierType {
     option allow_alias = true;
-    UNKNOWN = 0;
+    MODIFIER_UNKNOWN = 0;
 
     BARREL_STABILIZER = 1;
     BARREL_STAB = 1;
@@ -131,7 +131,7 @@ enum ModifierType {
 }
 
 enum Weapon {
-    UNKNOWN = 0;
+    WEAPON_UNKNOWN = 0;
 
     FLATLINE = 1;
     SCOUT = 2;
@@ -165,7 +165,7 @@ enum Weapon {
 }
 
 enum Legend {
-    UNKNOWN = 0;
+    LEGEND_UNKNOWN = 0;
 
     BANGALORE = 1;
     WRAITH = 2;

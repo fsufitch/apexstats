@@ -9,71 +9,71 @@ message WeaponStats {
     AmmoType ammoType = 4;
     bool ammoSpecial = 5;
     uint32 magazine = 6;
-    float adsMoveSpeed = 7;
+    float adsMoveMultiplier = 7;
     repeated WeaponMode modes = 8;
     repeated Modifier modifiers = 9;
 }
 
 message WeaponMode {
-    WeaponModeType type = 0;
-    uint32 damagePerPellet = 1;
-    uint32 pelletsPerShot = 2;
-    uint32 ammoPerShot = 3;
-    uint32 shotsPerRound = 4;
-    float headshotMultiplier = 5;
-    float legshotMultiplier = 6;
-    float rpm = 7;
-    string note = 8;
+    WeaponModeType type = 1;
+    uint32 damagePerBullet = 2;
+    uint32 bulletsPerShot = 3;
+    uint32 ammoPerShot = 4;
+    uint32 shotsPerRound = 5;
+    float headshotMultiplier = 6;
+    float legshotMultiplier = 7;
+    float roundsPerMinute = 8;
+    string notes = 9;
 }
 
 message Modifier {
-    ModifierType type = 0;
-    repeated StatChanges statChanges = 1;
+    ModifierType type = 1;
+    repeated StatChanges statChanges = 2;
 }
 
 message StatChanges {
-    Rarity rarity = 0;
-    string notes = 1;
+    Rarity rarity = 1;
+    string notes = 2;
 
     // Barrel stab
-    float recoilMultiplier = 2;
-    float randomnessMultiplier = 3;
+    float recoilMultiplier = 3;
+    float randomnessMultiplier = 4;
 
     // Shotgun bolt
-    float rpmMultiplier = 4;
+    float rpmMultiplier = 5;
 
     // Light, heavy, and sniper mags
-    uint32 magazine = 5;
+    uint32 magazine = 6;
 
-    // Stocks
-    float switchSpeedMultiplier = 6;
+    // Stocks, quickdraw
+    float switchSpeedMultiplier = 7;
 
     // Double tap
-    uint32 shotsPerRound = 7;
+    uint32 shotsPerRound = 8;
 
     // Hammerpoint
-    uint32 unshieldedDamage = 8;
+    uint32 unshieldedDamage = 9;
 
     // Quickdraw
-    // ?? 
+    // ???
 
     // Skullpiercer
-    float headshotMultiplier = 9;
+    float headshotMultiplier = 10;
 
     // Turbocharger
     // ??
 
     // Sentinel Amp
-    uint32 damagePerPellet = 10;
+    uint32 damagePerBullet = 11;
 }
 
 message WeaponConfiguration {
-    Weapon weaponID = 0;
-    WeaponModeType mode = 1;
-    repeated EquippedModifier modifiers = 2;
+    Weapon weaponID = 1;
+    WeaponModeType mode = 2;
+    repeated EquippedModifier modifiers = 3;
 }
 
 message EquippedModifier {
-    ModifierType type = 0;
-    Rarity rarity = 1;
+    ModifierType type = 1;
+    Rarity rarity = 2;
 }

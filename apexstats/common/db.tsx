@@ -1,7 +1,32 @@
 import React, { createContext, FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
 
-import { parseGameData, ApexGameDB } from './gamedb';
 import gameDataYAML from './gamedata.yaml';
+
+import { RawGameData, Weapon, WeaponType } from 'apexstats/common/protos';
+
+export const parseGameData = (gameDataYAML: { [k: string]: any }) => {
+    // TODO: somehow validate that the data is good
+
+    return {
+        gameData: RawGameData.fromJson(gameDataYAML, { ignoreUnknownFields: true }),
+        error: '',
+    };
+};
+
+export class ApexGameDB {
+    constructor(public raw: RawGameData) {}
+
+    version = () => this.raw.version;
+
+    export = () => RawGameData.toJson(this.raw, { enumAsInteger: false });
+
+    getWeaponStats = (id: Weapon) => {
+        const filtered = this.raw.weapons.filter((w) => w.id === id);
+        return filtered.length ? filtered[0] : null;
+    };
+
+    getWeaponsOfType = (type: WeaponType) => this.raw.weapons.filter((w) => w.type == type).map((w) => w.id);
+}
 
 export interface GameDBContextPayload {
     loaded: boolean;

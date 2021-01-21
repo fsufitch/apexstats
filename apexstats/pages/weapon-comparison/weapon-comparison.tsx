@@ -1,80 +1,81 @@
-import React, { useState, useEffect } from 'react';
+import { RemoveButton } from 'apexstats/common/components/remove-button/remove-button';
+import { GameDBContext } from 'apexstats/common/db';
+import { Weapon, WeaponComparisonValueType, WeaponConfiguration, WeaponModeType } from 'apexstats/common/protos';
+import { ConfiguredWeaponStats, useStatCalculator } from 'apexstats/common/stats';
+import { useWeaponNames } from 'apexstats/common/strings';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { WeaponComparisonNav } from './comparison-nav';
+import { getWeaponComparisonValue, WeaponComparisonValue } from './rows';
+import { deserializeFromHash, serializeToHash } from './serialization';
 
-import { useLocation, useHistory } from 'react-router-dom';
+export const defaultRows = [
+    WeaponComparisonValueType.MAGAZINE_SIZE,
+    WeaponComparisonValueType.DAMAGE,
+    WeaponComparisonValueType.DAMAGE_HEADSHOT,
+    WeaponComparisonValueType.DAMAGE_PER_SECOND,
+    WeaponComparisonValueType.DAMAGE_PER_MAGAZINE,
+    WeaponComparisonValueType.CLIP_TIME,
+].map(getWeaponComparisonValue);
 
-import { WeaponStats } from 'apexstats/game/stats';
-import { FiringModeID, weapons } from 'apexstats/game/data';
-import { defaltRowIDs, rowChoices, WeaponComparisonRow } from './rows';
-import { RemoveButton } from 'apexstats/common/remove-button';
-import { WeaponComparisonNav, WeaponModeSuffixes } from './comparison-nav';
-import { weaponName } from 'apexstats/game/strings';
-import { ColumnSpec, deserialize, serialize } from './serialization';
+export const defaultWeaponConfigurations = [
+    { weaponID: Weapon.R301, mode: WeaponModeType.AUTO, modifiers: [] },
+    { weaponID: Weapon.FLATLINE, mode: WeaponModeType.AUTO, modifiers: [] },
+];
 
 export const WeaponComparison = () => {
-    const [rowIDs, setRowIDs] = useState<Set<string>>(new Set(defaltRowIDs));
-    const [columnSpecs, setColumnSpecs] = useState<ColumnSpec[]>([]);
-
-    const [rows, setRows] = useState<WeaponComparisonRow[]>([]);
-    const [columns, setColumns] = useState<WeaponStats[]>([]);
-
-    useEffect(() => setRows(rowChoices.map((r) => r as WeaponComparisonRow).filter((r) => rowIDs.has(r.id))), [rowIDs]);
-
-    useEffect(
-        () => setColumns(columnSpecs.map(({ weaponID, modeID }) => new WeaponStats(weaponID, { firingMode: modeID }))),
-        [columnSpecs]
+    const [weaponConfigurations, setWeaponConfigurations] = useState<WeaponConfiguration[]>(
+        defaultWeaponConfigurations
     );
 
-    const addRow = (rowID: string | null) => {
-        if (!rowID) {
-            return;
-        }
-        const newRowIDs = new Set(rowIDs);
-        newRowIDs.add(rowID);
-        setRowIDs(newRowIDs);
+    const [rows, setRows] = useState<WeaponComparisonValue[]>(defaultRows);
+    const [columns, setColumns] = useState<ConfiguredWeaponStats[]>([]);
+
+    const getWeaponName = useWeaponNames();
+    const statCalculator = useStatCalculator();
+    const { gameDB, loaded } = useContext(GameDBContext);
+
+    // Recreate the calculated column values when the selected weapon configs change
+    useEffect(() => (loaded ? setColumns(weaponConfigurations.map(statCalculator)) : void 0), [weaponConfigurations]);
+
+    // Callback for a new row being picked
+    const addRow = (value: WeaponComparisonValue) => {
+        if (rows.includes(value)) return;
+        const newRows = [...rows, value]; // TODO: automatic ordering?
+        newRows.sort((a, b) => a.type - b.type);
+        setRows(newRows);
     };
 
-    const addColumn = (columnID: string | null) => {
-        if (!columnID) {
-            console.error('Tried to add empty column ID');
+    const addWeapon = (weapon: Weapon) => {
+        if (!weapon || !gameDB) return;
+
+        const weaponStats = gameDB.getWeaponStats(weapon);
+        if (!weapon || !weaponStats) {
+            console.error(`Unknown weapon: ${weapon}`);
             return;
         }
 
-        const modeID = Object.keys(WeaponModeSuffixes).find((suffix) => columnID.endsWith(suffix)) as
-            | FiringModeID
-            | undefined;
-        if (modeID === undefined) {
-            console.error(`Tried to add column ID without firing mode: ${columnID}`);
-            return;
-        }
+        const newWeaponConfiguration: WeaponConfiguration = {
+            weaponID: weapon,
+            mode: weaponStats.modes[0].type,
+            modifiers: [],
+        };
 
-        const weaponID = columnID.split(WeaponModeSuffixes[modeID], 2)[0];
-        if (!weapons[weaponID]) {
-            console.error(`Unknown weapon '${weaponID}' in ID: ${columnID}`);
-            return;
-        }
-
-        if (columnSpecs.find((it) => it.weaponID === weaponID && it.modeID === modeID)) {
-            console.warn(`Tried to add duplicate weapon spec ${columnID}`);
-            return;
-        }
-
-        const newColumnSpecs = [...columnSpecs, { weaponID, modeID }];
-        setColumnSpecs(newColumnSpecs);
+        const newWeaponConfigurations = [...weaponConfigurations, newWeaponConfiguration];
+        setWeaponConfigurations(newWeaponConfigurations);
     };
 
-    const removeColumn = (weaponID: string, modeID: FiringModeID) => {
-        setColumnSpecs(columnSpecs.filter((spec) => spec.weaponID !== weaponID || spec.modeID !== modeID));
+    const removeWeaponConfiguration = (index: number) => {
+        setWeaponConfigurations(weaponConfigurations.filter((_val, i) => index !== i));
     };
 
-    const removeRow = (rowID: string) => {
-        const newRowIDs = new Set(rowIDs);
-        newRowIDs.delete(rowID);
-        setRowIDs(newRowIDs);
+    const removeRow = (index: number) => {
+        setRows(rows.filter((_row, i) => index !== i));
     };
 
     const clear = () => {
-        setColumnSpecs([]);
-        setRowIDs(new Set());
+        setWeaponConfigurations([]);
+        setRows([]);
     };
 
     const location = useLocation();
@@ -82,34 +83,43 @@ export const WeaponComparison = () => {
 
     useEffect(() => {
         // When rows or columns are updated, update the hash
-        const newHash = serialize(rowIDs, columnSpecs);
+        const newHash =
+            rows.length && weaponConfigurations.length
+                ? serializeToHash(
+                      rows.map((r) => r.type),
+                      weaponConfigurations
+                  )
+                : '';
         const newLocation = { ...location, hash: newHash };
         history.replace(newLocation);
-    }, [rowIDs, columnSpecs]);
+    }, [rows, weaponConfigurations]);
 
     useEffect(() => {
         // On load, try to set the table from the URL
+        if (!location.hash) {
+            setRows(defaultRows);
+            setWeaponConfigurations(defaultWeaponConfigurations);
+        }
         try {
-            const { rowIDs, columnSpecs } = deserialize(location.hash);
-            setRowIDs(new Set(rowIDs));
-            setColumnSpecs(columnSpecs);
+            const { valueTypes, weaponConfigurations } = deserializeFromHash(location.hash);
+            if (!valueTypes.length || !weaponConfigurations.length)
+                throw new Error('valueTypes or weaponConfigurations was empty');
+            setRows(valueTypes.map(getWeaponComparisonValue));
+            setWeaponConfigurations(weaponConfigurations);
         } catch (e) {
             console.log('illegal hash', location.hash, e);
             const newLocation = { ...location, hash: '' };
             history.replace(newLocation);
+            setRows(defaultRows);
+            setWeaponConfigurations(defaultWeaponConfigurations);
         }
-    }, [location.hash]);
+    }, []);
 
     return (
         <>
             <h2> Weapon Comparison </h2>
 
-            <WeaponComparisonNav
-                showTooltip={rowIDs.size === 0 || columnSpecs.length === 0}
-                onAddStat={addRow}
-                onAddWeapon={addColumn}
-                onClear={clear}
-            />
+            <WeaponComparisonNav onAddStat={addRow} onAddWeapon={addWeapon} onClear={clear} />
 
             <table className="table table-bordered table-hover table-striped">
                 <thead>
@@ -117,8 +127,8 @@ export const WeaponComparison = () => {
                         <th scope="col">{/*empty*/}</th>
                         {columns.map((col, i) => (
                             <th scope="col" key={i} className="text-center">
-                                <RemoveButton onClick={() => removeColumn(col.weaponID, col.firingModeID)} />
-                                {weaponName(col.weaponID, col.firingModeID)}
+                                <RemoveButton onClick={() => removeWeaponConfiguration(i)} />
+                                {getWeaponName(col.raw.weapon)}
                             </th>
                         ))}
                     </tr>
@@ -129,7 +139,7 @@ export const WeaponComparison = () => {
                         <tr key={i}>
                             <th scope="row" className="text-right">
                                 {row.label}
-                                <RemoveButton onClick={() => removeRow(row.id)} />
+                                <RemoveButton onClick={() => removeRow(i)} />
                             </th>
                             {columns.map((stat, i) => (
                                 <td key={i} className="text-right">

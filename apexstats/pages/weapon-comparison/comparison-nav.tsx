@@ -1,82 +1,90 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
-
-import { CustomDropdown } from 'apexstats/common/dropdown';
-import { FiringModeID, weapons, weaponTypeIDs, weaponTypes } from 'apexstats/game/data';
-import { weaponName, weaponTypeName } from 'apexstats/game/strings';
-import { rowChoices, WeaponComparisonRow } from './rows';
-
-import css from './comparison-nav.module.sass';
+import { CustomDropdown } from 'apexstats/common/components/dropdown/dropdown';
+import { GameDBContext } from 'apexstats/common/db';
+import { Weapon, WeaponType } from 'apexstats/common/protos';
+import { getWeaponTypeName, useWeaponNames } from 'apexstats/common/strings';
+import React, { FunctionComponent, useContext, useEffect, useRef, useState } from 'react';
 import { Overlay, Tooltip } from 'react-bootstrap';
+import css from './comparison-nav.module.sass';
+import { getWeaponComparisonValueByStringID, rowChoices, WeaponComparisonValue } from './rows';
 
 interface Props {
     showTooltip?: boolean;
-    onAddWeapon?: (id: string | null) => void;
-    onAddStat?: (id: string | null) => void;
+    onAddWeapon?: (id: Weapon) => void;
+    onAddStat?: (id: WeaponComparisonValue) => void;
     onExportCSV?: () => void;
     onClear?: () => void;
 }
 
-export const WeaponModeSuffixes = {
-    single: '++single',
-    single_amp: '++single-amp',
-    burst: '++burst',
-    auto: '++auto',
-    unknown: '++??',
+type WeaponNavChoice =
+    | {
+          id: string;
+          label: string;
+      }
+    | { header: true; label: string };
+
+const DISPLAYED_WEAPON_TYPES = [
+    WeaponType.ASSAULT_RIFLE,
+    WeaponType.LMG,
+    WeaponType.SMG,
+    WeaponType.SNIPER,
+    WeaponType.SHOTGUN,
+    WeaponType.PISTOL,
+];
+
+const useWeaponChoices = () => {
+    const { gameDB, loaded } = useContext(GameDBContext);
+    const weaponNameGetter = useWeaponNames();
+    const [choices, setChoices] = useState<WeaponNavChoice[]>([]);
+    useEffect(() => {
+        if (!loaded || !gameDB) return;
+        const newChoices: WeaponNavChoice[] = [];
+        for (const weaponType of DISPLAYED_WEAPON_TYPES) {
+            const weapons = gameDB.getWeaponsOfType(weaponType);
+            if (!weapons.length) continue;
+            newChoices.push({ label: getWeaponTypeName(weaponType), header: true });
+            for (const weapon of gameDB.getWeaponsOfType(weaponType)) {
+                const weaponStringID = Weapon[weapon];
+                const weaponName = weaponNameGetter(weapon) ?? `MISSINGNAME[${weapon}]`;
+                newChoices.push({ id: weaponStringID, label: weaponName });
+            }
+        }
+        setChoices(newChoices);
+    }, [gameDB]);
+
+    return choices;
 };
 
-const weaponChoices = weaponTypeIDs
-    .map((typeID) => [
-        { id: '', label: weaponTypeName(typeID), header: true },
-        ...weaponTypes[typeID]
-            .map((id) =>
-                ['single', 'single_amp', 'burst', 'auto']
-                    .map((mode) => mode as FiringModeID)
-                    .filter((mode) => !!weapons[id].modes[mode])
-                    .map((mode) => ({
-                        id: `${id}${WeaponModeSuffixes[mode]}`,
-                        label: weaponName(id, mode),
-                        header: false,
-                    }))
-            )
-            .reduce((acc, curr) => acc.concat(curr)),
-    ])
-    .reduce((acc, curr) => acc.concat(curr));
-
-const weaponComparisonRowToStatChoice = ({ id, label }: WeaponComparisonRow) => ({ id, label });
-
-const statChoices = rowChoices.map((row) =>
-    Object.keys(row).includes('id')
-        ? weaponComparisonRowToStatChoice(row as WeaponComparisonRow)
-        : { id: '', label: row.label, header: true }
-);
-
 export const WeaponComparisonNav: FunctionComponent<Props> = ({
-    showTooltip,
     onAddWeapon,
     onAddStat,
     onExportCSV,
     onClear,
 }: Props) => {
-    onAddWeapon ??= () => void 0;
-    onAddStat ??= () => void 0;
+    const onAddWeapon_Wrapper = (weaponIDStringUntyped: string) => {
+        if (!onAddWeapon || !weaponIDStringUntyped) return;
+        const weaponIDString = weaponIDStringUntyped as keyof typeof Weapon;
+        const weapon = Weapon[weaponIDString] || Weapon.WEAPON_UNKNOWN;
+        return onAddWeapon(weapon);
+    };
+    const onAddStat_Wrapper = (valueStringID: string) => {
+        if (!onAddStat || !valueStringID) return;
+        return onAddStat(getWeaponComparisonValueByStringID(valueStringID));
+    };
     onClear ??= () => void 0;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onExportCSV ??= () => void 0;
 
-    const [tooltip, setTooltip] = useState<boolean>(!!showTooltip);
+    const weaponChoices = useWeaponChoices();
 
-    useEffect(() => {
-        setTooltip(!!showTooltip);
-    }, [showTooltip]);
+    const [tooltip, setTooltip] = useState<boolean>(false);
 
     const target = useRef<any>(null);
-    console.log('created ref', target);
 
     return (
         <>
             <ul className={css['nav']}>
                 <li className="nav-item">
-                    <CustomDropdown title={'(+) Add Stat'} onSelect={onAddStat} choices={statChoices} />
+                    <CustomDropdown title={'(+) Add Stat'} onSelect={onAddStat_Wrapper} choices={rowChoices} />
                 </li>
 
                 <span ref={target}></span>
@@ -87,7 +95,7 @@ export const WeaponComparisonNav: FunctionComponent<Props> = ({
                 </Overlay>
 
                 <li className="nav-item">
-                    <CustomDropdown title={'(+) Add Weapon'} onSelect={onAddWeapon} choices={weaponChoices} />
+                    <CustomDropdown title={'(+) Add Weapon'} onSelect={onAddWeapon_Wrapper} choices={weaponChoices} />
                 </li>
                 <li className="nav-item">
                     <button className="btn btn-outline-danger" onClick={onClear}>

@@ -14,7 +14,7 @@ import { About } from './pages/about';
 import { TTKSimulation } from './pages/ttk-simulation';
 import { WeaponComparison } from './pages/weapon-comparison';
 import { Footer } from './nav/footer';
-import { GameDBLoader } from './game/data/gamedb-context';
+import { GameDBLoader } from './common/db';
 
 const App = () => {
     return (
